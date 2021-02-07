@@ -1,10 +1,184 @@
 @import "reset"
-@import "basic"
-@import "header"
-@import "static-page"
-@import "about-page"
-@import "lk"
-@import "home-page"
+$main_color: #519999
+.header
+  &-w-line
+    padding-top: 33px
+  &-line
+    padding: 6px 0
+    background: $main_color
+    position: absolute
+    left: 0
+    right: 0
+    top: -33px
+    z-index: 100
+    p
+      color: #FFFFFF
+      font-size: 14px
+      font-weight: 500
 
-@import "footer"
+.langSelect
+  width: 40px
+  & .el-input__inner
+      border: none
+      padding: 0
 
+.header-nav
+  position: relative
+  &::after
+    position: absolute
+    content: ''
+    width: 1px
+    height: 108px
+    background: #e0e0e0
+    right: -1px
+    top: -28px
+  &__link
+    font-weight: 600
+    color: #24363A
+  &__button
+    &-submenu
+      position: absolute
+      top: 69px
+      left: 0
+      right: -1px
+      border: 1px solid #e0e0e0
+      padding: 30px 0
+      opacity: 0
+      pointer-events: none
+      transition: all .2s linear
+      z-index: 100
+      background: #FFFFFF
+      &__item
+        line-height: 35px !important
+        font-weight: 600
+        transition: all .2s linear
+        &:hover
+          color: $main_color
+          text-decoration: underline
+
+    &.with-submenu
+      position: relative
+      &::after
+        position: absolute
+        content: url(/arr_d.png)
+        right: 20px
+        top: 48%
+        transform: translateY(-50%)
+        transition: all .2s linear
+      &:hover > div
+        top: 79px
+        opacity: 1
+        pointer-events: all
+      &:hover > .link-button
+          color: $main_color
+      &:hover
+        &:after
+          transform-origin: 50% 50%
+          transform: rotate(180deg) translateY(20%)
+      & .link-button
+        &:hover
+          color: $main_color
+
+.header-mobile-menu__item
+  height: 90px
+  overflow: hidden
+  &--link
+    position: relative
+    &::after
+      position: absolute
+      content: url(/arr_d_m.png)
+      right: -20px
+      top: 28%
+      transform-origin: 50% 50%
+      transform:  rotate(180deg)
+      transition: all .2s linear
+  &.mobile-submenu
+    padding: 15px 0
+    border-bottom: none
+    a
+      display: block
+      margin-bottom: 15px
+      font-weight: bold
+      font-size: 14px
+      &:last-child
+        margin-bottom: 0
+  &.mobileSubmenuActive
+    height: fit-content
+    & .header-mobile-menu__item
+      height: fit-content
+      &--link
+        &::after
+          transform-origin: 50% 50%
+          transform: rotate(0deg) translateY(-50%)
+
+  &.mobile-links
+    padding: 25px 0
+    height: fit-content
+    border-bottom: none
+.mobile-links__link
+  display: block
+  margin-bottom: 15px
+  font-size: 14px
+  &:last-child
+    margin-bottom: 25px
+
+.mobile-links__phone
+  display: block
+  font-size: 18px
+  margin-bottom: 15px
+.mobile-links__social
+  a
+    margin-right: 15px
+    &:last-child
+      margin-right: 0
+
+
+@media (max-width: 600px)
+  .header-nav
+    &::after
+      content: none
+  &.mobile-menu
+    svg
+      height: 35px
+      width: 35px
+    &::after
+      position: absolute
+      content: ''
+      width: 1px
+      height: 108px
+      background: #e0e0e0
+      right: -1px
+      top: -22px
+
+@media (max-width: 450px)
+  .header-mobile-menu__item
+    height: 45px
+
+
+.authModal
+  & .el-dialog
+    width: 450px
+    margin-top: 0 !important
+    margin-bottom: 0 !important
+    top: 50%
+    transform: translateY(-50%)
+    &__body
+      color: #24363A
+    &__header
+      padding: 0
+    &__headerbtn
+      &:hover
+        & .el-dialog__close
+          color: $main_color
+    & .el-button
+      width: 100%
+      max-width: unset
+
+.el-input
+  &__inner
+    &:hover
+      border-color: $main_color
+    &:focus
+      border-color: $main_color
+    &:active
+      border-color: $main_color

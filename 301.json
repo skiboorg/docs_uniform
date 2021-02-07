@@ -1,4 +1,4 @@
 [
-  { "from": "/profile", "to": "/" },
+  { "from": "/category", "to": "/" },
   { "from": "/profile/", "to": "/" }
 ]

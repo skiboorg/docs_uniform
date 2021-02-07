@@ -9,21 +9,40 @@
     </div>
 
     <MarqueeLine :text="`${ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).is_for_man ? 'Мужская':'Женская'}  медицинская одежда`"/>
-    <section class="subcategories">
+   <section>
+     <div class="container collection-wrapper">
+
+      <ItemCard v-for="item in items" :key="item.id"
+                        :collection_name="''"
+                        :item_name="item.name"
+                        :item_price="item.price"
+                        :discount="item.diccount"
+                        :item_slug="item.name_slug"
+                        :cat_slug="$route.params.category_slug"
+                        :subcat_slug="$route.params.subcategory_slug"
+                        :image="item.images[0].image_thumb"/>
+    </div>
+   </section>
+
+
+   <section class="collection" v-for="collection in collections" :key="collection.id">
         <div class="container">
+        <p style="font-size: 14px;letter-spacing: 0.1em;text-transform: uppercase;opacity: .5;margin-bottom: 15px"> {{collection.title}} </p>
+            <h3 class="section-header">
+                 {{collection.name}}
+            </h3>
 
-            <div class="subcategories-wrapper">
-                    <div class="subcategories-item" v-for="subcategory in this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).subcategories" :key="subcategory.id">
-                        <div class="subcategories-item__img">
-                                 <img :src="subcategory.image" alt="">
-
-
-                        </div>
-                        <p class="subcategories-item__name">{{subcategory.name}}</p>
-                    </div>
-
+            <div style="flex-wrap: wrap" class="collection-wrapper">
+              <ItemCard v-for="item in collection.collection_items" :key="item.id"
+                        :collection_name="collection.subcategory.name"
+                        :item_name="item.name"
+                        :item_price="item.price"
+                        :discount="item.diccount"
+                        :item_slug="item.name_slug"
+                        :cat_slug="$route.params.category_slug"
+                        :subcat_slug="$route.params.subcategory_slug"
+                        :image="item.images[0].image_thumb"/>
             </div>
-
         </div>
     </section>
  </div>
@@ -31,12 +50,25 @@
 
 <script>
 import MarqueeLine from '@/components/Marquee'
+import ItemCard from '@/components/ItemCard'
 
 export default {
+  async fetch({store}){
+    await store.dispatch('categories/fetchCategories')
+  },
+
   components: {
-    MarqueeLine
+    MarqueeLine,
+    ItemCard
 
 
+  },
+  async asyncData({$axios,params}){
+    const responce_data = await $axios.get(`/api/get_collections?subcategory_name_slug=${params.subcategory_slug}`)
+    const collections = responce_data.data
+    const responce_items = await $axios.get(`/api/get_subcategory_items?subcategory_name_slug=${params.subcategory_slug}`)
+    const items = responce_items.data
+    return {collections,items}
   },
   data() {
     return {
@@ -45,8 +77,9 @@ export default {
     }
   },
   mounted() {
-    this.category = this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug)
-    this.marqueeText = this.category.is_for_man ? 'Мужская' : 'Женская'
+    console.log( this.$route.params)
+
+
   },
 
 }

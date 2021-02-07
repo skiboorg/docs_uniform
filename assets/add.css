@@ -158,15 +158,11 @@ td {
 .tns-outer button{
     display: none;
 }
-.el-select{
-    width: 100%;
-}
+
 .el-input__suffix-inner{
     display: none;
 }
 .el-input__inner{
-
-
     border-radius: unset;
     border: 1px solid #e0e0e0;
     height: 67px;
@@ -174,12 +170,25 @@ td {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    background-image: url(../images/arr_d.png);
+    /*background-image: url(/arr_d.png);*/
+    /*background-repeat: no-repeat, repeat;*/
+    /*background-position: right .7em top 50%, 0 0;*/
+    /*background-size: .65em auto, 100%;*/
+}
+.city-select{
+  width: 100%;
+}
+.cart-grid-form .city-select .el-input__inner{
+
+    background-image: url(/arr_d.png);
     background-repeat: no-repeat, repeat;
     background-position: right .7em top 50%, 0 0;
     background-size: .65em auto, 100%;
-
 }
-.el-select-dropdown .el-popper{
-    top: 1447px !important;
+
+.el-input__inner:hover{
+  border-color: #519999 !important
+}
+.el-select .el-input.is-focus .el-input__inner{
+  border-color: #519999 !important
 }
