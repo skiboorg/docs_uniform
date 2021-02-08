@@ -14,44 +14,40 @@
     </section>
     <section>
       <div class="container">
-
-        <div class="offer-slider">
-          <div class="offer-banner-item">
-            <el-image  src="http://placehold.it/500" lazy></el-image>
-
-          </div><!--// offer-banner-item-->
-        </div>
+        <client-only>
+          <swiper :options="bannerOptions">
+            <div class="swiper-pagination" slot="pagination"></div>
+            <swiper-slide v-for="banner in banners" :key="banner.id">
+              <div class="offer-banner-item">
+                <img :src="banner.image" >
+              </div>
+            </swiper-slide>
+          </swiper>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </client-only>
       </div>
-
-
     </section>
-    <section class="collection">
+    <section class="collection" v-for="collection in collections" :key="collection.id">
       <div class="container">
         <h3 class="section-header">
-          collection.name
+          {{collection.name}}
         </h3>
-        <p class="section-header__link"><a href="#">Смотреть полностью</a></p>
+        <p class="section-header__link">
+          <nuxt-link :to="`category/${collection.category}/${collection.subcategory.name_slug}`">Смотреть полностью</nuxt-link>
+        </p>
         <div class="collection-wrapper">
-
-          <div class="collection-item">
-            <p class="collection-item-name">collection.subcategory.name</p>
-            <div class="collection-item__img" >
-              <a href="#">
-                <img src="http://placehold.it/500" alt="">
-              </a>
-
-            </div>
-            <p class="collection-item__name">item.name </p>
-            <p class="collection-item__price">item.price ₽</p>
-          </div>
-
-
+         <ItemCard v-for="item in collection.collection_items" :key="item.id"
+                        :collection_name="collection.subcategory.name"
+                        :item_name="item.name"
+                        :item_price="item.price"
+                        :discount="item.discount"
+                        :item_slug="item.name_slug"
+                        :cat_slug="collection.category"
+                        :subcat_slug="collection.subcategory.name_slug"
+                        :image="item.images[0].image_thumb"/>
         </div>
       </div>
     </section>
-
-
-
 
     <section class="about">
       <div class="container">
@@ -81,19 +77,19 @@
         </div>
         <div class="social-wrapper">
           <div class="social-item">
-             <el-image  src="/social-item1.png" lazy></el-image>
+            <el-image  src="/social-item1.png" lazy></el-image>
 
           </div>
           <div class="social-item">
-           <el-image  src="/social-item2.png" lazy></el-image>
+            <el-image  src="/social-item2.png" lazy></el-image>
           </div>
           <div class="social-item">
-           <el-image  src="/social-item3.png" lazy></el-image>
+            <el-image  src="/social-item3.png" lazy></el-image>
             <p class="text hide-mob-600">МЕДИЦИНСКАЯ ОДЕЖДА DOC’S workwear for life</p>
             <a class="link hide-mob-600" href="#">подписаться</a>
           </div>
           <div class="social-item">
-           <el-image  src="/social-item4.png" lazy></el-image>
+            <el-image  src="/social-item4.png" lazy></el-image>
           </div>
         </div>
       </div>
@@ -103,19 +99,60 @@
 </template>
 
 <script>
+
+import ItemCard from "@/components/ItemCard";
+
 export default {
+  components: {
+
+    ItemCard
+
+
+  },
   async fetch({store}){
     await store.dispatch('categories/fetchCategories')
-     await store.dispatch('cart/fetchCart')
+    await store.dispatch('cart/fetchCart')
   },
-  // async asyncData({$axios}){
-  //   const get_streamers = await $axios.get(`/api/v1/user/get_streamers?at_home=true`)
-  //   const streamers = get_streamers.data
-  //   return {streamers,streams,top_streamers}
-  // },
+  async asyncData({$axios}){
+    const get_banners = await $axios.get(`/api/get_banners`)
+    const get_collections = await $axios.get(`/api/get_home_collections`)
+    const banners = get_banners.data
+    const collections = get_collections.data
+    return {banners,collections}
+  },
   data() {
     return {
+      bannerOptions: {
+        slidesPerView: 1,
 
+        //centeredSlides: true,
+        pagination: {
+          el: '.swiper-pagination',
+          dynamicBullets: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        // breakpoints: {
+        //   // when window width is >= 320px
+        //   320: {
+        //     centeredSlides: true,
+        //     slidesPerView: 1,
+        //     spaceBetween: 20
+        //   },
+        //   // when window width is >= 480px
+        //   480: {
+        //     slidesPerView: 1,
+        //     spaceBetween: 30
+        //   },
+        //   // when window width is >= 640px
+        //   640: {
+        //     slidesPerView: 1,
+        //     spaceBetween: 40
+        //   }
+        // }
+      },
     }
   }
 }

@@ -1200,7 +1200,7 @@ select:focus {
 }
 
 .swiper-container {
-  display: none;
+
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
