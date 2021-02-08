@@ -48,23 +48,19 @@
         </div>
       </div>
     </section>
-
     <section class="about">
       <div class="container">
         <div class="about-wrapper">
           <div class="about-img">
             <el-image  src="/index-about.png" lazy></el-image>
-
           </div>
-
           <div class="about-text">
             <h3 class="section-header">ИНТЕРНЕТ-МАГАЗИН ОДЕЖДЫ ДЛЯ СОВРЕМЕННЫХ ВРАЧЕЙ</h3>
             <p class="text">DOC’S — это опыт врачей и хороший вкус дизайнеров: вместе мы делаем стильную и комфортную
               медицинскую одежду. Мы придумываем лаконичные и удобные модели,
               которые выглядят эстетично и не мешают в процессе работы.
             </p>
-            <a class="link" href="#">Узнать больше</a>
-
+            <nuxt-link class="link" to="/about">Узнать больше</nuxt-link>
           </div>
         </div>
       </div>
@@ -78,7 +74,6 @@
         <div class="social-wrapper">
           <div class="social-item">
             <el-image  src="/social-item1.png" lazy></el-image>
-
           </div>
           <div class="social-item">
             <el-image  src="/social-item2.png" lazy></el-image>
@@ -93,7 +88,6 @@
           </div>
         </div>
       </div>
-
     </section>
   </div>
 </template>
@@ -104,10 +98,7 @@ import ItemCard from "@/components/ItemCard";
 
 export default {
   components: {
-
     ItemCard
-
-
   },
   async fetch({store}){
     await store.dispatch('categories/fetchCategories')

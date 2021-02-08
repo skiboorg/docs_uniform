@@ -55,8 +55,8 @@ import ItemCard from '@/components/ItemCard'
 export default {
   async fetch({store}){
     await store.dispatch('categories/fetchCategories')
+    await store.dispatch('cart/fetchCart')
   },
-
   components: {
     MarqueeLine,
     ItemCard

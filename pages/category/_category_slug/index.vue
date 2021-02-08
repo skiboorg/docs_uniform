@@ -7,26 +7,22 @@
         <a class="link" href="#" @click.prevent="$router.back()">НАЗАД</a>
       </p>
     </div>
-
     <MarqueeLine
-      :text="`${ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).is_for_man ? 'Мужская':'Женская'}
-       медицинская одежда`"/>
+      :text="`${ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).is_for_man ?
+       'Мужская':'Женская'} медицинская одежда`"/>
     <section class="subcategories">
       <div class="container">
-
         <div class="subcategories-wrapper">
           <div class="subcategories-item"
                v-for="subcategory in this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).subcategories"
                :key="subcategory.id">
             <div @click="$router.push(`/category/${$route.params.category_slug}/${subcategory.name_slug}`)"
                  class="subcategories-item__img">
-              <img :src="subcategory.image" alt="">
+               <el-image  :src="subcategory.image" lazy></el-image>
             </div>
             <p class="subcategories-item__name">{{subcategory.name}}</p>
           </div>
-
         </div>
-
       </div>
     </section>
   </div>
@@ -38,11 +34,10 @@ import MarqueeLine from '@/components/Marquee'
 export default {
   async fetch({store}){
     await store.dispatch('categories/fetchCategories')
+    await store.dispatch('cart/fetchCart')
   },
   components: {
     MarqueeLine
-
-
   },
   data() {
     return {
