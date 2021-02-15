@@ -152,12 +152,19 @@ textarea {
   width: 100%;
   border-radius: unset;
   border: 1px solid #e0e0e0;
-  padding: 25px;
   margin-bottom: 15px;
   font-size: 12px;
   resize: none;
 }
-
+textarea{
+  padding: 10px 15px!important;
+}
+textarea:focus{
+  outline: none;
+}
+textarea:active{
+  outline: none;
+}
 input:last-child,
 textarea:last-child {
   margin-bottom: 0;
@@ -262,6 +269,7 @@ select:focus {
 }
 
 .btn {
+  user-select: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1805,6 +1813,15 @@ select:focus {
   font-weight: 500;
 }
 
+.cart-total__promo span{
+  user-select: none;
+}
+.cart-total__promo input:focus{
+  outline: none;
+}
+.cart-total__promo input:active{
+  outline: none;
+}
 .cart-total__promo {
   font-size: 12px;
   margin-bottom: 15px;

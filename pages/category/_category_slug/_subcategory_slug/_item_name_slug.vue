@@ -15,8 +15,8 @@
 
           <div class="item-images">
             <el-image v-for="(image,index) in previewList" :key="index"
-                :src="image"
-                :preview-src-list="previewList">
+                      :src="image"
+                      :preview-src-list="previewList">
               <div slot="placeholder" class="image-slot">
                 Загрузка<span class="dot">...</span>
               </div>
@@ -94,7 +94,7 @@
             </div>
             <p id="myBtn" class="item-info__table">Таблица размеров</p>
 
-            <div @click="addToCart" class="btn">
+            <div @click="addToCart" class="btn" :class="{'btnDisabled':btnDisabled}" >
               <p>{{buttonCaption}}</p>
             </div>
             <div class="item-info__features">
@@ -171,6 +171,7 @@ export default {
       sizes:[],
       materials:[],
       mods:[],
+      btnDisabled:true,
       selectedColor:0,
       buttonCaption:'В КОРЗИНУ',
       selectedSize:null,
@@ -197,7 +198,6 @@ export default {
         }
       });
     }
-
     for(let i of this.item.types){
       !this.colors.find(x=>x.id === i.color.id) ? this.colors.push(i.color) : null
       !this.sizes.find(x=>x.id === i.size.id) ? this.sizes.push(i.size) : null
@@ -209,64 +209,80 @@ export default {
     this.selectedHeight = this.heights[0].id
     this.selectedMaterial = this.materials[0].id
     this.selectedMod = this.mods[0].id
+    this.checkItem()
 
     for (let i of this.item.images.filter(x=>x.color===this.colors[0].id)){
       this.previewList.push(i.image)
     }
-
-
-
-
   },
-  methods:{
-    selectColor(index){
-      this.previewList=[]
+  watch:{
+    selectedColor(val){
+      this.checkItem()
+    },
+    selectedSize(val){
+      this.checkItem()
+    },
+    selectedHeight(val){
+      this.checkItem()
+    },
+    selectedMaterial(val){
+      this.checkItem()
+    },
+    selectedMod(val){
+      this.checkItem()
+    },
+  },
+  methods: {
+    checkItem() {
+      for (let i of this.item.types) {
+        if (i.color.id === this.colors[this.selectedColor].id &&
+          i.size.id === this.selectedSize &&
+          i.height.id === this.selectedHeight &&
+          i.material.id === this.selectedMaterial &&
+          i.modification.id === this.selectedMod) {
+          if (i.quantity > 0) {
+            this.buttonCaption = 'В корзину'
+            this.btnDisabled = false
+            return i
+          } else {
+            this.buttonCaption = 'Нет в наличии'
+          }
+        } else {
+          this.buttonCaption = 'Нет в наличии'
+        }
+      }
+      this.btnDisabled = true
+    },
+    selectColor(index) {
+      this.previewList = []
       this.selectedColor = index
-      for (let i of this.item.images.filter(x=>x.color===this.colors[this.selectedColor].id)){
+      for (let i of this.item.images.filter(x => x.color === this.colors[this.selectedColor].id)) {
         this.previewList.push(i.image)
 
       }
 
     },
-    async addToCart(){
-      // console.log('selectedColor',this.colors[this.selectedColor].id)
-      // console.log('selectedSize',this.selectedSize)
-      // console.log('selectedHeight',this.selectedHeight)
-      let session_id = this.$auth.$storage.getCookie('session_id')
-      for(let i of this.item.types){
-        if (i.color.id === this.colors[this.selectedColor].id &&
-          i.size.id === this.selectedSize &&
-          i.height.id === this.selectedHeight &&
-          i.material.id === this.selectedMaterial &&
-          i.modification.id === this.selectedMod
-        ){
-          console.log(i)
-          if (i.quantity > 0){
-            await this.$axios.post('/api/add_to_cart',
-              {
-                //session_id генерируется в header.vue
-                session_id: session_id,
-                item_id:i.id
+    async addToCart() {
 
-              })
-            await this.$store.dispatch('cart/fetchCart')
-            this.buttonCaption='В корзине'
-            return
-          }else{
-            this.buttonCaption='Нет в наличии'
-          }
-        }else{
-          this.buttonCaption='Нет в наличии'
-        }
+      let session_id = this.$auth.$storage.getCookie('session_id')
+      let item = this.checkItem()
+      if (item.quantity > 0) {
+        await this.$axios.post('/api/add_to_cart',
+          {
+            //session_id генерируется в header.vue
+            session_id: session_id,
+            item_id: item.id
+
+          })
+        await this.$store.dispatch('cart/fetchCart')
+        this.buttonCaption = 'В корзине'
 
       }
-      //  console.log(document.cookie)
-
     }
   }
 
 
-}
+  }
 </script>
 
 

@@ -4,7 +4,7 @@
       <header class="header">
         <div v-if="is_index_page" class="header-line">
           <p class="text-center">FREE SHIPPING ON ORDERS OF $50 OR MORE AND FREE RETURNS</p>
-
+<!--https://fev11.lord2film.net/26158-09102-mazhor-2021.html-->
         </div>
         <div class="header-wrapper">
           <div class="header-nav">
@@ -81,12 +81,7 @@
             </div>
 
             <a v-if="cart.items.length > 0" class="btn" href="#" @click.prevent="$router.push('/cart')">В корзину</a>
-            <p style="border: 1px solid #e0e0e0;
-                        text-align: center;
-                        padding: 20px;
-                        color: #519999;
-                        font-weight: 600;
-                        text-transform: uppercase;" v-else>Корзина пуста</p>
+            <p style="border: 1px solid #e0e0e0;text-align: center;padding: 20px;color: #519999;font-weight: 600;text-transform: uppercase;" v-else>Корзина пуста</p>
           </div>
         </div>
 
@@ -196,7 +191,7 @@ export default {
       curMobileMenuIndex:null,
       headerCartShow:false,
       is_index_page:null,
-      base_url:'http://localhost:8000',
+      base_url:process.env.img_url,
       loginRules: {
         email:[
           { required: true, message: 'Это обязательное поле', trigger: ['blur', 'change'] },

@@ -1,5 +1,8 @@
 @import "reset"
 $main_color: #519999
+.btnDisabled
+  opacity: .8
+  pointer-events: none
 .header
   &-w-line
     padding-top: 33px
@@ -182,3 +185,9 @@ $main_color: #519999
       border-color: $main_color
     &:active
       border-color: $main_color
+
+.el-loading-spinner i
+  color: $main_color
+.el-loading-spinner .el-loading-text
+  color: $main_color
+  font-weight: bold

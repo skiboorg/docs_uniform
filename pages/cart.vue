@@ -4,7 +4,8 @@
     <div class="cart-wrapper">
 
       <div class="cart-left">
-        <div class="cart-items">
+        <div v-loading="loading" element-loading-text="Операция выполняется..."
+    element-loading-spinner="el-icon-loading" class="cart-items">
           <div class="cart-item" v-for="(item,index) in cart.items" :key="item.id">
             <div class="cart-item__img">
               <img :src="base_url+item.item_type.image" alt="">
@@ -44,9 +45,9 @@
         <div class="cart-grid b-bottom">
           <div class="cart-grid-step"><p>1/3 данные</p></div>
           <div class="cart-grid-form">
-            <el-input class="mb-10" type="text" name="phone"  placeholder="Телефон" value=""></el-input>
-            <el-input class="mb-10" type="text" name="email" placeholder="Электронная почта" value=""></el-input>
-            <el-input type="text" name="fio" placeholder="ФИО" value=""></el-input>
+            <el-input class="mb-10" type="text" name="phone"  placeholder="Телефон" v-model="orderData.phone"></el-input>
+            <el-input class="mb-10" type="text" name="email" placeholder="Электронная почта" v-model="orderData.email"></el-input>
+            <el-input type="text" name="fio" placeholder="ФИО" v-model="orderData.fio"></el-input>
           </div>
         </div>
         <div class="cart-grid b-bottom">
@@ -54,23 +55,23 @@
           <div class="cart-grid-form">
             <p class="mb-15">Выберите способ доставки</p>
 
-            <label @click="deliveryPrice=0" class="cart-radio" for="d-0">
-              <input type="radio" name="delivery" checked id="d-0" v-model="selectedDelivery" value="0">
+            <label @click="orderData.delivery_type=0" class="cart-radio" for="d-0">
+              <input type="radio" name="delivery" checked id="d-0" v-model="orderData.delivery_type" value="0">
               <p class="cart-radio__p1">Самовывоз</p>
               <p class="cart-radio__p2">бесплатно<br>по адресу 1234</p>
               <span class="checkmark"></span>
             </label>
 
             <label :class="{'cart-radio-disabled':cart_weight > 3000}" class="cart-radio" :for="`d-${delivery.id}`" v-for="delivery in delivery_types" :key="delivery.id">
-              <input type="radio" name="delivery"  :id="`d-${delivery.id}`" v-model="selectedDelivery" :value="delivery.id">
+              <input type="radio" name="delivery"  :id="`d-${delivery.id}`" v-model="orderData.delivery_type" :value="delivery.id">
               <p class="cart-radio__p1">{{delivery.name}}</p>
               <p class="cart-radio__p2">{{delivery.time}}<br>от {{delivery.price}}</p>
               <span class="checkmark"></span>
             </label>
 
 
-            <div v-if="selectedDelivery>0">
-              <el-select class="city-select mb-10" filterable v-model="selectedCity" placeholder="Выберите город">
+            <div v-if="orderData.delivery_type>0">
+              <el-select class="city-select mb-10" filterable v-model="orderData.delivery_city" placeholder="Выберите город">
                 <el-option
                   v-for="city in cities"
                   :key="city.id"
@@ -81,10 +82,10 @@
 
 
 
-              <el-input class="mb-10" type="text" name="street" placeholder="Улица"></el-input>
+              <el-input class="mb-10" type="text" v-model="orderData.street" placeholder="Улица"></el-input>
               <div class="cart-grid-form__group">
-                <el-input type="text" name="num" placeholder="Дом"></el-input>
-                <el-input type="text" name="num1" placeholder="Квартира/офис"></el-input>
+                <el-input type="text" v-model="orderData.house" placeholder="Дом"></el-input>
+                <el-input type="text" v-model="orderData.flat" placeholder="Квартира/офис"></el-input>
               </div>
             </div>
 
@@ -94,20 +95,11 @@
           <div class="cart-grid-step"><p>3/3 оплата</p></div>
           <div class="cart-grid-form">
             <p class="mb-15">Выберите способ оплаты</p>
-            <label class="cart-radio" for="d-11">
-              <input type="radio" name="pay" id="d-11" value="Картой">
-              <p class="cart-radio__p1">Картой онлайн, Apple Pay, Google Pay</p>
-
+            <label class="cart-radio" :for="`p-${payment.id}`" v-for="payment in payments" :key="payment.id">
+              <input type="radio" :id="`p-${payment.id}`" v-model="orderData.pay_type" :value="payment.value">
+              <p class="cart-radio__p1">{{payment.name}}</p>
               <span class="checkmark"></span>
             </label>
-            <label class="cart-radio" for="d-21">
-              <input type="radio" name="pay" id="d-21" value="Курьером">
-              <p class="cart-radio__p1">Курьером</p>
-
-              <span class="checkmark"></span>
-            </label>
-
-
           </div>
         </div>
         <div class="cart-grid ">
@@ -129,20 +121,15 @@
             <p v-if="cart.promo_code.summ" class="cart-total__info">Промо код <span class="color-green">-{{cart.promo_code.summ}} ₽ </span></p>
          <p v-if="cart.promo_code.discount" class="cart-total__info">Промо код <span class="color-green">-{{cart.promo_code.discount}} % </span></p>
           </div>
-
           <p  class="cart-total__summ">итого <span class="color-green">{{deliveryPrice + cart.total_price}} ₽</span> </p>
-
-
-
-
           <p v-if="!cart.promo_code"  class="cart-total__promo ">
             <input v-model="promoCode" placeholder="Промокод (если есть)">
-            <span @click="applyPromo" class="color-green">АКТИВИРОВАТЬ</span>
+            <span @click="applyPromo" class="color-green" :class="{'btnDisabled':promoSent}">АКТИВИРОВАТЬ</span>
           </p>
           <p v-else class="cart-total__promo ">Промокод активирован</p>
 
 
-          <button type="submit" class="btn">оформить заказ</button>
+          <button type="submit" class="btn" @click="createOrder">оформить заказ</button>
           <p class="cart-total__text">Нажимая на кнопку «оплатить заказ», я принимаю условия <a href="">публичной оферты</a> и <a
             href="">политики конфиденциальности</a></p>
         </div>
@@ -166,12 +153,30 @@ export default {
     return {delivery_types}
   },  data() {
     return {
+      loading:false,
+      promoSent:false,
       base_url:process.env.img_url,
-      selectedDelivery:0,
-      selectedCity:null,
       promoCode:null,
       deliveryPrice:0,
-      cities:[]
+      cities:[],
+      orderData:{
+        phone:null,
+        email:null,
+        fio:null,
+        street:null,
+        house:null,
+        flat:null,
+        delivery_type:0,
+        delivery_city:null,
+        pay_type:'online',
+        comment:null,
+
+      },
+      payments:[
+        {id:1,name:'Картой онлайн, Apple Pay, Google Pay',value:'online'},
+        {id:2,name:'Курьером',value:'cash'},
+
+      ]
     }
   },
   methods:{
@@ -182,7 +187,17 @@ export default {
         type: type
       });
     },
+    async createOrder () {
+      let session_id = this.$auth.$storage.getCookie('session_id')
+      const response = await this.$axios.post(`/api/create_order`,
+        {
+          session_id:session_id,
+          order:this.orderData
+        })
+      await this.$store.dispatch('cart/fetchCart')
+    },
     async applyPromo () {
+      this.promoSent= true
       let session_id = this.$auth.$storage.getCookie('session_id')
       const response = await this.$axios.post(`/api/apply_promo`,
         {
@@ -196,30 +211,39 @@ export default {
       }else {
          this.notify('Ошибка','Промокод не найден','error')
       }
+      this.promoSent= false
     },
     async addQt (id) {
+      this.loading = true
       await this.$axios.post(`/api/plus_quantity`,{item_id:id})
       await this.$store.dispatch('cart/fetchCart')
+      this.loading = false
     },
     async delQt (id) {
+      this.loading = true
       await this.$axios.post(`/api/minus_quantity`,{item_id:id})
       await this.$store.dispatch('cart/fetchCart')
+      this.loading = false
     },
     async deleteItem (id) {
+      this.loading = true
       await this.$axios.post(`/api/delete_item`,{item_id:id})
       await this.$store.dispatch('cart/fetchCart')
+      this.loading = false
+
     },
   },
   watch:{
-    selectedDelivery(val){
-      this.selectedCity = null
-      this.deliveryPrice = 0
-      if (val>0){
-        console.log(this.delivery_types.find(x=>x.id===this.selectedDelivery).cities)
-        this.cities = this.delivery_types.find(x=>x.id===this.selectedDelivery).cities
-      }
-    },
-    selectedCity(val){
+      'orderData.delivery_type'(val) {
+        this.orderData.delivery_city = null
+        this.deliveryPrice = 0
+        console.log(val)
+        if (val > 0) {
+          console.log(this.delivery_types.find(x => x.id === this.orderData.delivery_type).cities)
+          this.cities = this.delivery_types.find(x => x.id === this.orderData.delivery_type).cities
+        }
+      },
+    'orderData.delivery_city'(val){
       if (val>0){
       this.deliveryPrice = this.cities.find(x=>x.id===val).price
       }
@@ -227,7 +251,7 @@ export default {
     cart_weight(val){
       if (val > 3000){
         this.selectedDelivery = 0
-        this.selectedCity = null
+        this.delivery_city = null
         this.deliveryPrice = 0
       }
     }
