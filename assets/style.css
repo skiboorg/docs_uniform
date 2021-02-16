@@ -1638,9 +1638,7 @@ select:focus {
 }
 
 .cart-item__info {
-  -webkit-box-flex: 6;
-  -ms-flex-positive: 6;
-  flex-grow: 6;
+  flex-basis: 450px;
 }
 
 .cart-item__info__art {
