@@ -233,6 +233,13 @@ export default {
     },
   },
   methods: {
+    notify(title,message,type){
+      this.$notify({
+        title: title,
+        message: message,
+        type: type
+      });
+    },
     checkItem() {
       for (let i of this.item.types) {
         if (i.color.id === this.colors[this.selectedColor].id &&
@@ -275,6 +282,7 @@ export default {
 
           })
         await this.$store.dispatch('cart/fetchCart')
+        this.notify('Товар добавлен','','success')
         this.buttonCaption = 'В корзине'
 
       }

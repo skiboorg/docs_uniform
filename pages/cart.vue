@@ -55,23 +55,24 @@
           <div class="cart-grid-form">
             <p class="mb-15">Выберите способ доставки</p>
 
-            <label @click="orderData.delivery_type=0" class="cart-radio" for="d-0">
-              <input type="radio" name="delivery" checked id="d-0" v-model="orderData.delivery_type" value="0">
-              <p class="cart-radio__p1">Самовывоз</p>
-              <p class="cart-radio__p2">бесплатно<br>по адресу 1234</p>
-              <span class="checkmark"></span>
-            </label>
+<!--            <label @click="orderData.delivery_type=0" class="cart-radio" for="d-0">-->
+<!--              <input type="radio" name="delivery" checked id="d-0" v-model="orderData.delivery_type" value="0">-->
+<!--              <p class="cart-radio__p1">Самовывоз</p>-->
+<!--              <p class="cart-radio__p2">бесплатно<br>по адресу 1234</p>-->
+<!--              <span class="checkmark"></span>-->
+<!--            </label>-->
 
-            <label :class="{'cart-radio-disabled':cart_weight > 3000}" class="cart-radio" :for="`d-${delivery.id}`" v-for="delivery in delivery_types" :key="delivery.id">
-              <input type="radio" name="delivery"  :id="`d-${delivery.id}`" v-model="orderData.delivery_type" :value="delivery.id">
+            <label @click="is_self_delivery=delivery.is_self_delivery" :class="{'cart-radio-disabled':cart_weight > 3000}"
+                   class="cart-radio" :for="`d-${delivery.id}`" v-for="(delivery,index) in delivery_types" :key="delivery.id">
+              <input type="radio" name="delivery"  :id="`d-${delivery.id}`"  v-model="orderData.delivery_type" :value="delivery.id">
               <p class="cart-radio__p1">{{delivery.name}}</p>
-              <p class="cart-radio__p2">{{delivery.time}}<br>от {{delivery.price}}</p>
+              <p v-if="!delivery.is_self_delivery" class="cart-radio__p2">{{delivery.time}}<br>от {{delivery.price}}</p>
               <span class="checkmark"></span>
             </label>
 
 
-            <div v-if="orderData.delivery_type>0">
-              <el-select class="city-select mb-10" filterable v-model="orderData.delivery_city" placeholder="Выберите город">
+            <div v-if="!is_self_delivery">
+              <el-select class="city-select mb-10" filterable v-model="orderData.delivery_city"  placeholder="Выберите город">
                 <el-option
                   v-for="city in cities"
                   :key="city.id"
@@ -158,6 +159,9 @@ export default {
       base_url:process.env.img_url,
       promoCode:null,
       deliveryPrice:0,
+      city_code:null,
+      is_self_delivery:true,
+
       cities:[],
       orderData:{
         phone:null,
@@ -179,6 +183,11 @@ export default {
       ]
     }
   },
+  mounted() {
+    for (let i of this.delivery_types){
+      i.is_self_delivery ? this.orderData.delivery_type=i.id : null
+    }
+  },
   methods:{
     notify(title,message,type){
       this.$notify({
@@ -186,6 +195,10 @@ export default {
         message: message,
         type: type
       });
+    },
+    async cityChange () {
+      console.log('change')
+      //const response = await this.$axios.get(`/api/calculate_delivery`)
     },
     async createOrder () {
       let session_id = this.$auth.$storage.getCookie('session_id')
@@ -206,30 +219,41 @@ export default {
         })
       console.log(response.data)
       if (response.data.status){
-         this.notify('Успешно','Промокод активирован','success')
+         this.notify('Промокод активирован','','success')
         await this.$store.dispatch('cart/fetchCart')
       }else {
-         this.notify('Ошибка','Промокод не найден','error')
+         this.notify('Промокод не найден','','error')
       }
       this.promoSent= false
+    },
+
+    async calculateDelivery () {
+      if(this.city_code){
+          const response = await this.$axios.get(`/api/calculate_delivery?city_code=${this.city_code}&weight=${this.cart_weight}`)
+          this.deliveryPrice = response.data.delivery_price
+      }
+     this.loading = false
     },
     async addQt (id) {
       this.loading = true
       await this.$axios.post(`/api/plus_quantity`,{item_id:id})
       await this.$store.dispatch('cart/fetchCart')
-      this.loading = false
+      await this.calculateDelivery()
+
     },
     async delQt (id) {
       this.loading = true
       await this.$axios.post(`/api/minus_quantity`,{item_id:id})
       await this.$store.dispatch('cart/fetchCart')
-      this.loading = false
+      await this.calculateDelivery()
+
     },
     async deleteItem (id) {
       this.loading = true
       await this.$axios.post(`/api/delete_item`,{item_id:id})
       await this.$store.dispatch('cart/fetchCart')
-      this.loading = false
+      await this.calculateDelivery()
+
 
     },
   },
@@ -243,9 +267,13 @@ export default {
           this.cities = this.delivery_types.find(x => x.id === this.orderData.delivery_type).cities
         }
       },
-    'orderData.delivery_city'(val){
+    async 'orderData.delivery_city'(val){
       if (val>0){
-      this.deliveryPrice = this.cities.find(x=>x.id===val).price
+      //this.deliveryPrice = this.cities.find(x=>x.id===val).price
+        this.loading = true
+        this.city_code = this.cities.find(x=>x.id===val).code
+        await this.calculateDelivery()
+
       }
     },
     cart_weight(val){
