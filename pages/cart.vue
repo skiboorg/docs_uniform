@@ -84,10 +84,13 @@
 
 
               <el-input class="mb-10" type="text" v-model="orderData.street" placeholder="Улица"></el-input>
-              <div class="cart-grid-form__group">
+              <div class="cart-grid-form__group mb-10">
                 <el-input type="text" v-model="orderData.house" placeholder="Дом"></el-input>
                 <el-input type="text" v-model="orderData.flat" placeholder="Квартира/офис"></el-input>
               </div>
+              <p class="cart-total__text text-grey">Вашего города нет в списке доставки? Выберите пункт "самовывоз",
+                а в комментарии к заказу укажите информацию куда вам доставить ваш заказ.
+                Наш менеджер с вами свяжется и поможет оформить доставку!</p>
             </div>
 
           </div>
