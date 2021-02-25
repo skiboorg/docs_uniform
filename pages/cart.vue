@@ -82,7 +82,6 @@
               </el-select>
 
 
-
               <el-input class="mb-10" type="text" v-model="orderData.street" placeholder="Улица"></el-input>
               <div class="cart-grid-form__group mb-10">
                 <el-input type="text" v-model="orderData.house" placeholder="Дом"></el-input>
@@ -110,15 +109,11 @@
           <div class="cart-grid-step"><p>дополнительно</p></div>
           <div class="cart-grid-form">
             <textarea class="mb-15" name="comment" id="" cols="30" rows="10" placeholder="Комментарий курьеру"></textarea>
-
-
-
           </div>
         </div>
       </div>
       <div class="cart-right">
         <div style="position: sticky;top: 20px"  class="cart-total">
-
           <p class="cart-total__info">Доставка <span class="color-green"
                                                      v-loading="loading"  element-loading-spinner="el-icon-loading">{{deliveryPrice}} ₽
           </span></p>

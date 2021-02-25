@@ -13,7 +13,7 @@
      <div class="container collection-wrapper">
 
       <ItemCard v-for="item in items" :key="item.id"
-                        :collection_name="''"
+                        :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
                         :discount="item.diccount"
@@ -33,8 +33,10 @@
             </h3>
 
             <div style="flex-wrap: wrap" class="collection-wrapper">
+
               <ItemCard v-for="item in collection.collection_items" :key="item.id"
-                        :collection_name="collection.subcategory.name"
+
+                        :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
                         :discount="item.diccount"
