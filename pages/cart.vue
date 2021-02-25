@@ -1,11 +1,10 @@
 <template>
-  <div class="container">
+  <div v-if="this.$store.getters['cart/getCart'].items.length>0" class="container">
     <h1 class="section-header">Ваша корзина</h1>
     <div class="cart-wrapper">
 
       <div class="cart-left">
-        <div v-loading="loading" element-loading-text="Операция выполняется..."
-    element-loading-spinner="el-icon-loading" class="cart-items">
+        <div v-loading="loading"  element-loading-spinner="el-icon-loading" class="cart-items">
           <div class="cart-item" v-for="(item,index) in cart.items" :key="item.id">
             <div class="cart-item__img">
               <img :src="base_url+item.item_type.image" alt="">
@@ -60,9 +59,10 @@
 <!--              <p class="cart-radio__p1">Самовывоз</p>-->
 <!--              <p class="cart-radio__p2">бесплатно<br>по адресу 1234</p>-->
 <!--              <span class="checkmark"></span>-->
+<!--            :class="{'cart-radio-disabled':cart_weight > 3000}"-->
 <!--            </label>-->
 
-            <label @click="is_self_delivery=delivery.is_self_delivery" :class="{'cart-radio-disabled':cart_weight > 3000}"
+            <label @click="is_self_delivery=delivery.is_self_delivery"
                    class="cart-radio" :for="`d-${delivery.id}`" v-for="(delivery,index) in delivery_types" :key="delivery.id">
               <input type="radio" name="delivery"  :id="`d-${delivery.id}`"  v-model="orderData.delivery_type" :value="delivery.id">
               <p class="cart-radio__p1">{{delivery.name}}</p>
@@ -119,13 +119,17 @@
       <div class="cart-right">
         <div style="position: sticky;top: 20px"  class="cart-total">
 
-          <p class="cart-total__info">Доставка <span class="color-green">{{deliveryPrice}} ₽ </span></p>
-          <p class="cart-total__info">сумма заказа <span class="color-green">{{cart.raw_price}} ₽ </span></p>
+          <p class="cart-total__info">Доставка <span class="color-green"
+                                                     v-loading="loading"  element-loading-spinner="el-icon-loading">{{deliveryPrice}} ₽
+          </span></p>
+          <p class="cart-total__info">сумма заказа <span class="color-green" v-loading="loading"  element-loading-spinner="el-icon-loading">
+            {{cart.raw_price}} ₽ </span></p>
           <div v-if="cart.promo_code">
             <p v-if="cart.promo_code.summ" class="cart-total__info">Промо код <span class="color-green">-{{cart.promo_code.summ}} ₽ </span></p>
          <p v-if="cart.promo_code.discount" class="cart-total__info">Промо код <span class="color-green">-{{cart.promo_code.discount}} % </span></p>
           </div>
-          <p  class="cart-total__summ">итого <span class="color-green">{{deliveryPrice + cart.total_price}} ₽</span> </p>
+          <p  class="cart-total__summ">итого <span class="color-green" v-loading="loading"  element-loading-spinner="el-icon-loading">
+            {{deliveryPrice + cart.total_price}} ₽</span> </p>
           <p v-if="!cart.promo_code"  class="cart-total__promo ">
             <input v-model="promoCode" placeholder="Промокод (если есть)">
             <span @click="applyPromo" class="color-green" :class="{'btnDisabled':promoSent}">АКТИВИРОВАТЬ</span>
@@ -133,14 +137,19 @@
           <p v-else class="cart-total__promo ">Промокод активирован</p>
 
 
-          <button type="submit" class="btn" @click="createOrder">оформить заказ</button>
-          <p class="cart-total__text">Нажимая на кнопку «оплатить заказ», я принимаю условия <a href="">публичной оферты</a> и <a
+          <el-button :loading="loading" type="submit" class="btn" @click="createOrder">оформить заказ</el-button>
+          <p class="cart-total__text mb-10">Нажимая на кнопку «оплатить заказ», я принимаю условия <a href="">публичной оферты</a> и <a
             href="">политики конфиденциальности</a></p>
+           <p class="cart-total__link "><nuxt-link to="/delivery">условия доставки и оплаты</nuxt-link> </p>
         </div>
-        <p class="cart-total__link hide-mob-600"><nuxt-link to="/delivery">условия доставки и оплаты</nuxt-link> </p>
+
       </div>
 
     </div>
+  </div>
+  <div v-else style="height: 70vh" class="container">
+    <h1 class="section-header">Ваша корзина пуста</h1>
+    <el-button class="btn" @click="$router.push('/')">На главную</el-button>
   </div>
 </template>
 
@@ -277,15 +286,17 @@ export default {
         this.city_code = this.cities.find(x=>x.id===val).code
         await this.calculateDelivery()
 
-      }
-    },
-    cart_weight(val){
-      if (val > 3000){
-        this.selectedDelivery = 0
-        this.delivery_city = null
-        this.deliveryPrice = 0
+      }else{
+        this.city_code=null
       }
     }
+    // cart_weight(val){
+    //   if (val > 3000){
+    //     this.selectedDelivery = 0
+    //     this.delivery_city = null
+    //     this.deliveryPrice = 0
+    //   }
+    // }
   },
   computed:{
     cart (){

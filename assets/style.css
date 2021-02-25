@@ -1799,12 +1799,15 @@ select:focus {
 .cart-total__link {
   text-decoration: underline;
   text-transform: uppercase;
+  color: #24363A !important;
+  font-size: 15px;
 }
 
 .cart-total__summ {
   text-transform: uppercase;
   margin-bottom: 30px;
   color: #24363A !important;
+
 }
 
 .cart-total__summ span {

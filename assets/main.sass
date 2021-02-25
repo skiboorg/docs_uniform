@@ -161,6 +161,10 @@ $main_color: #519999
 @media (max-width: 450px)
   .header-mobile-menu__item
     height: 45px
+  .header
+    &-line
+      p
+        font-size: 10px
 
 
 .authModal
@@ -196,3 +200,11 @@ $main_color: #519999
 .el-loading-spinner .el-loading-text
   color: $main_color
   font-weight: bold
+
+.el-button:focus, .el-button:hover, .el-button:active
+    color: #FFFFFF
+    border-color: $main_color
+
+.cart-wrapper
+  & .el-loading-spinner
+    margin-top: -14px
