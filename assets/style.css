@@ -509,9 +509,9 @@ select:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-flex: 2;
-  -ms-flex-positive: 2;
-  flex-grow: 3;
+  -webkit-box-flex: 4;
+  -ms-flex-positive: 4;
+  flex-grow: 4;
 }
 
 .header-nav__button {
@@ -608,15 +608,15 @@ select:focus {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  /*-webkit-box-flex: 1;*/
-  /*-ms-flex-positive: 1;*/
-  /*flex-grow: 1;*/
-  flex-basis: 300px;
+  -webkit-box-flex: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+  /*flex-basis: 300px;*/
 }
 
 .header-middle__link {
-  -ms-flex-preferred-size: 80px;
-  flex-basis: 50px;
+  /*-ms-flex-preferred-size: 80px;*/
+  /*flex-basis: 50px;*/
 }
 .header-middle__link a:hover{
   color: #519999;

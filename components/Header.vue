@@ -17,6 +17,11 @@
               </div>
             </div>
 
+            <div class="header-nav__button hide-mob-600 ">
+               <nuxt-link class="header-nav__button-submenu__item" :to="`/`">Аксессуары</nuxt-link>
+              </div>
+
+
             <div class="header-nav__button mobile-menu show-mob-600">
               <svg @click="mobileMenuActive=!mobileMenuActive" v-if="!mobileMenuActive" width="35" height="7" viewBox="0 0 35 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 6H35" stroke="#519999"/>
@@ -33,6 +38,9 @@
               <img src="/logo.svg" alt="" >
             </div>
             <div class="header-middle__links hide-mob-600">
+              <div class="header-middle__link">
+                <nuxt-link to="/">Блог</nuxt-link>
+              </div>
               <div class="header-middle__link">
                 <nuxt-link to="/">Сертификаты</nuxt-link>
               </div>
@@ -93,11 +101,14 @@
               <div class="header-mobile-menu__item mobile-submenu">
                 <nuxt-link :to="`/category/${category.name_slug}/${subcategory.name_slug}`" v-for="subcategory in category.subcategories"
                            :key="subcategory.id">{{subcategory.name}}</nuxt-link>
-
               </div>
+
+
             </div>
 
             <div class="header-mobile-menu__item mobile-links">
+              <nuxt-link class="mobile-links__link" to="/">Аксессуары</nuxt-link>
+              <nuxt-link class="mobile-links__link" to="/">Блог</nuxt-link>
               <nuxt-link class="mobile-links__link" to="/">Сертификат</nuxt-link>
               <nuxt-link class="mobile-links__link" to="/delivery">Доставка и оплата</nuxt-link>
               <nuxt-link class="mobile-links__link" to="/about">О нас</nuxt-link>
