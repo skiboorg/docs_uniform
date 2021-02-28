@@ -76,14 +76,24 @@
                   :value="office.office_id">
                 </el-option>
               </el-select>
-              <el-input class="mb-10" type="text" v-model="orderData.street" placeholder="Улица"></el-input>
-              <div class="cart-grid-form__group mb-10">
-                <el-input type="text" v-model="orderData.house" placeholder="Дом"></el-input>
-                <el-input type="text" v-model="orderData.flat" placeholder="Квартира/офис"></el-input>
+              <div v-if="!this.is_office_cdek">
+                <el-input class="mb-10" type="text" v-model="orderData.street" placeholder="Улица"></el-input>
+                <div class="cart-grid-form__group mb-10">
+                  <el-input type="text" v-model="orderData.house" placeholder="Дом"></el-input>
+                  <el-input type="text" v-model="orderData.flat" placeholder="Квартира/офис"></el-input>
+                </div>
+                <p class="cart-total__text text-grey">Вашего города нет в списке доставки? Выберите пункт "самовывоз",
+                  а в комментарии к заказу укажите информацию куда вам доставить ваш заказ.
+                  Наш менеджер с вами свяжется и поможет оформить доставку!</p>
               </div>
-              <p class="cart-total__text text-grey">Вашего города нет в списке доставки? Выберите пункт "самовывоз",
-                а в комментарии к заказу укажите информацию куда вам доставить ваш заказ.
-                Наш менеджер с вами свяжется и поможет оформить доставку!</p>
+              <div v-else>
+                 <p class="cart-total__text text-grey">
+                   Выберите на карте <a href="https://www.cdek.ru/ru/office">подходящий вам офис</a>,
+                   а затем выберите его адрес на сайте!
+                 </p>
+              </div>
+
+
             </div>
           </div>
         </div>

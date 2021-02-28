@@ -11,8 +11,11 @@
           <div class="footer-top__item">
             <p><a href="#">Мужчинам</a></p>
             <p><a href="#">Женщинам</a></p>
+            <p><a href="#">Аксессуары</a></p>
           </div>
           <div class="footer-top__item">
+            <p><nuxt-link to="/delivery">Блог</nuxt-link></p>
+            <p><nuxt-link to="/delivery">Сертификаты</nuxt-link></p>
             <p><nuxt-link to="/delivery">Доставка и оплата</nuxt-link></p>
             <p><nuxt-link to="/about">О нас</nuxt-link></p>
             <p><nuxt-link to="/contact">Контакты</nuxt-link></p>
@@ -40,9 +43,12 @@
           <div class="footer-top-mob__middle--left">
             <p><a href="#">Мужчинам</a></p>
             <p><a href="#">Женщинам</a></p>
+
           </div>
           <div class="footer-top-mob__middle--right">
-
+            <p><nuxt-link to="/delivery">Аксессуары</nuxt-link></p>
+            <p><nuxt-link to="/delivery">Блог</nuxt-link></p>
+            <p><nuxt-link to="/delivery">Сертификаты</nuxt-link></p>
             <p><nuxt-link to="/delivery">Доставка и оплата</nuxt-link></p>
             <p><nuxt-link to="/about">О нас</nuxt-link></p>
             <p><nuxt-link to="/contact">Контакты</nuxt-link></p>
@@ -97,7 +103,7 @@
     <div class="container">
       <div class="footer-bottom">
 
-        <p>© «DOC’S», 2020.</p>
+        <p>© «DOC’S», {{new Date().getFullYear()}}.</p>
         <p><a href="">Политика конфиденциальности</a></p>
       </div>
 

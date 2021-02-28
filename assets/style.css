@@ -679,6 +679,20 @@ select:focus {
   height: -moz-fit-content;
   height: fit-content;
 }
+.header-cart__close{
+  position: absolute;
+    content: '\2715';
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    background: #519999;
+    color: #FFFFFF;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .header-cart.headerCartActive {
   opacity: 1;
@@ -2018,7 +2032,7 @@ select:focus {
   position: absolute;
   content: '';
   width: 1px;
-  height: 223px;
+  height: 291px;
   background: #e0e0e0;
   right: 40px;
   top: -50px;

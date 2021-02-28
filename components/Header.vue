@@ -77,6 +77,7 @@
           </div>
 
           <div @mouseleave="headerCartShow=false" class="header-cart" :class="{'headerCartActive':headerCartShow}">
+            <div @click="headerCartShow=false" class="header-cart__close"><span>&#10005;</span></div>
             <div class="header-cart__item" v-for="(item,index) in cart.items" :key="item.id">
               <img :src="base_url+item.item_type.image" alt="">
               <p><span class="color-green">{{index+1}}.</span>{{item.item_type.name}}<br>
