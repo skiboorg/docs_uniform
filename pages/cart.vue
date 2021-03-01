@@ -36,8 +36,9 @@
         <div class="cart-grid b-bottom">
           <div class="cart-grid-step"><p>1/3 данные</p></div>
           <div class="cart-grid-form">
+
             <el-input class="mb-10 " :class="{'fieldError':!orderData.phone}" type="text" name="phone"  placeholder="Телефон" v-model="orderData.phone"></el-input>
-            <el-input class="mb-10" :class="{'fieldError':!orderData.email}" type="text" name="email" placeholder="Электронная почта" v-model="orderData.email"></el-input>
+            <el-input class="mb-10" @input="validateEmail" :class="{'fieldError':!orderData.email || !is_email_valid}" type="text" name="email" placeholder="Электронная почта" v-model="orderData.email"></el-input>
             <el-input type="text" :class="{'fieldError':!orderData.fio}" name="fio" placeholder="ФИО" v-model="orderData.fio"></el-input>
           </div>
         </div>
@@ -136,7 +137,6 @@
           <el-button :disabled="!is_data_ok" :loading="loading || orderSend" type="submit" class="btn" @click="createOrder">оформить заказ</el-button>
           <p class="cart-total__text mb-10">Нажимая на кнопку «оплатить заказ», я принимаю условия <a href="">публичной оферты</a> и <a
             href="">политики конфиденциальности</a></p>
-          {{is_data_ok}}
           <p class="cart-total__link "><nuxt-link to="/delivery">условия доставки и оплаты</nuxt-link> </p>
         </div>
       </div>
@@ -169,6 +169,7 @@ export default {
       deliveryPrice:0,
       city_code:null,
       is_self_delivery:true,
+      is_email_valid:false,
       is_office_cdek:false,
       cities:[],
       orderData:{
@@ -205,6 +206,14 @@ export default {
         type: type
       });
     },
+    validateEmail() {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(re.test(String(this.orderData.email))){
+         this.is_email_valid = true
+        }else{
+          this.is_email_valid = false
+        }
+      },
     async cityChange () {
       console.log('change')
       //const response = await this.$axios.get(`/api/calculate_delivery`)
@@ -322,12 +331,15 @@ export default {
   },
   computed:{
     is_data_ok(){
+      let userData = this.orderData.fio && this.orderData.email && this.orderData.phone && this.is_email_valid
+      let deliveryData = this.orderData.house && this.orderData.street && this.orderData.flat && this.orderData.delivery_city
       if (this.is_self_delivery){
-        return this.orderData.fio && this.orderData.email && this.orderData.phone
+        return userData
       }
        if (!this.is_office_cdek){
-        return this.orderData.house && this.orderData.street && this.orderData.flat && this.orderData.delivery_city
+        return userData && deliveryData
       }
+
 
     },
     cart (){

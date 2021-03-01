@@ -43,6 +43,7 @@
                               v-for="(color,index) in colors" :style="'background:  ' + color.bg_color  " class="item-info__color "></span>
             </div>
             <div class="item-info__params">
+
               <div class="item-info__param">
                 <p  class="item-info__subtitle">размер</p>
                 <el-select v-model="selectedSize" placeholder="Select" @change="selectedHeight=null">
@@ -136,15 +137,15 @@
 
             <button class="accordion">Детали</button>
             <div class="panel">
-              <br><p v-html="item.description"></p><br>
+              <br><div v-html="item.description"></div><br>
             </div>
             <button class="accordion">Состав и уход</button>
             <div class="panel">
-              <br><p v-html="item.carry"></p><br>
+              <br><div v-html="item.carry"></div><br>
             </div>
             <button class="accordion">Срок доставки</button>
             <div class="panel">
-              <br><p v-html="item.delivery"></p><br>
+              <br><div v-html="item.delivery"></div><br>
             </div>
           </div>
         </div>
@@ -163,6 +164,7 @@ export default {
   async asyncData({$axios,params}){
     const responce_data = await $axios.get(`/api/get_item?base_item_slug=${params.item_name_slug}`)
     const item = responce_data.data
+
     return {item}
   },
   data() {
@@ -206,11 +208,13 @@ export default {
       !this.materials.find(x=>x.id === i.material.id) ? this.materials.push(i.material) : null
       !this.mods.find(x=>x.id === i.modification.id) ? this.mods.push(i.modification) : null
     }
+    this.sizes = _.orderBy(this.sizes,'order_num' )
     this.selectedSize = this.sizes[0].id
     this.selectedHeight = this.heights[0].id
     this.selectedMaterial = this.materials[0].id
     this.selectedMod = this.mods[0].id
     this.checkItem()
+
 
     for (let i of this.item.images.filter(x=>x.color===this.colors[0].id)){
       this.previewList.push(i.image)
@@ -233,6 +237,7 @@ export default {
       this.checkItem()
     },
   },
+
   methods: {
     notify(title,message,type){
       this.$notify({

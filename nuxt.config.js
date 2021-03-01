@@ -46,6 +46,7 @@ export default {
     '@/plugins/element-ui',
     '@/plugins/scroll',
     '@/plugins/mask',
+    '@/plugins/lodash',
 
     { src: '@/plugins/swiper', mode: 'client' },
     {src:'@/plugins/ymapPlugin',mode: 'client'},
