@@ -12,7 +12,7 @@
    <section>
      <div class="container collection-wrapper">
 
-      <ItemCard v-for="item in items" :key="item.id"
+      <ItemCard v-if="!item.collection" v-for="item in items" :key="item.id"
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
@@ -34,7 +34,7 @@
 
             <div style="flex-wrap: wrap" class="collection-wrapper">
 
-              <ItemCard v-for="item in collection.collection_items" :key="item.id"
+              <ItemCard v-for="item in items.filter(x=>x.collection.id===collection.id)" :key="item.id"
 
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
@@ -66,21 +66,25 @@ export default {
 
   },
   async asyncData({$axios,params}){
-    const responce_data = await $axios.get(`/api/get_collections?subcategory_name_slug=${params.subcategory_slug}`)
-    const collections = responce_data.data
+    // const responce_data = await $axios.get(`/api/get_collections?subcategory_name_slug=${params.subcategory_slug}`)
+    // const collections = responce_data.data
     const responce_items = await $axios.get(`/api/get_subcategory_items?subcategory_name_slug=${params.subcategory_slug}`)
     const items = responce_items.data
-    return {collections,items}
+    return {items}
   },
   data() {
     return {
       category: null,
-      marqueeText:''
+      marqueeText:'',
+      collections:[]
     }
   },
   mounted() {
-    console.log( this.$route.params)
-
+    console.log( this.items)
+    for (let i of this.items){
+      !this.collections.find(x=>x.id===i.collection.id) ? this.collections.push(i.collection) : null
+    }
+    console.log(this.collections)
 
   },
 

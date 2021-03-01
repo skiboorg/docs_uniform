@@ -208,3 +208,17 @@ $main_color: #519999
 .cart-wrapper
   & .el-loading-spinner
     margin-top: -14px
+
+.el-select .el-input__inner:focus
+  border-color: $main_color
+.el-select-dropdown__item.selected
+  color: $main_color
+
+
+.fieldError
+  input
+    border-color: red
+    &::placeholder
+      color: red
+    &:hover
+      border-color: red

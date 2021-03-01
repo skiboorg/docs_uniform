@@ -3,8 +3,7 @@
     <div :class="{'header-w-line' : is_index_page}" >
       <header class="header">
         <div v-if="is_index_page" class="header-line">
-          <p class="text-center">FREE SHIPPING ON ORDERS OF $50 OR MORE AND FREE RETURNS</p>
-<!--https://fev11.lord2film.net/26158-09102-mazhor-2021.html-->
+          <p class="text-center">Подпишись и получи скидку 15%</p>
         </div>
         <div class="header-wrapper">
           <div class="header-nav">
@@ -16,12 +15,9 @@
                            v-for="subcategory in category.subcategories" :key="subcategory.id">{{subcategory.name}}</nuxt-link>
               </div>
             </div>
-
             <div class="header-nav__button hide-mob-600 ">
                <nuxt-link class="header-nav__button-submenu__item" :to="`/`">Аксессуары</nuxt-link>
               </div>
-
-
             <div class="header-nav__button mobile-menu show-mob-600">
               <svg @click="mobileMenuActive=!mobileMenuActive" v-if="!mobileMenuActive" width="35" height="7" viewBox="0 0 35 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 6H35" stroke="#519999"/>
@@ -148,7 +144,7 @@
           <el-button type="primary" class="btn" @click="submitLoginForm">Войти</el-button>
           <p style="margin-top: 20px;color: red;text-align: center"></p>
           <p style="text-align: center; opacity: .5">Нет аккаунта? <a style="text-decoration: underline" href="#" @click.prevent="authMode='register'">Регистрация</a></p>
-          <p style="text-align: center; opacity: .5">Забыли пароль? <a style="text-decoration: underline" href="">Восстановить</a></p>
+          <p style="text-align: center; opacity: .5">Забыли пароль? <a style="text-decoration: underline" href="№" @click.prevent="authMode='recover'">Восстановить</a></p>
         </el-form>
          <el-form v-if="authMode==='register'" :model="registerData" status-icon :rules="registerRules" ref="registerForm">
           <el-form-item prop="email">
@@ -163,9 +159,18 @@
           <el-button type="primary" class="btn" @click="submitRegisterForm">Регистрация</el-button>
           <p style="margin-top: 20px;color: red;text-align: center"></p>
           <p style="text-align: center; opacity: .5">Есть аккаунт? <a style="text-decoration: underline" href="#" @click.prevent="authMode='login'">Вход</a></p>
-          <p style="text-align: center; opacity: .5">Забыли пароль? <a style="text-decoration: underline" href="">Восстановить</a></p>
+          <p style="text-align: center; opacity: .5">Забыли пароль? <a style="text-decoration: underline" href="№" @click.prevent="authMode='recover'">Восстановить</a></p>
         </el-form>
+        <el-form v-if="authMode==='recover'" :model="recoverData" status-icon :rules="recoverRules" ref="recoverForm">
+          <el-form-item prop="email">
+            <el-input  prefix-icon="el-icon-message" v-model="recoverData.email"  placeholder="Введите почту"></el-input>
+          </el-form-item>
 
+          <el-button type="primary" class="btn" @click="submitRecoverForm">Сбросить пароль</el-button>
+          <p style="margin-top: 20px;color: red;text-align: center"></p>
+          <p style="text-align: center; opacity: .5">Нет аккаунта? <a style="text-decoration: underline" href="#" @click.prevent="authMode='register'">Регистрация</a></p>
+          <p style="text-align: center; opacity: .5">Есть аккаунт? <a style="text-decoration: underline" href="#" @click.prevent="authMode='login'">Вход</a></p>
+        </el-form>
       </div>
 
     </el-dialog>
@@ -191,6 +196,9 @@ export default {
         email:null,
         password:null,
       },
+      recoverData:{
+        email:null,
+      },
       registerData:{
         email:null,
         password1:null,
@@ -204,6 +212,12 @@ export default {
       headerCartShow:false,
       is_index_page:null,
       base_url:process.env.img_url,
+      recoverRules:{
+        email:[
+          { required: true, message: 'Это обязательное поле', trigger: ['blur', 'change'] },
+          { type: 'email', message: 'Введите корректный E-Mail адрес', trigger: ['blur', 'change'] }
+        ],
+      },
       loginRules: {
         email:[
           { required: true, message: 'Это обязательное поле', trigger: ['blur', 'change'] },
@@ -290,6 +304,17 @@ export default {
         this.notify('Ошибка','Проверьте введеные данные','error')
       }
     },
+    submitRecoverForm() {
+
+      this.$refs.recoverForm.validate((valid) => {
+        if (valid) {
+           console.log('recover')
+        } else {
+
+          return false;
+        }
+      });
+    },
     submitLoginForm() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
@@ -314,6 +339,7 @@ export default {
 
   },
   computed:{
+
     cart (){
       return this.$store.getters['cart/getCart']
     },

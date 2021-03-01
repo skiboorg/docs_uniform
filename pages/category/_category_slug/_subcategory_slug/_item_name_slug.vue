@@ -44,7 +44,7 @@
             </div>
             <div class="item-info__params">
               <div class="item-info__param">
-                <p  class="item-info__subtitle">1. размер</p>
+                <p  class="item-info__subtitle">размер</p>
                 <el-select v-model="selectedSize" placeholder="Select" @change="selectedHeight=null">
                   <el-option
                     v-for="size in sizes"
@@ -55,7 +55,7 @@
                 </el-select>
               </div>
               <div class="item-info__param">
-                <p class="item-info__subtitle">2. рост</p>
+                <p class="item-info__subtitle">рост</p>
                 <el-select v-model="selectedHeight" placeholder="Выберите рост">
                   <el-option
                     v-for="height in heights"
@@ -68,8 +68,9 @@
 
             </div>
             <div class="item-info__params">
-              <div class="item-info__param">
-                <p  class="item-info__subtitle">3. ткань</p>
+
+              <div v-if="materials.length>1" class="item-info__param">
+                <p  class="item-info__subtitle">ткань</p>
                 <el-select v-model="selectedMaterial" placeholder="Select" >
                   <el-option
                     v-for="material in materials"
@@ -79,8 +80,8 @@
                   </el-option>
                 </el-select>
               </div>
-              <div class="item-info__param">
-                <p class="item-info__subtitle">4. модификация</p>
+              <div v-if="mods.length>1" class="item-info__param">
+                <p class="item-info__subtitle">модификация</p>
                 <el-select v-model="selectedMod" placeholder="Выберите рост">
                   <el-option
                     v-for="mod in mods"
@@ -190,7 +191,7 @@ export default {
     for (let i = 0; i < acc.length; i++) {
       acc[i].addEventListener("click", function() {
         this.classList.toggle("active");
-        var panel = this.nextElementSibling;
+        let panel = this.nextElementSibling;
         if (panel.style.maxHeight) {
           panel.style.maxHeight = null;
         } else {
@@ -261,12 +262,20 @@ export default {
       this.btnDisabled = true
     },
     selectColor(index) {
+
       this.previewList = []
       this.selectedColor = index
       for (let i of this.item.images.filter(x => x.color === this.colors[this.selectedColor].id)) {
         this.previewList.push(i.image)
-
       }
+
+      // this.materials = []
+      // this.mods = []
+      // for(let i of this.item.types.filter(x => x.color.id === this.colors[this.selectedColor].id)){
+      //   this.materials.push(i.material)
+      //   this.mods.push(i.modification)
+      // }
+      // console.log(this.materials)
 
     },
     async addToCart() {
@@ -290,7 +299,7 @@ export default {
   }
 
 
-  }
+}
 </script>
 
 
