@@ -12,7 +12,7 @@
    <section>
      <div class="container collection-wrapper">
 
-      <ItemCard v-if="!item.collection" v-for="item in items" :key="item.id"
+      <ItemCard v-if="item.collection.is_base_collection" v-for="item in items" :key="item.id"
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
@@ -25,7 +25,7 @@
    </section>
 
 
-   <section class="collection" v-for="collection in collections" :key="collection.id">
+   <section v-if="!collection.is_base_collection" class="collection" v-for="collection in collections" :key="collection.id">
         <div class="container">
         <p style="font-size: 14px;letter-spacing: 0.1em;text-transform: uppercase;opacity: .5;margin-bottom: 15px"> {{collection.title}} </p>
             <h3 class="section-header">
@@ -34,7 +34,7 @@
 
             <div style="flex-wrap: wrap" class="collection-wrapper">
 
-              <ItemCard  v-for="item in  items.filter(x=>x.collection===collection)" :key="item.id"
+              <ItemCard  v-for="item in  items.filter(x=>x.collection.id===collection.id)" :key="item.id"
 
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
