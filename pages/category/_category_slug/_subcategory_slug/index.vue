@@ -82,7 +82,8 @@ export default {
   mounted() {
     console.log( this.items)
     for (let i of this.items){
-      !this.collections.find(x=>x.id===i.collection.id) ? this.collections.push(i.collection) : null
+      if (i.collection) !this.collections.find(x=>x.id===i.collection.id) ? this.collections.push(i.collection) : null
+
     }
     console.log(this.collections)
 
