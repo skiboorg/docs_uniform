@@ -34,7 +34,7 @@
 
             <div style="flex-wrap: wrap" class="collection-wrapper">
 
-              <ItemCard v-for="item in items.filter(x=>x.collection.id===collection.id)" :key="item.id"
+              <ItemCard  v-for="item in  items.filter(x=>x.collection===collection)" :key="item.id"
 
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
