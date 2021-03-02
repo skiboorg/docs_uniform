@@ -46,7 +46,8 @@
 
               <div class="item-info__param">
                 <p  class="item-info__subtitle">размер</p>
-                <el-select v-model="selectedSize" placeholder="Select" @change="selectedHeight=null">
+<!--                @change="selectedHeight=null"-->
+                <el-select v-model="selectedSize" placeholder="Select" >
                   <el-option
                     v-for="size in sizes"
                     :key="size.id"
