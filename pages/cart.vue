@@ -49,6 +49,7 @@
             <label @click="is_self_delivery=delivery.is_self_delivery,is_office_cdek=delivery.is_office_cdek"
                    class="cart-radio" :for="`d-${delivery.id}`"
                    v-for="(delivery,index) in delivery_types"
+                   v-if="delivery.is_active"
                    :key="delivery.id">
               <input type="radio" name="delivery"
                      :id="`d-${delivery.id}`"

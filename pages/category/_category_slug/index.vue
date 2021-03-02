@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="category-page">
     <div class="container">
       <p class="back-link"><svg width="27" height="15" viewBox="0 0 27 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M27 7.5H1M1 7.5L7.5 1M1 7.5L7.5 14" stroke="#519999"/>

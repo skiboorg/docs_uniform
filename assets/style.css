@@ -1100,8 +1100,13 @@ select:focus {
   margin-left: 50%;
 }
 
-.subcategories-item:last-child {
-  margin-bottom: 0;
+.subcategories-item:nth-child(even) {
+
+}
+
+.subcategories-item:last-child .subcategories-item__name{
+  left: unset;
+  right: 0;
 }
 
 .item-wrapper {
