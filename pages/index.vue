@@ -32,18 +32,19 @@
         <h3 class="section-header">
           {{collection.name}}
         </h3>
+
         <p class="section-header__link">
-          <nuxt-link :to="`category/${collection.category}/${collection.subcategory.name_slug}`">Смотреть полностью</nuxt-link>
+          <nuxt-link :to="`/collection/${collection.name_slug}`">Смотреть полностью</nuxt-link>
         </p>
         <div class="collection-wrapper">
-         <ItemCard v-for="item in collection.collection_items" :key="item.id"
-                        :collection_name="collection.subcategory.name"
+         <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"
+                        :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
                         :discount="item.discount"
                         :item_slug="item.name_slug"
-                        :cat_slug="collection.category"
-                        :subcat_slug="collection.subcategory.name_slug"
+                        :cat_slug="item.category"
+                        :subcat_slug="item.subcategory.name_slug"
                         :image="item.images[0].image_thumb"/>
         </div>
       </div>

@@ -85,6 +85,7 @@ export default {
       if (i.collection) !this.collections.find(x=>x.id===i.collection.id) ? this.collections.push(i.collection) : null
 
     }
+    this.collections = _.orderBy(this.collections,'order_num' )
     console.log(this.collections)
 
   },

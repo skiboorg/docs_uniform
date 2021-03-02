@@ -11,6 +11,7 @@
     </div>
     <p class="collection-item__name">{{item_name}}</p>
     <p class="collection-item__price">{{item_price}} ₽</p>
+
   </div>
 </template>
 
