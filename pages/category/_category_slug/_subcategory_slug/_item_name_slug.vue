@@ -56,7 +56,7 @@
                   </el-option>
                 </el-select>
               </div>
-              <div class="item-info__param">
+              <div v-if="heights.length>1" class="item-info__param">
                 <p class="item-info__subtitle">рост</p>
                 <el-select v-model="selectedHeight" placeholder="Выберите рост">
                   <el-option
@@ -95,7 +95,8 @@
               </div>
 
             </div>
-            <p id="myBtn" class="item-info__table">Таблица размеров</p>
+
+           <p id="myBtn" class="item-info__table" @click="sizesDialogVisible=!sizesDialogVisible">Таблица размеров</p>
 
             <div @click="addToCart" class="btn" :class="{'btnDisabled':btnDisabled}" >
               <p>{{buttonCaption}}</p>
@@ -153,7 +154,31 @@
       </div>
 
     </section>
+     <section>
+
+
+     <div class="container ">
+       <h3 class="section-header mb-40">Рекомендуемые товары</h3>
+       <div class="collection-wrapper">
+         <ItemCard v-for="item in recommended_items" :key="item.id"
+                        :collection_name="item.subcategory.name"
+                        :item_name="item.name"
+                        :item_price="item.price"
+                        :discount="item.diccount"
+                        :item_slug="item.name_slug"
+                        :cat_slug="$route.params.category_slug"
+                        :subcat_slug="$route.params.subcategory_slug"
+                        :image="item.images[0].image_thumb"/>
+       </div>
+
+
+    </div>
+   </section>
+      <el-dialog class="sizesDialog" :visible.sync="sizesDialogVisible">
+  <el-image :src="sizes_img"></el-image>
+</el-dialog>
   </div>
+
 </template>
 
 <script>
@@ -164,9 +189,11 @@ export default {
   },
   async asyncData({$axios,params}){
     const responce_data = await $axios.get(`/api/get_item?base_item_slug=${params.item_name_slug}`)
+    const recommended_data = await $axios.get(`/api/get_recomended_items?base_item_slug=${params.item_name_slug}`)
     const item = responce_data.data
+    const recommended_items = recommended_data.data
 
-    return {item}
+    return {item,recommended_items}
   },
   data() {
     return {
@@ -176,6 +203,7 @@ export default {
       materials:[],
       mods:[],
       btnDisabled:true,
+      sizesDialogVisible:false,
       selectedColor:0,
       buttonCaption:'В КОРЗИНУ',
       selectedSize:null,
@@ -237,6 +265,12 @@ export default {
     selectedMod(val){
       this.checkItem()
     },
+  },
+  computed:{
+    sizes_img (){
+      let is_man = this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).is_for_man ? true:false
+      return is_man ? '/man.jpg' : '/woman.jpg'
+    }
   },
 
   methods: {

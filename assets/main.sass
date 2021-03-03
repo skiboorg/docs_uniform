@@ -227,8 +227,25 @@ $main_color: #519999
       color: red
     &:hover
       border-color: red
-
+.sizesDialog
+  & .el-dialog
+    max-width: 800px
+  & .el-dialog__header
+    padding: 0
+  & .el-dialog__headerbtn
+    background: #519999
+    z-index: 100
+    i
+      color: #FFFFFF
+  & .el-dialog__body
+    padding: 0
 @media (max-width: 600px)
+  .sizesDialog
+    & .el-dialog
+      width: 95%
+      margin-top: 0
+      top: 50%
+      transform: translateY(-50%)
   .subcategories-item
     margin-right: 30%
   .subcategories-item:nth-child(2n)
