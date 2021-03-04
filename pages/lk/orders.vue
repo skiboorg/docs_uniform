@@ -4,39 +4,41 @@
                 <h1 class="lk-tab__title ">Мои заказы</h1>
 
 
-                    <div class="lk-order-item">
+                    <div class="lk-order-item" v-for="order in orders" :key="order.id">
                      <div class="lk-order-item__info--group">
                             <div class="lk-order-item__info--group--item">
                                 <p class="item-info__subtitle">Дата заказа</p>
-                                <p class="fs12"></p>
+                                <p class="fs12">{{new Date(order.created_at).toLocaleString()}}</p>
                             </div>
                             <div class="lk-order-item__info--group--item">
                                 <p class="item-info__subtitle">Номер заказа</p>
-                                <p class="fs12"></p>
+                                <p class="fs12">{{order.order_code}}</p>
                             </div>
                             <div class="lk-order-item__info--group--item">
                                 <p class="item-info__subtitle">Адрес доставки</p>
-                                <p class="fs12">г. Уфа, ул. Казанская 4, 14</p>
+
+                                <p class="fs12">{{order.city ? `г. ${order.city.name}` : ''}}{{order.street}} {{order.house}} {{order.flat}}</p>
                             </div>
                          <div class="">
-                             <p class="lk-order-item__price">₽</p>
+                             <p class="lk-order-item__price">{{order.total_price}}₽</p>
                          </div>
                         </div>
 
-                        <div class="lk-order-item__info--group">
+                        <div class="lk-order-item__info--group" v-for="item in order.items" :key="item.id">
+
                         <div class="lk-order-item__img">
-                        <img src="" alt="">
+                        <img :src="base_url+item.item_type.image" alt="">
                     </div>
 
-                    <div class="lk-order-item__info">
-                        <p class="lk-order-item__info--status">{% if order.is_complete %}Доставлен{% endif %}</p>
-                        <p class="lk-order-item__info--status">{% if order.is_payed %}Оплачен{% endif %}</p>
+                    <div class="lk-order-item__info" >
+<!--                        <p class="lk-order-item__info&#45;&#45;status">{% if order.is_complete %}Доставлен{% endif %}</p>-->
+<!--                        <p class="lk-order-item__info&#45;&#45;status">{% if order.is_payed %}Оплачен{% endif %}</p>-->
 
-                        <p class="lk-order-item__info--name"></p>
+                        <p class="lk-order-item__info--name">{{item.item_type.name}}</p>
 
                     </div>
-                    <p class="lk-order-item__num"> шт</p>
-                    <p class="lk-order-item__price">₽</p>
+                    <p class="lk-order-item__num">{{item.quantity}} шт</p>
+                    <p class="lk-order-item__price">{{item.price}} ₽</p>
                         </div>
 
 
@@ -58,8 +60,15 @@ export default {
     await store.dispatch('categories/fetchCategories')
     await store.dispatch('cart/fetchCart')
   },
+  async asyncData({$axios,$auth}){
+    const get_orders = await $axios.get(`/api/get_user_orders?user_id=${$auth.user.id}`)
+    const orders = get_orders.data
+    console.log(orders)
+    return {orders}
+  },
   data() {
     return {
+      base_url:process.env.img_url,
 
     }
   },

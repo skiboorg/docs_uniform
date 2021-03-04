@@ -160,7 +160,8 @@ export default {
     const get_delivery = await $axios.get(`/api/get_delivery`)
     const delivery_types = get_delivery.data
     return {delivery_types}
-  },  data() {
+  },
+  data() {
     return {
       loading:false,
       promoSent:false,
@@ -174,9 +175,9 @@ export default {
       is_office_cdek:false,
       cities:[],
       orderData:{
-        phone:null,
-        email:null,
-        fio:null,
+        phone:this.$auth.loggedIn ? this.$auth.user.phone : null,
+        email:this.$auth.loggedIn ? this.$auth.user.email : null,
+        fio:this.$auth.loggedIn ? this.$auth.user.fio : null,
         street:null,
         house:null,
         flat:null,
