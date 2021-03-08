@@ -7,9 +7,7 @@
         <a class="link" href="#" @click.prevent="$router.back()">НАЗАД</a>
       </p>
     </div>
-    <MarqueeLine
-      :text="`${ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).is_for_man ?
-       'Мужская':'Женская'} медицинская одежда`"/>
+    <MarqueeLine :text="`${ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}`"/>
     <section class="subcategories">
       <div class="container">
         <div class="subcategories-wrapper">

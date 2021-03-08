@@ -1,8 +1,15 @@
 <template>
-  <div>
+  <div class="main-wrapper">
     <Header/>
     <Nuxt />
     <Footer/>
+    <div v-if="!this.$auth.$storage.getCookie('cookie_agree')" ref="cookie_message" class="cookie-message"
+    :class="{'hideCookie':hideCookie}"
+    >
+      <p>Продолжая использовать наш сайт, вы даете согласие на обработку файлов cookie, которые обеспечивают
+        правильную работу сайта. Благодаря им мы улучшаем сайт, обслуживание и товары</p>
+      <el-button @click="cookie_agree" type="success">ОК</el-button>
+    </div>
   </div>
 </template>
 
@@ -13,16 +20,20 @@
     export default {
         data:function(){
             return{
+              hideCookie:false
             }
         },
         components:{
             Header,
             Footer
-
-
         },
         methods: {
-
+          cookie_agree(){
+            this.$auth.$storage.setCookie('cookie_agree',true)
+            this.hideCookie = true
+          }
         },
+
+
     }
 </script>

@@ -238,10 +238,24 @@ export default {
       !this.mods.find(x=>x.id === i.modification.id) ? this.mods.push(i.modification) : null
     }
     this.sizes = _.orderBy(this.sizes,'order_num' )
-    this.selectedSize = this.sizes[0].id
+
     this.selectedHeight = this.heights[0].id
     this.selectedMaterial = this.materials[0].id
     this.selectedMod = this.mods[0].id
+    console.log('this.sizes.length',this.sizes.length)
+    if (this.is_male && this.sizes.length >= 2){
+      this.selectedSize = this.sizes[1].id
+    }
+    else {
+      this.selectedSize = this.sizes[0].id
+    }
+    if (!this.is_male && this.sizes.length >= 3){
+      this.selectedSize = this.sizes[2].id
+    }
+    else {
+      this.selectedSize = this.sizes[0].id
+    }
+
     this.checkItem()
 
 
@@ -267,9 +281,12 @@ export default {
     },
   },
   computed:{
+    is_male (){
+      return this.$store.getters['categories/getCategories']
+        .find(x => x.name_slug === this.$route.params.category_slug).is_for_man
+    },
     sizes_img (){
-      let is_man = this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).is_for_man ? true:false
-      return is_man ? '/man.jpg' : '/woman.jpg'
+      return this.is_male ? '/man.jpg' : '/woman.jpg'
     }
   },
 
@@ -293,10 +310,10 @@ export default {
             this.btnDisabled = false
             return i
           } else {
-            this.buttonCaption = 'Нет в наличии'
+            this.buttonCaption = 'Закончилось :('
           }
         } else {
-          this.buttonCaption = 'Нет в наличии'
+          this.buttonCaption = 'Закончилось :('
         }
       }
       this.btnDisabled = true

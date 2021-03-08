@@ -3,7 +3,7 @@
     <section class="categories">
       <div class="container">
         <div class="categories-wrapper">
-          <div @click="$router.push(`/category/${category.name_slug}`)" class="categories-item"
+          <div v-if="category.is_at_home" @click="$router.push(`/category/${category.name_slug}`)" class="categories-item"
                :style="`background: url(${category.image}) center`"
                v-for="(category,index) in this.$store.getters['categories/getCategories']"
                :key="category.id">

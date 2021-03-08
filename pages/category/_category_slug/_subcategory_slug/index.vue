@@ -8,7 +8,7 @@
         </p>
     </div>
 
-    <MarqueeLine :text="`${ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).is_for_man ? 'Мужская':'Женская'}  медицинская одежда`"/>
+    <MarqueeLine :text="`${ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}`"/>
    <section>
      <div class="container collection-wrapper">
 
