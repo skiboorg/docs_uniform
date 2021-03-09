@@ -242,19 +242,14 @@ export default {
     this.selectedHeight = this.heights[0].id
     this.selectedMaterial = this.materials[0].id
     this.selectedMod = this.mods[0].id
-    console.log('this.sizes.length',this.sizes.length)
-    if (this.is_male && this.sizes.length >= 2){
-      this.selectedSize = this.sizes[1].id
+
+    if (this.is_male){
+      this.sizes.length >= 2 ? this.selectedSize = this.sizes[1].id : this.selectedSize = this.sizes[0].id
+    }else{
+      this.sizes.length >= 3 ? this.selectedSize = this.sizes[3].id : this.selectedSize = this.sizes[0].id
     }
-    else {
-      this.selectedSize = this.sizes[0].id
-    }
-    if (!this.is_male && this.sizes.length >= 3){
-      this.selectedSize = this.sizes[2].id
-    }
-    else {
-      this.selectedSize = this.sizes[0].id
-    }
+
+
 
     this.checkItem()
 

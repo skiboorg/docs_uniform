@@ -25,14 +25,14 @@
           </a>
         </div>
         <div class="mb-40">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2246.9520836614515!2d37.582423916266265!3d55.72458488054585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54b9fd4b756dd%3A0x8ab11fefbe6fbcd6!2z0KTRgNGD0L3Qt9C10L3RgdC60LDRjyDQvdCw0LEuLCAzMCwg0Y3RgtCw0LYgMSwg0JzQvtGB0LrQstCwLCAxMTkxNDY!5e0!3m2!1sru!2sru!4v1608456140628!5m2!1sru!2sru" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+          <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aeca6e5a9284d9b9250395670972f79acaf69b81e87c95fd6db908b42c8366841&amp;source=constructor" width="100%" height="450" frameborder="0"></iframe>
         </div>
         <div class="mb-40"></div>
         <section class="social">
           <div class="container">
             <div class="social-wrapper">
               <div class="social-item">
-                <img src="/social-item4.png" alt="">
+                <img src="/contact1.png" alt="">
               </div>
               <div class="social-item">
                 <img src="/social-item4.png" alt="">

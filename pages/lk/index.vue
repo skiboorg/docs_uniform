@@ -41,7 +41,7 @@
         </div>
         <a href="" class="link">+ ДОБАВИТЬ</a>
       </div>
-      <div class="lk-tab-grid__item">
+      <div style="display: none" class="lk-tab-grid__item">
         <p  class="lk-tab-grid__item--title">Адрес доставки</p>
         <div class="lk-tab__removeItem">
           <div class="lk-tab__removeItem--btn">
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="lk-tab-grid ">
-      <div class="lk-tab-grid__item">
+      <div style="display: none" class="lk-tab-grid__item">
         <p  class="lk-tab-grid__item--title">Размеры и рост</p>
         <div class="lk-tab-grid__item--group">
           <div class="">
