@@ -305,10 +305,10 @@ export default {
             this.btnDisabled = false
             return i
           } else {
-            this.buttonCaption = 'Закончилось :('
+            this.buttonCaption = 'К сожалению, закончилось :('
           }
         } else {
-          this.buttonCaption = 'Закончилось :('
+          this.buttonCaption = 'К сожалению, закончилось :('
         }
       }
       this.btnDisabled = true

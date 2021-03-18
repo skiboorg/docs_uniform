@@ -301,7 +301,7 @@ select:focus {
 .text {
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .text-300 {
@@ -1133,6 +1133,7 @@ select:focus {
 
 .item-info .btn {
   margin-bottom: 40px;
+  max-width: 350px;
 }
 
 .item-info__price {
@@ -2024,6 +2025,7 @@ select:focus {
 
 .footer-top__item p {
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
 .footer-top__item p:last-child {

@@ -74,7 +74,7 @@
                   v-for="office in city.offices"
                   :key="office.id"
                   :label="office.address"
-                  :value="office.office_id">
+                  :value="office.city_code">
                 </el-option>
               </el-select>
               <div v-if="!this.is_office_cdek">
