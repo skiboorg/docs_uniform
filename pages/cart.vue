@@ -74,7 +74,7 @@
                   v-for="office in city.offices"
                   :key="office.id"
                   :label="office.address"
-                  :value="office.city_code">
+                  :value="office.id">
                 </el-option>
               </el-select>
               <div v-if="!this.is_office_cdek">
@@ -315,8 +315,7 @@ export default {
       console.log(val)
       if (val){
         //this.deliveryPrice = this.cities.find(x=>x.id===val).price
-        this.loading = true
-        this.city_code = val
+
 
         await this.calculateDelivery()
       }else{
