@@ -37,9 +37,9 @@
           <div class="cart-grid-step"><p>1/3 данные</p></div>
           <div class="cart-grid-form">
 
-            <el-input class="mb-10 " :class="{'fieldError':!orderData.phone}" type="text" name="phone"  placeholder="Телефон" v-model="orderData.phone"></el-input>
-            <el-input class="mb-10" @input="validateEmail" :class="{'fieldError':!orderData.email || !is_email_valid}" type="text" name="email" placeholder="Электронная почта" v-model="orderData.email"></el-input>
-            <el-input type="text" :class="{'fieldError':!orderData.fio}" name="fio" placeholder="ФИО" v-model="orderData.fio"></el-input>
+            <el-input class="mb-10 " ref="phone"  type="text" name="phone"  placeholder="Телефон" v-model="orderData.phone"></el-input>
+            <el-input class="mb-10" ref="email" @input="validateEmail"  type="text" name="email" placeholder="Электронная почта" v-model="orderData.email"></el-input>
+            <el-input type="text" ref="fio" name="fio" placeholder="ФИО" v-model="orderData.fio"></el-input>
           </div>
         </div>
         <div class="cart-grid b-bottom">
@@ -60,7 +60,8 @@
               <span class="checkmark"></span>
             </label>
             <div v-if="!is_self_delivery">
-              <el-select class="city-select mb-10" :class="{'fieldError':!orderData.delivery_city}" filterable v-model="orderData.delivery_city"  placeholder="Выберите город">
+              <el-select class="city-select mb-10" :class="{'fieldError':!orderData.delivery_city}" filterable v-model="orderData.delivery_city"
+                         @change="orderData.delivery_office=null" placeholder="Выберите город">
                 <el-option
                   v-for="city in cities"
                   :key="city.id"
@@ -134,8 +135,8 @@
             <span @click="applyPromo" class="color-green" :class="{'btnDisabled':promoSent}">АКТИВИРОВАТЬ</span>
           </p>
           <p v-else class="cart-total__promo ">Промокод активирован</p>
-
-          <el-button :disabled="!is_data_ok" :loading="loading || orderSend" type="submit" class="btn" @click="createOrder">оформить заказ</el-button>
+<!--:disabled="!is_data_ok"-->
+          <el-button  :loading="loading || orderSend" type="submit" class="btn" @click="createOrder">оформить заказ</el-button>
           <p class="cart-total__text mb-10">Нажимая на кнопку «оплатить заказ», я принимаю условия <a href="">публичной оферты</a> и <a
             href="">политики конфиденциальности</a></p>
           <p class="cart-total__link "><nuxt-link to="/delivery">условия доставки и оплаты</nuxt-link> </p>
@@ -221,6 +222,15 @@ export default {
       //const response = await this.$axios.get(`/api/calculate_delivery`)
     },
     async createOrder () {
+      this.orderData.phone ?  this.$refs.phone.$el.classList.remove('fieldError'):this.$refs.phone.$el.classList.add('fieldError')
+    this.orderData.email && this.is_email_valid ? this.$refs.email.$el.classList.remove('fieldError') :this.$refs.email.$el.classList.add('fieldError')
+      this.orderData.fio ? this.$refs.fio.$el.classList.remove('fieldError'): this.$refs.fio.$el.classList.add('fieldError')
+
+      if(!this.is_data_ok){
+        return
+      }
+
+
       this.orderSend = true
       let session_id = this.$auth.$storage.getCookie('session_id')
       const response = await this.$axios.post(`/api/create_order`,
