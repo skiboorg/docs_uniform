@@ -60,7 +60,7 @@
               <span class="checkmark"></span>
             </label>
             <div v-if="!is_self_delivery">
-              <el-select class="city-select mb-10" :class="{'fieldError':!orderData.delivery_city}" filterable v-model="orderData.delivery_city"
+              <el-select class="city-select mb-10"  :class="{'fieldError':!orderData.delivery_city}" filterable v-model="orderData.delivery_city"
                          @change="orderData.delivery_office=null" placeholder="Выберите город">
                 <el-option
                   v-for="city in cities"
@@ -223,7 +223,7 @@ export default {
     },
     async createOrder () {
       this.orderData.phone ?  this.$refs.phone.$el.classList.remove('fieldError'):this.$refs.phone.$el.classList.add('fieldError')
-    this.orderData.email && this.is_email_valid ? this.$refs.email.$el.classList.remove('fieldError') :this.$refs.email.$el.classList.add('fieldError')
+      this.orderData.email && this.is_email_valid ? this.$refs.email.$el.classList.remove('fieldError') :this.$refs.email.$el.classList.add('fieldError')
       this.orderData.fio ? this.$refs.fio.$el.classList.remove('fieldError'): this.$refs.fio.$el.classList.add('fieldError')
 
       if(!this.is_data_ok){

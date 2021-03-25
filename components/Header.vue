@@ -8,6 +8,7 @@
         <div class="header-wrapper">
           <div class="header-nav">
             <div class="header-nav__button hide-mob-600 with-submenu"
+                 v-if="category.is_at_menu"
                  v-for="category in this.$store.getters['categories/getCategories']" :key="category.id">
               <nuxt-link class="header-nav__link link-button" :to="`/category/${category.name_slug}`">{{category.name}}</nuxt-link>
               <div class="header-nav__button-submenu">
@@ -36,7 +37,7 @@
                 <nuxt-link to="/">Блог</nuxt-link>
               </div>
               <div class="header-middle__link">
-                <nuxt-link to="/">Сертификаты</nuxt-link>
+                <nuxt-link to="/category/sertifikatyi/sertifikatyi">Сертификаты</nuxt-link>
               </div>
 
               <div class="header-middle__link">
@@ -104,7 +105,7 @@
             <div class="header-mobile-menu__item mobile-links">
 
               <nuxt-link class="mobile-links__link" to="/">Блог</nuxt-link>
-              <nuxt-link class="mobile-links__link" to="/">Сертификат</nuxt-link>
+              <nuxt-link class="mobile-links__link" to="/category/sertifikatyi/sertifikatyi">Сертификаты</nuxt-link>
               <nuxt-link class="mobile-links__link" to="/delivery">Доставка и оплата</nuxt-link>
               <nuxt-link class="mobile-links__link" to="/about">О нас</nuxt-link>
               <nuxt-link class="mobile-links__link" to="/contact">Контакты</nuxt-link>

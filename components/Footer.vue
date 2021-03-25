@@ -9,13 +9,13 @@
             </a>
           </div>
           <div class="footer-top__item">
-            <p><a href="#">Мужчинам</a></p>
-            <p><a href="#">Женщинам</a></p>
-            <p><a href="#">Аксессуары</a></p>
+            <p><a href="/category/muzhchinam">Мужчинам</a></p>
+            <p><a href="/category/zhenschinam">Женщинам</a></p>
+            <p><a href="/category/aksessuaryi">Аксессуары</a></p>
           </div>
           <div class="footer-top__item">
             <p><nuxt-link to="/delivery">Блог</nuxt-link></p>
-            <p><nuxt-link to="/delivery">Сертификаты</nuxt-link></p>
+            <p><nuxt-link to="/category/sertifikatyi/sertifikatyi">Сертификаты</nuxt-link></p>
             <p><nuxt-link to="/delivery">Доставка и оплата</nuxt-link></p>
             <p><nuxt-link to="/about">О нас</nuxt-link></p>
             <p><nuxt-link to="/contact">Контакты</nuxt-link></p>
@@ -41,14 +41,15 @@
         </div>
         <div class="footer-top-mob__middle">
           <div class="footer-top-mob__middle--left">
-            <p><a href="#">Мужчинам</a></p>
-            <p><a href="#">Женщинам</a></p>
+            <p><a href="/category/muzhchinam">Мужчинам</a></p>
+            <p><a href="/category/zhenschinam">Женщинам</a></p>
+             <p><a href="/category/aksessuaryi">Аксессуары</a></p>
 
           </div>
           <div class="footer-top-mob__middle--right">
             <p><nuxt-link to="/delivery">Аксессуары</nuxt-link></p>
             <p><nuxt-link to="/delivery">Блог</nuxt-link></p>
-            <p><nuxt-link to="/delivery">Сертификаты</nuxt-link></p>
+            <p><nuxt-link to="/category/sertifikatyi/sertifikatyi">Сертификаты</nuxt-link></p>
             <p><nuxt-link to="/delivery">Доставка и оплата</nuxt-link></p>
             <p><nuxt-link to="/about">О нас</nuxt-link></p>
             <p><nuxt-link to="/contact">Контакты</nuxt-link></p>
