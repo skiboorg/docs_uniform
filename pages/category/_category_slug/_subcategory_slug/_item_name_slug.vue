@@ -14,9 +14,11 @@
         <div class="item-wrapper">
 
           <div class="item-images">
-            <el-image v-for="(image,index) in previewList" :key="index"
+
+            <el-image  v-for="(image,index) in thumbList" :key="index"
                       :src="image"
                       :preview-src-list="previewList">
+
               <div slot="placeholder" class="image-slot">
                 Загрузка<span class="dot">...</span>
               </div>
@@ -212,6 +214,7 @@ export default {
       selectedMaterial:null,
       selectedMod:null,
       previewList:[],
+      thumbList:[],
 
 
     }
@@ -252,9 +255,9 @@ export default {
 
 
     this.checkItem()
-
-
     for (let i of this.item.images.filter(x=>x.color===this.colors[0].id)){
+
+      this.thumbList.push(i.image_thumb)
       this.previewList.push(i.image)
     }
   },
@@ -318,6 +321,7 @@ export default {
       this.previewList = []
       this.selectedColor = index
       for (let i of this.item.images.filter(x => x.color === this.colors[this.selectedColor].id)) {
+        this.thumbList.push(i.image_thumb)
         this.previewList.push(i.image)
       }
 
