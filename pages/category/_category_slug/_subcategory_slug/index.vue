@@ -9,20 +9,7 @@
     </div>
 
     <MarqueeLine :text="`${ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}`"/>
-   <section>
-     <div class="container collection-wrapper">
 
-      <ItemCard v-if="item.collection.is_base_collection" v-for="item in items" :key="item.id"
-                        :collection_name="item.subcategory.name"
-                        :item_name="item.name"
-                        :item_price="item.price"
-                        :discount="item.diccount"
-                        :item_slug="item.name_slug"
-                        :cat_slug="$route.params.category_slug"
-                        :subcat_slug="$route.params.subcategory_slug"
-                        :image="item.images[0].image_thumb"/>
-    </div>
-   </section>
 
 
    <section v-if="!collection.is_base_collection" class="collection" v-for="collection in collections" :key="collection.id">
@@ -47,6 +34,19 @@
             </div>
         </div>
     </section>
+    <section style="margin-bottom: 0">
+     <div class="container collection-wrapper">
+      <ItemCard v-if="item.collection.is_base_collection" v-for="item in items" :key="item.id"
+                        :collection_name="item.subcategory.name"
+                        :item_name="item.name"
+                        :item_price="item.price"
+                        :discount="item.diccount"
+                        :item_slug="item.name_slug"
+                        :cat_slug="$route.params.category_slug"
+                        :subcat_slug="$route.params.subcategory_slug"
+                        :image="item.images[0].image_thumb"/>
+    </div>
+   </section>
  </div>
 </template>
 
