@@ -1,12 +1,15 @@
 <template>
-  <div @click="$router.push(`/category/${cat_slug}/${subcat_slug}/${item_slug}`)" class="collection-item" >
+  <div class="collection-item" >
     <p class="collection-item-name">{{collection_name}}</p>
     <div class="collection-item__img" >
-       <el-image  :src="image" lazy>
+      <nuxt-link :to="`/category/${cat_slug}/${subcat_slug}/${item_slug}`">
+        <el-image  :src="image" lazy>
          <div slot="error" class="image-slot">
         <i class="el-icon-picture-outline"></i>
       </div>
        </el-image>
+      </nuxt-link>
+
 
     </div>
     <p class="collection-item__name">{{item_name}}</p>

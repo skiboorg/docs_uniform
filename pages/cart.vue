@@ -146,7 +146,7 @@
   </div>
   <div v-else style="height: 70vh" class="container">
     <h1 class="section-header">Ваша корзина пуста</h1>
-    <el-button class="btn" @click="$router.push('/')">На главную</el-button>
+    <el-button style="width: 220px" class="btn" @click="$router.push('/')">На главную</el-button>
   </div>
 </template>
 
@@ -244,6 +244,7 @@ export default {
       if (response.data.pay_url){
         window.location.href = response.data.pay_url
       }
+
 
     },
     async applyPromo () {

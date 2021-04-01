@@ -233,6 +233,7 @@ export default {
         }
       });
     }
+
     for(let i of this.item.types){
       !this.colors.find(x=>x.id === i.color.id) ? this.colors.push(i.color) : null
       !this.sizes.find(x=>x.id === i.size.id) ? this.sizes.push(i.size) : null
@@ -245,11 +246,11 @@ export default {
     this.selectedHeight = this.heights[0].id
     this.selectedMaterial = this.materials[0].id
     this.selectedMod = this.mods[0].id
-
+console.log('11')
     if (this.is_male){
       this.sizes.length >= 2 ? this.selectedSize = this.sizes[1].id : this.selectedSize = this.sizes[0].id
     }else{
-      this.sizes.length >= 3 ? this.selectedSize = this.sizes[3].id : this.selectedSize = this.sizes[0].id
+      this.sizes.length > 3 ? this.selectedSize = this.sizes[3].id : this.selectedSize = this.sizes[0].id
     }
 
 
