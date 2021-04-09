@@ -40,13 +40,15 @@
           <img src="/logo-f-600.png" alt="">
         </div>
         <div class="footer-top-mob__middle">
-          <div class="footer-top-mob__middle--left">
-            <p><a href="/category/muzhchinam">Мужчинам</a></p>
-            <p><a href="/category/zhenschinam">Женщинам</a></p>
-             <p><a href="/category/aksessuaryi">Аксессуары</a></p>
+<!--          <div class="footer-top-mob__middle&#45;&#45;left">-->
+<!--            <p><a href="/category/muzhchinam">Мужчинам</a></p>-->
+<!--            <p><a href="/category/zhenschinam">Женщинам</a></p>-->
+<!--           -->
 
-          </div>
+<!--          </div>-->
           <div class="footer-top-mob__middle--right">
+            <p><nuxt-link to="/category/muzhchinam">Мужчинам</nuxt-link></p>
+            <p><nuxt-link to="/category/zhenschinam">Женщинам</nuxt-link></p>
             <p><nuxt-link to="/delivery">Аксессуары</nuxt-link></p>
             <p><nuxt-link to="/delivery">Блог</nuxt-link></p>
             <p><nuxt-link to="/category/sertifikatyi/sertifikatyi">Сертификаты</nuxt-link></p>
