@@ -37,9 +37,9 @@
           <div class="cart-grid-step"><p>1/3 данные</p></div>
           <div class="cart-grid-form">
 
-            <el-input class="mb-10 " ref="phone"  type="text" name="phone"  placeholder="Телефон" v-model="orderData.phone"></el-input>
-            <el-input class="mb-10" ref="email" @input="validateEmail"  type="text" name="email" placeholder="Электронная почта" v-model="orderData.email"></el-input>
-            <el-input type="text" ref="fio" name="fio" placeholder="ФИО" v-model="orderData.fio"></el-input>
+            <el-input class="mb-10 " ref="phone"  type="text" name="phone"  placeholder="Телефон *" v-model="orderData.phone"></el-input>
+            <el-input class="mb-10" ref="email" @input="validateEmail"  type="text" name="email" placeholder="Электронная почта *" v-model="orderData.email"></el-input>
+            <el-input type="text" ref="fio" name="fio" placeholder="ФИО *" v-model="orderData.fio"></el-input>
           </div>
         </div>
         <div class="cart-grid b-bottom">
@@ -61,7 +61,7 @@
             </label>
             <div v-if="!is_self_delivery">
               <el-select class="city-select mb-10"  :class="{'fieldError':!orderData.delivery_city}" filterable v-model="orderData.delivery_city"
-                         @change="orderData.delivery_office=null" placeholder="Выберите город">
+                         @change="orderData.delivery_office=null" placeholder="Выберите город *">
                 <el-option
                   v-for="city in cities"
                   :key="city.id"
@@ -70,7 +70,7 @@
                 </el-option>
               </el-select>
 
-              <el-select v-if="city && this.is_office_cdek" class="city-select mb-10" filterable v-model="orderData.delivery_office"  placeholder="Выберите офис">
+              <el-select v-if="city && this.is_office_cdek" class="city-select mb-10" filterable v-model="orderData.delivery_office"  placeholder="Выберите офис *">
                 <el-option
                   v-for="office in city.offices"
                   :key="office.id"
@@ -79,10 +79,10 @@
                 </el-option>
               </el-select>
               <div v-if="!this.is_office_cdek">
-                <el-input class="mb-10" type="text" :class="{'fieldError':!orderData.street}" v-model="orderData.street" placeholder="Улица"></el-input>
+                <el-input class="mb-10" type="text" :class="{'fieldError':!orderData.street}" v-model="orderData.street" placeholder="Улица *"></el-input>
                 <div class="cart-grid-form__group mb-10">
-                  <el-input type="text" :class="{'fieldError':!orderData.house}" v-model="orderData.house" placeholder="Дом"></el-input>
-                  <el-input type="text" :class="{'fieldError':!orderData.flat}" v-model="orderData.flat" placeholder="Квартира/офис"></el-input>
+                  <el-input type="text" :class="{'fieldError':!orderData.house}" v-model="orderData.house" placeholder="Дом *"></el-input>
+                  <el-input type="text" :class="{'fieldError':!orderData.flat}" v-model="orderData.flat" placeholder="Квартира/офис *"></el-input>
                 </div>
                 <p class="cart-total__text text-grey">Вашего города нет в списке доставки? Выберите пункт "самовывоз",
                   а в комментарии к заказу укажите информацию куда вам доставить ваш заказ.
@@ -138,7 +138,7 @@
 <!--:disabled="!is_data_ok"-->
           <el-button  :loading="loading || orderSend" type="submit" class="btn" @click="createOrder">оформить заказ</el-button>
           <p class="cart-total__text mb-10">Нажимая на кнопку «оплатить заказ», я принимаю условия <a href="">публичной оферты</a> и <a
-            href="">политики конфиденциальности</a></p>
+            href="/policy.docx" target="_blank">политики конфиденциальности</a></p>
           <p class="cart-total__link "><nuxt-link to="/delivery">условия доставки и оплаты</nuxt-link> </p>
         </div>
       </div>
@@ -191,7 +191,7 @@ export default {
       },
       payments:[
         {id:1,name:'Картой онлайн, Apple Pay, Google Pay',value:'online'},
-        {id:2,name:'Курьером',value:'cash'},
+       // {id:2,name:'Курьером',value:'cash'},
 
       ]
     }
@@ -227,7 +227,10 @@ export default {
       this.orderData.fio ? this.$refs.fio.$el.classList.remove('fieldError'): this.$refs.fio.$el.classList.add('fieldError')
 
       if(!this.is_data_ok){
-        return
+         this.$notify.error({
+                   message: 'Поля, отмеченные * обязательны для заполнения'
+        });
+         return
       }
 
 

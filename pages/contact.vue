@@ -30,18 +30,18 @@
         <div class="mb-40"></div>
         <section class="social">
           <div class="container">
-            <div class="social-wrapper">
+            <div class="contact-images">
               <div class="social-item">
                 <img src="/contact1.png" alt="">
               </div>
               <div class="social-item">
-                <img src="/social-item4.png" alt="">
+                <img src="/room1.jpg" alt="">
               </div>
               <div class="social-item">
-                <img src="/social-item4.png" alt="">
+                <img src="/room2.jpg" alt="">
               </div>
               <div class="social-item">
-                <img src="/social-item4.png" alt="">
+                <img src="/room3.jpg" alt="">
               </div>
             </div>
           </div>
