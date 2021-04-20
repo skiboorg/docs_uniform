@@ -306,3 +306,10 @@ $main_color: #519999
   display: grid
   grid-template-columns: repeat(auto-fill,minmax(250px,1fr))
   grid-gap: 10px
+
+
+.el-checkbox__input.is-checked+.el-checkbox__label
+  color: $main_color
+.el-checkbox__input.is-checked .el-checkbox__inner
+  background-color: $main_color
+  border-color: $main_color

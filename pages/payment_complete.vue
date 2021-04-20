@@ -20,12 +20,11 @@ export default {
   async asyncData({$axios,route}){
     try{
       const responce = await $axios.post(`/api/order_payed`,{pay_id:route.query.pay_id})
-    console.log(responce.data)
-    return {}
+      console.log(responce.data)
+      return {}
     } catch (e){
       console.log(e)
     }
-
   },
 
   data() {

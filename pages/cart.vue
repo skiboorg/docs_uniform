@@ -40,6 +40,7 @@
             <el-input class="mb-10 " ref="phone"  type="text" name="phone"  placeholder="Телефон *" v-model="orderData.phone"></el-input>
             <el-input class="mb-10" ref="email" @input="validateEmail"  type="text" name="email" placeholder="Электронная почта *" v-model="orderData.email"></el-input>
             <el-input type="text" ref="fio" name="fio" placeholder="ФИО *" v-model="orderData.fio"></el-input>
+
           </div>
         </div>
         <div class="cart-grid b-bottom">
@@ -136,9 +137,11 @@
           </p>
           <p v-else class="cart-total__promo ">Промокод активирован</p>
 <!--:disabled="!is_data_ok"-->
+            <el-checkbox class="mb-10" v-model="orderData.need_register">Автоматически меня зарегистрировать</el-checkbox>
           <el-button  :loading="loading || orderSend" type="submit" class="btn" @click="createOrder">оформить заказ</el-button>
           <p class="cart-total__text mb-10">Нажимая на кнопку «оплатить заказ», я принимаю условия <a href="">публичной оферты</a> и <a
             href="/policy.docx" target="_blank">политики конфиденциальности</a></p>
+          <p  v-if="orderData.need_register" class="cart-total__text mb-10">Ваш пароль для личного кабинета по-умолчанию 0000 (четыре нуля). Пароль можно изменить в разделе настроек после входа в личный кабинет</p>
           <p class="cart-total__link "><nuxt-link to="/delivery">условия доставки и оплаты</nuxt-link> </p>
         </div>
       </div>
@@ -187,6 +190,7 @@ export default {
         delivery_office:null,
         pay_type:'online',
         comment:null,
+        need_register:false,
 
       },
       payments:[
