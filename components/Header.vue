@@ -149,6 +149,12 @@
           <el-form-item prop="email">
             <el-input  prefix-icon="el-icon-message" v-model="registerData.email"  placeholder="Введите почту"></el-input>
           </el-form-item>
+           <el-form-item prop="phone">
+            <el-input  prefix-icon="el-icon-phone" v-model="registerData.phone"  placeholder="Введите телефон"></el-input>
+          </el-form-item>
+           <el-form-item prop="fio">
+            <el-input  prefix-icon="el-icon-user" v-model="registerData.fio"  placeholder="Введите ФИО"></el-input>
+          </el-form-item>
           <el-form-item prop="password1">
             <el-input   prefix-icon="el-icon-key" show-password v-model="registerData.password1"  placeholder="Пароль"></el-input>
           </el-form-item>
@@ -200,6 +206,8 @@ export default {
       },
       registerData:{
         email:null,
+        phone:'',
+        fio:null,
         password1:null,
         password2:null,
       },
@@ -234,6 +242,14 @@ export default {
         email:[
           { required: true, message: 'Это обязательное поле', trigger: ['blur', 'change'] },
           { type: 'email', message: 'Введите корректный E-Mail адрес', trigger: ['blur', 'change'] }
+        ],
+         fio:[
+          { required: true, message: 'Это обязательное поле', trigger: ['blur', 'change'] },
+          {  message: 'Введите ФИО', trigger: ['blur', 'change'] }
+        ],
+         phone:[
+          { required: true, message: 'Это обязательное поле', trigger: ['blur', 'change'] },
+          {  message: 'Введите телефон', trigger: ['blur', 'change'] }
         ],
         password2: [
           { validator: validatePass, trigger: ['blur', 'change']  }
@@ -295,6 +311,8 @@ export default {
         let response =  this.$axios.post('/auth/users/', {
           email:this.registerData.email,
           password:this.registerData.password2,
+          fio:this.registerData.fio,
+          phone:this.registerData.phone,
         })
         console.log(await response)
         this.notify('Успешно','Аккаунт создан','success')

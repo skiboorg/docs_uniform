@@ -11,7 +11,7 @@
     <section class="subcategories">
       <div class="container">
         <p class="partners-text-green fs35">+7 (495) 205-93-94</p>
-        <p class="mb-15">Москва, Фрунзенская набережная, 30, стр. 5, этаж 1</p>
+        <p class="mb-15"><span class="partners-text-green">Адрес шоурума:</span> Москва, Фрунзенская набережная, 30, стр. 5, этаж 1</p>
         <p  class="mb-15"><span class="partners-text-green">Юридический адрес:</span>  119048, г. Москва, Хамовнический вал, дом № 24, кв. 39</p>
         <div  class="mb-50">
           <a href="https://www.instagram.com/docsuniform/" target="_blank" style="display: inline-block; margin-right: 10px">
@@ -33,15 +33,16 @@
             <div class="contact-images">
               <div class="social-item">
                 <img src="/contact1.png" alt="">
+                <p style="font-weight: bold">Наш шоурум!<br>Заходите :)</p>
               </div>
               <div class="social-item">
-                <img src="/room1.jpg" alt="">
+                <img src="/contact2.png" alt="">
               </div>
               <div class="social-item">
-                <img src="/room2.jpg" alt="">
+                <img src="/contact3.png" alt="">
               </div>
               <div class="social-item">
-                <img src="/room3.jpg" alt="">
+                <img src="/contact4.png" alt="">
               </div>
             </div>
           </div>
