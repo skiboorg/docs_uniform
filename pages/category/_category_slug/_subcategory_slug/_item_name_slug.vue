@@ -72,7 +72,7 @@
 
             </div>
             <div class="item-info__params">
-
+{{selectedMaterial}}
               <div v-if="materials.length>1" class="item-info__param">
                 <p  class="item-info__subtitle">ткань</p>
                 <el-select v-model="selectedMaterial" placeholder="Select" >
@@ -309,12 +309,26 @@ console.log('11')
             return i
           } else {
             this.buttonCaption = 'К сожалению, закончилось :('
+            this.selectNextMaterial()
           }
         } else {
           this.buttonCaption = 'К сожалению, закончилось :('
+        //this.selectNextMaterial()
         }
       }
       this.btnDisabled = true
+    },
+    selectNextMaterial(){
+      console.log('next mat')
+      console.log(this.materials)
+
+      let currMatIndex = this.materials.findIndex(x=>x.id===this.selectedMaterial)
+      console.log(currMatIndex)
+      if (!currMatIndex+1 > this.materials.length-1){
+        this.selectedMaterial = this.materials[currMatIndex+1].id
+      }
+
+
     },
     selectColor(index) {
 
