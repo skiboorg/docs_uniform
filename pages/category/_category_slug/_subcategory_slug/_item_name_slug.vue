@@ -313,7 +313,7 @@ console.log('11')
           }
         } else {
           this.buttonCaption = 'К сожалению, закончилось :('
-        //this.selectNextMaterial()
+        this.selectNextMaterial()
         }
       }
       this.btnDisabled = true
