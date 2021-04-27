@@ -72,7 +72,6 @@
 
             </div>
             <div class="item-info__params">
-{{selectedMaterial}}
               <div v-if="materials.length>1" class="item-info__param">
                 <p  class="item-info__subtitle">ткань</p>
                 <el-select v-model="selectedMaterial" placeholder="Select" >
@@ -312,8 +311,8 @@ console.log('11')
             this.selectNextMaterial()
           }
         } else {
-          this.buttonCaption = 'К сожалению, закончилось :('
-        this.selectNextMaterial()
+          this.buttonCaption = 'К сожалению, закончилось <:('
+        //this.selectNextMaterial()
         }
       }
       this.btnDisabled = true
