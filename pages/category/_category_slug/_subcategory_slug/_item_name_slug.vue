@@ -183,20 +183,29 @@
 
 <script>
 export default {
+
+
+
   async fetch({store}){
     await store.dispatch('categories/fetchCategories')
     await store.dispatch('cart/fetchCart')
   },
-  async asyncData({$axios,params}){
-    const responce_data = await $axios.get(`/api/get_item?base_item_slug=${params.item_name_slug}`)
+  async asyncData({$axios,params,error}){
+    try{
+      const responce_data = await $axios.get(`/api/get_item?base_item_slug=${params.item_name_slug}`)
     const recommended_data = await $axios.get(`/api/get_recomended_items?base_item_slug=${params.item_name_slug}`)
     const item = responce_data.data
     const recommended_items = recommended_data.data
 
     return {item,recommended_items}
+    }catch (e){
+      return error({ statusCode: 404 })
+    }
+
   },
   data() {
     return {
+      title:'',
       colors:[],
       heights:[],
       sizes:[],
@@ -215,6 +224,18 @@ export default {
       thumbList:[],
 
 
+    }
+  },
+  head() {
+    return {
+      title: this.item.name,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.item.short_description
+        }
+      ]
     }
   },
   mounted() {

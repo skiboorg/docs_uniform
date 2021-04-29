@@ -30,9 +30,21 @@
 import MarqueeLine from '@/components/Marquee'
 
 export default {
-  async fetch({store}){
+  async fetch({store,route}){
     await store.dispatch('categories/fetchCategories')
     await store.dispatch('cart/fetchCart')
+  },
+  async asyncData ({ store, $axios, params, error,route }) {
+    console.log(route.params.category_slug === 'muzhchinam')
+      switch(route.params.category_slug) {
+        case 'muzhchinam':
+          break
+        case 'zhenschinam':
+          break
+        default:
+          return error({ statusCode: 404 })
+    }
+
   },
   components: {
     MarqueeLine
@@ -43,9 +55,15 @@ export default {
       marqueeText:''
     }
   },
-  mounted() {
-    this.category = this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug)
-    this.marqueeText = this.category.is_for_man ? 'Мужская' : 'Женская'
+  created() {
+    try {
+      this.category = this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug)
+      this.marqueeText = this.category.is_for_man ? 'Мужская' : 'Женская'
+    }catch (e) {
+      this.$nuxt.error({ statusCode: 404 })
+    }
+
+
   },
 
 }

@@ -34,7 +34,8 @@
             </div>
             <div class="header-middle__links hide-mob-600">
               <div class="header-middle__link">
-                <nuxt-link to="/">Блог</nuxt-link>
+<!--                <nuxt-link to="/">Блог</nuxt-link>-->
+                <p >Блог</p>
               </div>
               <div class="header-middle__link">
                 <nuxt-link to="/category/sertifikatyi/sertifikatyi">Сертификаты</nuxt-link>
@@ -65,7 +66,10 @@
               <svg width="21" height="25" viewBox="0 0 21 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.3828 6.39648V1.54858L13.8342 0H7.16576L5.61719 1.54858V6.39648H0.0507812V22.0703C0.0507812 23.6858 1.36494 25 2.98047 25H18.0195C19.6351 25 20.9492 23.6858 20.9492 22.0703V6.39648H15.3828ZM18.9961 22.0703C18.9961 22.6088 18.558 23.0469 18.0195 23.0469H2.98047C2.44202 23.0469 2.00391 22.6088 2.00391 22.0703V8.34961H5.61719V11.8652H7.57031V2.35767L7.97486 1.95312H13.0251L13.4297 2.35767V6.39648H9.57227V8.34961H13.4297V11.8652H15.3828V8.34961H18.9961V22.0703Z" fill="#519999"/>
               </svg>
-              <p v-if="cart.items.length > 0" class="header-icons__cart--number">{{cart.items.length}}</p>
+              <span v-if="cart.items">
+                 <p v-if="cart.items.length > 0" class="header-icons__cart--number">{{cart.items.length}}</p>
+              </span>
+
 
             </div>
 
@@ -83,9 +87,10 @@
               x {{item.quantity}}шт</span>
               </p>
             </div>
-
+ <span v-if="cart.items">
             <a v-if="cart.items.length > 0" class="btn" href="#" @click.prevent="$router.push('/cart')">В корзину</a>
             <p style="border: 1px solid #e0e0e0;text-align: center;padding: 20px;color: #519999;font-weight: 600;text-transform: uppercase;" v-else>Корзина пуста</p>
+ </span>
           </div>
         </div>
 
@@ -185,6 +190,7 @@
 </template>
 <script>
 export default {
+
 
   data() {
      var validatePass = (rule, value, callback) => {

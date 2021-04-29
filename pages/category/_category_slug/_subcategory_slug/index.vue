@@ -65,12 +65,19 @@ export default {
 
 
   },
-  async asyncData({$axios,params}){
+  async asyncData({$axios,params,error}){
     // const responce_data = await $axios.get(`/api/get_collections?subcategory_name_slug=${params.subcategory_slug}`)
     // const collections = responce_data.data
+    try{
     const responce_items = await $axios.get(`/api/get_subcategory_items?subcategory_name_slug=${params.subcategory_slug}`)
     const items = responce_items.data
     return {items}
+    }
+    catch (e)
+    {
+      return error({ statusCode: 404 })
+    }
+
   },
   data() {
     return {

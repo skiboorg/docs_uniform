@@ -1,3 +1,7 @@
+const axios = require('axios')
+const API_BASE_URL = 'http://localhost:8000'
+const SITE_BASE_URL = 'http://localhost:3000'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   //  server: {
@@ -67,12 +71,27 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth',
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap'
     // 'nuxt-lazy-load'
   ],
+  robots: {
+    UserAgent: '*',
+    Disallow: '/admin'
+  },
+  sitemap: {
+    routes:
+      async () => {
+      const { data } = await axios.get(`${API_BASE_URL}/api/get_items`)
+      return data.map((item) => item.url ? item.url : '')
+    },
+
+  },
+
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL:'http://localhost:8000'
+    baseURL: API_BASE_URL
     // baseURL:'http://185.51.246.40:8000'
   },
 

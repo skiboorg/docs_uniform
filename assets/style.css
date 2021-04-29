@@ -896,7 +896,7 @@ select:focus {
 
 .collection-item__img img {
   width: 350px;
-  height: 450px;
+  /*height: 450px;*/
   -o-object-fit: cover;
   object-fit: cover;
 }
