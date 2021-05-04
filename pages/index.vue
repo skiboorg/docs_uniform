@@ -45,7 +45,7 @@
                         :item_slug="item.name_slug"
                         :cat_slug="item.category"
                         :subcat_slug="item.subcategory.name_slug"
-                        :image="item.images[0].image_thumb"/>
+                        :image="item.images"/>
         </div>
       </div>
     </section>

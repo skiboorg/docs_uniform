@@ -30,7 +30,7 @@
                         :item_slug="item.name_slug"
                         :cat_slug="$route.params.category_slug"
                         :subcat_slug="$route.params.subcategory_slug"
-                        :image="item.images[0].image_thumb"/>
+                        :image="item.images"/>
             </div>
         </div>
     </section>
@@ -44,7 +44,7 @@
                         :item_slug="item.name_slug"
                         :cat_slug="$route.params.category_slug"
                         :subcat_slug="$route.params.subcategory_slug"
-                        :image="item.images[0].image_thumb"/>
+                        :image="item.images"/>
     </div>
    </section>
  </div>

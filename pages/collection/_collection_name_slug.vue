@@ -20,7 +20,6 @@
             <div style="flex-wrap: wrap" class="collection-wrapper">
 
               <ItemCard  v-for="item in  collection[0].collection_items" :key="item.id"
-
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
@@ -28,7 +27,7 @@
                         :item_slug="item.name_slug"
                         :cat_slug="$route.params.category_slug"
                         :subcat_slug="$route.params.subcategory_slug"
-                        :image="item.images[0].image_thumb"/>
+                        :image="item.images"/>
             </div>
         </div>
     </section>

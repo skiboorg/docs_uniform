@@ -621,6 +621,9 @@ select:focus {
 .header-middle__link a:hover{
   color: #519999;
 }
+.header-middle__link:last-child{
+  margin-right: 20px;
+}
 .header-icons {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;

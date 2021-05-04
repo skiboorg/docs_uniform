@@ -6,9 +6,12 @@
     <div v-if="!this.$auth.$storage.getCookie('cookie_agree')" ref="cookie_message" class="cookie-message"
     :class="{'hideCookie':hideCookie}"
     >
-      <p>Продолжая использовать наш сайт, вы даете согласие на обработку файлов cookie, которые обеспечивают
+      <div class="container cookie-message__inner">
+         <p>Продолжая использовать наш сайт, вы даете согласие на обработку файлов cookie, которые обеспечивают
         правильную работу сайта. Благодаря им мы улучшаем сайт, обслуживание и товары</p>
-      <el-button @click="cookie_agree" type="success">ОК</el-button>
+      <el-button class="btn" @click="cookie_agree" type="info">ПРИНЯТЬ КУКИ</el-button>
+      </div>
+
     </div>
   </div>
 </template>

@@ -44,12 +44,12 @@
               <div class="header-middle__link">
                 <nuxt-link to="/contact">Контакты</nuxt-link>
               </div>
-              <div class="header-middle__link">
-                <el-select v-model="curLang" placeholder="RU" class="langSelect">
-                  <el-option :label="'RU'" :value="'RU'">  </el-option>
-                  <el-option :label="'EN'" :value="'EN'">  </el-option>
-                </el-select>
-              </div>
+<!--              <div class="header-middle__link">-->
+<!--                <el-select v-model="curLang" placeholder="RU" class="langSelect">-->
+<!--                  <el-option :label="'RU'" :value="'RU'">  </el-option>-->
+<!--                  <el-option :label="'EN'" :value="'EN'">  </el-option>-->
+<!--                </el-select>-->
+<!--              </div>-->
 
 
             </div>
