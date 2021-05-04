@@ -37,7 +37,8 @@
           <nuxt-link :to="`/collection/${collection.name_slug}`">Смотреть полностью</nuxt-link>
         </p>
         <div class="collection-wrapper">
-         <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"
+<!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
+         <ItemCard v-for="item in _.take(collection.collection_items, 3)" :key="item.id"
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
