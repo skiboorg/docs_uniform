@@ -1,25 +1,25 @@
 const axios = require('axios')
 const API_BASE_URL = 'http://localhost:8000'
 const SITE_BASE_URL = 'http://localhost:3000'
+//const API_BASE_URL = 'http://185.92.148.221:8000'
+//const SITE_BASE_URL = 'http://185.92.148.221'
 
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
-  //  server: {
-  //    port: 80, // default: 3000
-  //     host: '185.51.246.40' // default: localhost
-  //   },
-  // env: {
-  //       ws_url: 'ws://185.51.246.40:8000',
-  //       img_url: 'http://185.51.246.40:8000',
-  //
-  //   },
-  serverMiddleware: [
-     '~/middleware/seo.js'
-  ],
-  env: {
-    img_url: 'http://localhost:8000',
 
+  //server: {
+  //  port: 80, // default: 3000
+  //  host: '185.92.148.221' // default: localhost
+  //},
+
+  env: {
+    //img_url: 'http://185.92.148.221:8000',
+    img_url: 'http://localhost:8000',
   },
+
+  serverMiddleware: [
+    '~/middleware/seo.js'
+  ],
+
   head: {
     title: 'docs_uniform',
     htmlAttrs: {
@@ -32,7 +32,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/fav.png' },
-       { rel: 'preconnect',  href: 'https://fonts.gstatic.com' },
+      { rel: 'preconnect',  href: 'https://fonts.gstatic.com' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap' },
     ]
   },
@@ -77,14 +77,14 @@ export default {
   ],
   robots: {
     UserAgent: '*',
-    Disallow: '/admin'
+    Disallow: '/'
   },
   sitemap: {
     routes:
       async () => {
-      const { data } = await axios.get(`${API_BASE_URL}/api/get_items`)
-      return data.map((item) => item.url ? item.url : '')
-    },
+        const { data } = await axios.get(`${API_BASE_URL}/api/get_items`)
+        return data.map((item) => item.url ? item.url : '')
+      },
 
   },
 
