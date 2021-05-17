@@ -1,5 +1,20 @@
 @import "reset"
 $main_color: #519999
+
+
+::-webkit-scrollbar
+  width: 5px
+
+::-webkit-scrollbar-track
+  background: #f1f1f1
+
+::-webkit-scrollbar-thumb
+  background: $main_color
+
+::-webkit-scrollbar-thumb:hover
+  background: #139a9a
+
+
 .el-popup-parent--hidden
     overflow: hidden
     position: fixed
@@ -335,3 +350,19 @@ $main_color: #519999
 @media (max-width: 768px)
   .el-select-dropdown__wrap
     max-height: 150px
+
+.header-icons
+  &::after
+    position: absolute
+    content: ""
+    width: 1px
+    height: 80px
+    background: #e0e0e0
+    right: 0
+    top: 0px
+
+@media (max-width: 768px)
+  .header-icons
+    &::after
+
+      content: none

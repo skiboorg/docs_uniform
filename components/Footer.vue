@@ -21,7 +21,7 @@
             <p><nuxt-link to="/contact">Контакты</nuxt-link></p>
           </div>
           <div class="footer-top__item">
-            <p><a class="phone" href="">+7 (495) 205-93-94</a></p>
+            <p><a class="phone" href="tel:+74952059394">+7 (495) 205-93-94</a></p>
             <a class="social-icon" href="https://www.instagram.com/docsuniform/" target="_blank" style="display: inline-block; margin-right: 10px">
               <img src="/inst_icon.png" alt="" >
             </a>
@@ -55,6 +55,7 @@
             <p><nuxt-link to="/delivery">Доставка и оплата</nuxt-link></p>
             <p><nuxt-link to="/about">О нас</nuxt-link></p>
             <p><nuxt-link to="/contact">Контакты</nuxt-link></p>
+
 
             <div class="footer-top-mob__middle--right--icons">
               <p><a href="tel:+74952059394">+7 (495) 205-93-94</a></p>
@@ -101,7 +102,7 @@
     <div class="container">
       <div class="footer-bottom">
         <p>© «DOC’S», {{new Date().getFullYear()}}.</p>
-        <p><a href="">Политика конфиденциальности</a></p>
+        <p><a href="/policy.docx" target="_blank">Политика конфиденциальности</a></p>
       </div>
     </div>
 
