@@ -46,10 +46,10 @@
             </div>
             <div class="item-info__params">
 
-              <div class="item-info__param">
+              <div v-if="sizes.length>1" class="item-info__param">
                 <p  class="item-info__subtitle">размер</p>
 <!--                @change="selectedHeight=null"-->
-                <el-select v-model="selectedSize" placeholder="Select" >
+                <el-select  v-model="selectedSize" placeholder="Select" >
                   <el-option
                     v-for="size in sizes"
                     :key="size.id"
