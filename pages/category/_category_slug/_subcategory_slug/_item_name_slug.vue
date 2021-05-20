@@ -157,7 +157,7 @@
      <section>
 
 
-     <div class="container ">
+     <div v-if="recommended_items.length > 0" class="container ">
        <h3 class="section-header mb-40">Рекомендуемые товары</h3>
        <div class="collection-wrapper">
          <ItemCard v-for="item in recommended_items" :key="item.id"
