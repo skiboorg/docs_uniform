@@ -320,7 +320,7 @@ console.log('11')
 
   methods: {
     openImage(i){
-      console.log()
+      console.log(this.previewList[i])
       this.cur_image=this.previewList[i]
       this.imageModal=true
     },
