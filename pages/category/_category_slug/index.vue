@@ -41,6 +41,8 @@ export default {
           break
         case 'zhenschinam':
           break
+        case 'aksessuaryi':
+          break
         default:
           return error({ statusCode: 404 })
     }

@@ -15,9 +15,10 @@
 
           <div class="item-images">
 
-            <el-image  v-for="(image,index) in thumbList" :key="index"
+            <el-image style="cursor: pointer"  v-for="(image,index) in thumbList" :key="index"
                       :src="image"
-                      :preview-src-list="previewList">
+                       @click="openImage(index)"
+                      >
 
               <div slot="placeholder" class="image-slot">
                 Загрузка<span class="dot">...</span>
@@ -177,6 +178,9 @@
       <el-dialog class="sizesDialog" :visible.sync="sizesDialogVisible">
   <el-image :src="sizes_img"></el-image>
 </el-dialog>
+          <el-dialog class="sizesDialog" :visible.sync="imageModal">
+  <el-image :src="cur_image"></el-image>
+</el-dialog>
   </div>
 
 </template>
@@ -196,6 +200,7 @@ export default {
     const recommended_data = await $axios.get(`/api/get_recomended_items?base_item_slug=${params.item_name_slug}`)
     const item = responce_data.data
     const recommended_items = recommended_data.data
+      console.log(item)
 
     return {item,recommended_items}
     }catch (e){
@@ -205,6 +210,8 @@ export default {
   },
   data() {
     return {
+      imageModal:false,
+      cur_image:"",
       title:'',
       colors:[],
       heights:[],
@@ -254,11 +261,14 @@ export default {
     }
 
     for(let i of this.item.types){
-      !this.colors.find(x=>x.id === i.color.id) ? this.colors.push(i.color) : null
+      if (i.is_active){
+        !this.colors.find(x=>x.id === i.color.id) ? this.colors.push(i.color) : null
       !this.sizes.find(x=>x.id === i.size.id) ? this.sizes.push(i.size) : null
       !this.heights.find(x=>x.id === i.height.id) ? this.heights.push(i.height) : null
       !this.materials.find(x=>x.id === i.material.id) ? this.materials.push(i.material) : null
       !this.mods.find(x=>x.id === i.modification.id) ? this.mods.push(i.modification) : null
+      }
+
     }
     this.sizes = _.orderBy(this.sizes,'order_num' )
 
@@ -309,6 +319,11 @@ console.log('11')
   },
 
   methods: {
+    openImage(i){
+      console.log()
+      this.cur_image=this.previewList[i]
+      this.imageModal=true
+    },
     notify(title,message,type){
       this.$notify({
         title: title,

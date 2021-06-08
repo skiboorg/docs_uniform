@@ -50,6 +50,29 @@
         </div>
       </div>
     </section>
+
+     <section class="collection">
+      <div class="container">
+        <h3 class="section-header">
+          Новинки
+        </h3>
+
+
+        <div class="collection-wrapper">
+<!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
+<!--         <ItemCard v-for="item in _.take(collection.collection_items, 3)" :key="item.id"-->
+         <ItemCard v-for="item in new_items" :key="item.id"
+                        :collection_name="item.subcategory.name"
+                        :item_name="item.name"
+                        :item_price="item.price"
+                        :discount="item.discount"
+                        :item_slug="item.name_slug"
+                        :cat_slug="item.category"
+                        :subcat_slug="item.subcategory.name_slug"
+                        :image="item.images"/>
+        </div>
+      </div>
+    </section>
     <section class="about">
       <div class="container">
         <div class="about-wrapper">
@@ -109,9 +132,11 @@ export default {
   async asyncData({$axios}){
     const get_banners = await $axios.get(`/api/get_banners`)
     const get_collections = await $axios.get(`/api/get_home_collections`)
+    const get_new = await $axios.get(`/api/get_new_items`)
     const banners = get_banners.data
     const collections = get_collections.data
-    return {banners,collections}
+    const new_items = get_new.data
+    return {banners,collections,new_items}
   },
   data() {
     return {
