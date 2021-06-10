@@ -839,8 +839,21 @@ select:focus {
   background: url(/woman-category.png) center;
 }
 
-.categories-item:last-child {
+.categories-item:nth-child(2) {
   margin-top: 50px;
+}
+.categories-item:nth-child(1) .categories-item__text{
+  top: 280px;
+    right: -190px;
+}
+.categories-item:nth-child(2) .categories-item__text{
+  top: 270px;
+    right: -200px;
+}
+
+.categories-item:nth-child(3) .categories-item__text{
+  top: 255px;
+    right: -210px;
 }
 
 .categories-item__text {
@@ -851,16 +864,17 @@ select:focus {
   -ms-transform: rotate(-90deg);
   transform: rotate(-90deg);
   text-transform: uppercase;
+
 }
 
 .categories-item__text.man {
-  bottom: 168px;
-  left: -210px;
+  top: 260px;
+    right: -215px;
 }
 
 .categories-item__text.woman {
-  top: 177px;
-  left: -220px;
+  top: 260px;
+    right: -215px;
 }
 
 .collection-wrapper {
@@ -2623,10 +2637,28 @@ select:focus {
   .categories-item__text {
     position: absolute;
     font-size: 22px;
-    -webkit-transform: none;
-    -ms-transform: none;
-    transform: none;
+    /*-webkit-transform: none;*/
+    /*-ms-transform: none;*/
+    /*transform: none;*/
+    z-index: 100;
   }
+
+  .categories-item:nth-child(2) {
+  margin-top: 0px;
+}
+.categories-item:nth-child(1) .categories-item__text{
+  top: 300px;
+    right: -50px;
+}
+.categories-item:nth-child(2) .categories-item__text{
+  top: 300px;
+    right: -50px;
+}
+
+.categories-item:nth-child(3) .categories-item__text{
+  top: 300px;
+    right: -55px;
+}
 
   .categories-item__text.man {
     bottom: -7px;

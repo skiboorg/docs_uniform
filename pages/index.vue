@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <MarqueeLine text="магазин медицинской одежды "/>
     <section class="categories">
       <div class="container">
         <div class="categories-wrapper">
@@ -7,7 +8,8 @@
                :style="`background: url(${category.image}) center`"
                v-for="(category,index) in this.$store.getters['categories/getCategories']"
                :key="category.id">
-            <p class="categories-item__text" :class="category.is_for_man ? 'man' : 'woman'">{{category.name}}</p>
+<!--            :class="category.is_for_man ? 'man' : 'woman'"-->
+            <p class="categories-item__text" >{{category.name}}</p>
           </div>
         </div>
       </div>
@@ -38,7 +40,7 @@
         </p>
         <div class="collection-wrapper">
 <!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
-         <ItemCard v-for="item in _.take(collection.collection_items, 3)" :key="item.id"
+         <ItemCard v-for="item in _.take(collection.collection_items, 4)" :key="item.id"
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
@@ -120,10 +122,11 @@
 <script>
 
 import ItemCard from "@/components/ItemCard";
-
+import MarqueeLine from '@/components/Marquee'
 export default {
   components: {
-    ItemCard
+    ItemCard,
+    MarqueeLine
   },
   async fetch({store}){
     await store.dispatch('categories/fetchCategories')

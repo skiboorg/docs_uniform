@@ -34,7 +34,7 @@
         </div>
         <h3 class="section-header b-bottom ">Оформление заказа</h3>
         <div class="cart-grid b-bottom">
-          <div class="cart-grid-step"><p>1/3 данные</p></div>
+          <div class="cart-grid-step"><p>1/4 данные</p></div>
           <div class="cart-grid-form">
 
             <el-input class="mb-10 " ref="phone"  type="text" name="phone"  placeholder="Телефон *" v-model="orderData.phone"></el-input>
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="cart-grid b-bottom">
-          <div class="cart-grid-step"><p>2/3 данные</p></div>
+          <div class="cart-grid-step"><p>2/4 данные</p></div>
           <div class="cart-grid-form">
             <p class="mb-15">Выберите способ доставки</p>
             <label @click="is_self_delivery=delivery.is_self_delivery,is_office_cdek=delivery.is_office_cdek"
@@ -101,12 +101,23 @@
           </div>
         </div>
         <div class="cart-grid b-bottom">
-          <div class="cart-grid-step"><p>3/3 оплата</p></div>
+          <div class="cart-grid-step"><p>3/4 оплата</p></div>
           <div class="cart-grid-form">
             <p class="mb-15">Выберите способ оплаты</p>
             <label class="cart-radio" :for="`p-${payment.id}`" v-for="payment in payments" :key="payment.id">
               <input type="radio" :id="`p-${payment.id}`" v-model="orderData.pay_type" :value="payment.value">
               <p class="cart-radio__p1">{{payment.name}}</p>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>
+        <div class="cart-grid b-bottom">
+          <div class="cart-grid-step"><p>4/4 упаковка</p></div>
+          <div class="cart-grid-form">
+            <p class="mb-15">Выберите упаковку</p>
+            <label class="cart-radio" :for="`pack-${pack.id}`" v-for="pack in pack_types" :key="pack.id">
+              <input type="radio" :id="`pack-${pack.id}`" v-model="orderData.pack_type" :value="pack.value">
+              <p class="cart-radio__p1">{{pack.name}}</p>
               <span class="checkmark"></span>
             </label>
           </div>
@@ -130,7 +141,7 @@
             <p v-if="cart.promo_code.discount" class="cart-total__info">Промо код <span class="color-green">-{{cart.promo_code.discount}} % </span></p>
           </div>
           <p  class="cart-total__summ">итого <span class="color-green" v-loading="loading"  element-loading-spinner="el-icon-loading">
-            {{deliveryPrice + cart.total_price}} ₽</span> </p>
+            {{deliveryPrice + cart.total_price + pack_price}} ₽</span> </p>
           <p v-if="!cart.promo_code"  class="cart-total__promo ">
             <input v-model="promoCode" placeholder="Промокод (если есть)">
             <span @click="applyPromo" class="color-green" :class="{'btnDisabled':promoSent}">АКТИВИРОВАТЬ</span>
@@ -176,6 +187,7 @@ export default {
       base_url:process.env.img_url,
       promoCode:null,
       deliveryPrice:0,
+      pack_price:0,
       city_code:null,
       is_self_delivery:true,
       is_email_valid:false,
@@ -194,11 +206,18 @@ export default {
         pay_type:'online',
         comment:null,
         need_register:false,
+        pack_type:'not pack'
 
       },
       payments:[
         {id:1,name:'Картой онлайн, Apple Pay, Google Pay',value:'online'},
        // {id:2,name:'Курьером',value:'cash'},
+
+      ],
+      pack_types:[
+        {id:1,name:'Нет упаковки',value:'not pack'},
+        {id:2,name:'Есть упаковка (+300 руб. к заказу)',value:'pack'},
+
 
       ]
     }
@@ -311,6 +330,13 @@ export default {
     },
   },
   watch:{
+    'orderData.pack_type'(val) {
+      if (val==='pack'){
+        this.pack_price = 300
+      }else{
+        this.pack_price = 0
+      }
+    },
     'orderData.delivery_type'(val) {
       this.orderData.delivery_city = null
       this.deliveryPrice = 0
