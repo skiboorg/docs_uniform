@@ -60,6 +60,19 @@ export default {
     await store.dispatch('categories/fetchCategories')
     await store.dispatch('cart/fetchCart')
   },
+  head() {
+    return {
+      title: `Контакты интернет-магазин медицинской одежды DOC’S`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `
+Контакты интернет-магазина медицинской одежды DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ ☝️ Заходите!`
+        }
+      ]
+    }
+  },
   components:{
     MarqueeLine
   },

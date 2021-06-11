@@ -235,12 +235,12 @@ export default {
   },
   head() {
     return {
-      title: this.item.name,
+      title: `Купить ${this.item.name} в интернет-магазине DOC’S`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.item.short_description
+          content: `Покупайте ${this.item.name} в интернет-магазин DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ ☝️ Заходите!`
         }
       ]
     }

@@ -48,6 +48,19 @@ export default {
     }
 
   },
+  head() {
+    return {
+      title: `${this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}— купить в интернет-магазине DOC’S`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `
+Покупайте недорого стильные и модные мужские медицинские халаты в интернет-магазине DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ, низкие цены ☝️ Заходите!`
+        }
+      ]
+    }
+  },
   components: {
     MarqueeLine
   },

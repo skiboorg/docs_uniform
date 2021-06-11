@@ -13,7 +13,7 @@ export default {
 
   env: {
     //img_url: 'http://185.92.148.221:8000',
-    img_url: 'http://localhost:8000',
+    img_url: API_BASE_URL,
   },
 
   serverMiddleware: [
@@ -28,7 +28,10 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '' },
+      { name: 'robots', content: 'noindex' },
+
+
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/fav.png' },

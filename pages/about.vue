@@ -69,6 +69,19 @@ export default {
     await store.dispatch('categories/fetchCategories')
     await store.dispatch('cart/fetchCart')
   },
+  head() {
+    return {
+      title: `О нас — интернет-магазин медицинской одежды DOC’S`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `
+Подробная информация об интернет-магазине медицинской одежды DOC’S ✅ История создания, миссия, отзывы`
+        }
+      ]
+    }
+  },
   components:{
     MarqueeLine
   },

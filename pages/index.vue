@@ -8,7 +8,7 @@
                :style="`background: url(${category.image}) center`"
                v-for="(category,index) in this.$store.getters['categories/getCategories']"
                :key="category.id">
-<!--            :class="category.is_for_man ? 'man' : 'woman'"-->
+            <!--            :class="category.is_for_man ? 'man' : 'woman'"-->
             <p class="categories-item__text" >{{category.name}}</p>
           </div>
         </div>
@@ -31,63 +31,101 @@
     </section>
     <section class="collection" v-for="collection in collections" :key="collection.id">
       <div class="container">
-        <h3 class="section-header">
+        <h2 class="section-header">
           {{collection.name}}
-        </h3>
+        </h2>
 
         <p class="section-header__link">
           <nuxt-link :to="`/collection/${collection.name_slug}`">Смотреть полностью</nuxt-link>
         </p>
         <div class="collection-wrapper">
-<!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
-         <ItemCard v-for="item in _.take(collection.collection_items, 4)" :key="item.id"
-                        :collection_name="item.subcategory.name"
-                        :item_name="item.name"
-                        :item_price="item.price"
-                        :discount="item.discount"
-                        :item_slug="item.name_slug"
-                        :cat_slug="item.category"
-                        :subcat_slug="item.subcategory.name_slug"
-                        :image="item.images"/>
+          <!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
+          <ItemCard v-for="item in _.take(collection.collection_items, 4)" :key="item.id"
+                    :collection_name="item.subcategory.name"
+                    :item_name="item.name"
+                    :item_price="item.price"
+                    :discount="item.discount"
+                    :item_slug="item.name_slug"
+                    :cat_slug="item.category"
+                    :subcat_slug="item.subcategory.name_slug"
+                    :image="item.images"/>
         </div>
       </div>
     </section>
 
-     <section class="collection">
+    <section class="collection">
       <div class="container">
-        <h3 class="section-header">
+        <h2 class="section-header">
           Новинки
-        </h3>
+        </h2>
 
 
         <div class="collection-wrapper">
-<!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
-<!--         <ItemCard v-for="item in _.take(collection.collection_items, 3)" :key="item.id"-->
-         <ItemCard v-for="item in new_items" :key="item.id"
-                        :collection_name="item.subcategory.name"
-                        :item_name="item.name"
-                        :item_price="item.price"
-                        :discount="item.discount"
-                        :item_slug="item.name_slug"
-                        :cat_slug="item.category"
-                        :subcat_slug="item.subcategory.name_slug"
-                        :image="item.images"/>
+          <!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
+          <!--         <ItemCard v-for="item in _.take(collection.collection_items, 3)" :key="item.id"-->
+          <ItemCard v-for="item in new_items" :key="item.id"
+                    :collection_name="item.subcategory.name"
+                    :item_name="item.name"
+                    :item_price="item.price"
+                    :discount="item.discount"
+                    :item_slug="item.name_slug"
+                    :cat_slug="item.category"
+                    :subcat_slug="item.subcategory.name_slug"
+                    :image="item.images"/>
         </div>
       </div>
     </section>
-    <section class="about">
+    <!--    <section class="about">-->
+    <!--      <div class="container">-->
+    <!--        <div class="about-wrapper">-->
+    <!--          <div class="about-img">-->
+    <!--            <el-image  src="/index-about.png" lazy></el-image>-->
+    <!--          </div>-->
+    <!--          <div class="about-text">-->
+    <!--            <h3 class="section-header">ИНТЕРНЕТ-МАГАЗИН ОДЕЖДЫ ДЛЯ СОВРЕМЕННЫХ ВРАЧЕЙ</h3>-->
+    <!--            <p class="text">DOC’S — это опыт врачей и хороший вкус дизайнеров: вместе мы делаем стильную и комфортную-->
+    <!--              медицинскую одежду. Мы придумываем лаконичные и удобные модели,-->
+    <!--              которые выглядят эстетично и не мешают в процессе работы.-->
+    <!--            </p>-->
+    <!--            <nuxt-link class="link" to="/about">Узнать больше</nuxt-link>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </section>-->
+    <section class="about-new">
       <div class="container">
-        <div class="about-wrapper">
-          <div class="about-img">
-            <el-image  src="/index-about.png" lazy></el-image>
-          </div>
-          <div class="about-text">
-            <h3 class="section-header">ИНТЕРНЕТ-МАГАЗИН ОДЕЖДЫ ДЛЯ СОВРЕМЕННЫХ ВРАЧЕЙ</h3>
-            <p class="text">DOC’S — это опыт врачей и хороший вкус дизайнеров: вместе мы делаем стильную и комфортную
-              медицинскую одежду. Мы придумываем лаконичные и удобные модели,
-              которые выглядят эстетично и не мешают в процессе работы.
-            </p>
-            <nuxt-link class="link" to="/about">Узнать больше</nuxt-link>
+        <h2 class="section-header">ИНТЕРНЕТ-МАГАЗИН ОДЕЖДЫ ДЛЯ СОВРЕМЕННЫХ ВРАЧЕЙ</h2>
+        <p>DOC’S — это опыт врачей и хороший вкус дизайнеров: вместе мы делаем стильную и комфортную медицинскую одежду. Мы придумываем лаконичные и удобные модели, которые выглядят эстетично и не мешают в процессе работы.</p>
+        <div style="display: flex;justify-content: center">
+          <nuxt-link style="padding: 25px 70px" class="btn" to="/about">узнать больше</nuxt-link>
+        </div>
+
+      </div>
+    </section>
+    <section class="feedback">
+      <div class="container">
+        <h2 class="section-header">
+          ОТЗЫВЫ
+        </h2>
+        <div class="feedback-wrapper">
+          <div class="feedback-item">
+            <div class="feedback-item__top">
+              <img src="http://placehold.it/50" alt="">
+              <div class="feedback-item__top-name">
+                <p>Валентин <span>Педиатр</span></p>
+                <el-rate
+                  v-model="rate1"
+                  disabled
+
+                  :colors="['#519999', '#519999', '#519999']">
+
+                </el-rate>
+              </div>
+            </div>
+            <div class="feedback-item__bottom">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi dignissimos eos error eveniet id numquam odio optio perferendis quasi quo!</p>
+            </div>
+
           </div>
         </div>
       </div>
@@ -142,6 +180,7 @@ export default {
   },
   data() {
     return {
+      rate1:4,
       bannerOptions: {
         slidesPerView: 1,
 

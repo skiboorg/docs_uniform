@@ -60,6 +60,19 @@ export default {
     await store.dispatch('categories/fetchCategories')
     await store.dispatch('cart/fetchCart')
   },
+  head() {
+    return {
+      title: `Доставка и оплата медицинской одежды в интернет-магазине DOC’S`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `
+Способы доставки и оплаты интернет-магазина DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ ☝️ Заходите!`
+        }
+      ]
+    }
+  },
   components:{
     MarqueeLine
   },

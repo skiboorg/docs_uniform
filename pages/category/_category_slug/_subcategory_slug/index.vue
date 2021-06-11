@@ -15,9 +15,9 @@
    <section v-if="!collection.is_base_collection" class="collection" v-for="collection in collections" :key="collection.id">
         <div class="container">
         <p style="font-size: 14px;letter-spacing: 0.1em;text-transform: uppercase;opacity: .5;margin-bottom: 15px"> {{collection.title}} </p>
-            <h3 class="section-header">
+            <h2 class="section-header">
                  {{collection.name}}
-            </h3>
+            </h2>
 
             <div style="flex-wrap: wrap" class="collection-wrapper">
 
@@ -58,6 +58,19 @@ export default {
   async fetch({store}){
     await store.dispatch('categories/fetchCategories')
     await store.dispatch('cart/fetchCart')
+  },
+  head() {
+    return {
+      title: `${this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}— купить в интернет-магазине DOC’S`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `
+Покупайте недорого стильные и модные мужские медицинские халаты в интернет-магазине DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ, низкие цены ☝️ Заходите!`
+        }
+      ]
+    }
   },
   components: {
     MarqueeLine,
