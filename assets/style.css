@@ -1797,7 +1797,7 @@ select:focus {
 }
 
 .color-green {
-  color: #519999;
+  color: #519999 !important;
 }
 
 .cart-total {
@@ -2760,9 +2760,9 @@ select:focus {
     margin-right: 0;
   }
 
-  .social-item:first-child {
-    padding-top: 71px;
-  }
+  /*.social-item:first-child {*/
+  /*  padding-top: 71px;*/
+  /*}*/
 
   .delivery .section-header {
     margin-bottom: 25px !important;

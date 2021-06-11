@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <MarqueeLine text="магазин медицинской одежды "/>
+    <MarqueeLine :is_index="true" text="магазин медицинской одежды "/>
     <section class="categories">
       <div class="container">
         <div class="categories-wrapper">
@@ -100,18 +100,17 @@
         </div>
         <div class="social-wrapper">
           <div class="social-item">
-            <el-image  src="/social-item1.png" lazy></el-image>
+            <img  src="/i1.jpg" >
           </div>
           <div class="social-item">
-            <el-image  src="/social-item2.png" lazy></el-image>
+            <img  src="/i2.jpg" >
           </div>
           <div class="social-item">
-            <el-image  src="/social-item3.png" lazy></el-image>
-            <p class="text hide-mob-600">МЕДИЦИНСКАЯ ОДЕЖДА DOC’S workwear for life</p>
-            <a class="link hide-mob-600" href="#">подписаться</a>
+            <img  src="/i3.jpg" >
+
           </div>
           <div class="social-item">
-            <el-image  src="/social-item4.png" lazy></el-image>
+            <img  src="/i4.jpg" >
           </div>
         </div>
       </div>
@@ -178,5 +177,12 @@ export default {
   }
 }
 </script>
+<style lang="sass">
+.social-item
+  img
+    width: 300px
+    height: 300px
+    object-fit: cover
+</style>
 
 
