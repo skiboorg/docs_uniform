@@ -102,6 +102,11 @@
 
       </div>
     </section>
+    <section>
+      <div class="container">
+        <img src="/i.png" alt="">
+      </div>
+    </section>
     <section class="feedback">
       <div class="container">
         <h2 class="section-header">
