@@ -108,13 +108,13 @@
           ОТЗЫВЫ
         </h2>
         <div class="feedback-wrapper">
-          <div class="feedback-item">
+          <div class="feedback-item" v-for="item in feedbacks":key="item.id">
             <div class="feedback-item__top">
-              <img src="http://placehold.it/50" alt="">
+              <img :src="`f${item.id}.png`" alt="">
               <div class="feedback-item__top-name">
-                <p>Валентин <span>Педиатр</span></p>
+                <p>{{item.from}} <span>{{item.nick}}</span></p>
                 <el-rate
-                  v-model="rate1"
+                  v-model="item.rate"
                   disabled
 
                   :colors="['#519999', '#519999', '#519999']">
@@ -123,7 +123,7 @@
               </div>
             </div>
             <div class="feedback-item__bottom">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi dignissimos eos error eveniet id numquam odio optio perferendis quasi quo!</p>
+              <p>{{item.text}}</p>
             </div>
 
           </div>
@@ -181,6 +181,11 @@ export default {
   data() {
     return {
       rate1:4,
+      feedbacks:[
+        {id:1,rate:4,img:'',from:'Иллина',nick:'ashata77',text:'Купили форму у вас в магазине дня 3 назад.. решили написать отзыв) Качество шикарное 👍 идеально подошел костюмчик! 👌 цену оправдывает)) Придём еще!)'},
+        {id:2,rate:5,img:'',from:'Dahi Abdullayev',nick:'marmotte2016',text:'Здравствуйте! Вы были абсолютно правы! Костюм подошел просто идепально! Такая приятная для тела ткань! 😍😍😍 И сама модель обалденная! Про цвет я вообще молчу - мой любимый! Пожлауйста, не останавливайтесь на достигнутом! Только вперед! Успехов вам и только довольных клиентов!💰'},
+        {id:3,rate:5,img:'',from:'Darria',nick:'_protege_moi',text:'Спасибо большое, качество хорошее, размеры точные, но виз короткий, хотя бы 1-2 см добавить и было бы отлично. Но все равно намного лучше чем у других производителей'},
+      ],
       bannerOptions: {
         slidesPerView: 1,
 
