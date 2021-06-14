@@ -21,7 +21,10 @@
             <div class="swiper-pagination" slot="pagination"></div>
             <swiper-slide v-for="banner in banners" :key="banner.id">
               <div class="offer-banner-item">
-                <img :src="banner.image" >
+                <a :href="banner.url">
+                   <img :src="banner.image" >
+                </a>
+
               </div>
             </swiper-slide>
           </swiper>
@@ -53,28 +56,26 @@
       </div>
     </section>
 
-    <section class="collection">
-      <div class="container">
-        <h2 class="section-header">
-          Новинки
-        </h2>
-
-
-        <div class="collection-wrapper">
-          <!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
-          <!--         <ItemCard v-for="item in _.take(collection.collection_items, 3)" :key="item.id"-->
-          <ItemCard v-for="item in new_items" :key="item.id"
-                    :collection_name="item.subcategory.name"
-                    :item_name="item.name"
-                    :item_price="item.price"
-                    :discount="item.discount"
-                    :item_slug="item.name_slug"
-                    :cat_slug="item.category"
-                    :subcat_slug="item.subcategory.name_slug"
-                    :image="item.images"/>
-        </div>
-      </div>
-    </section>
+<!--    <section class="collection">-->
+<!--      <div class="container">-->
+<!--        <h2 class="section-header">-->
+<!--          Новинки-->
+<!--        </h2>-->
+<!--        <div class="collection-wrapper">-->
+<!--          &lt;!&ndash;           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"&ndash;&gt;-->
+<!--          &lt;!&ndash;         <ItemCard v-for="item in _.take(collection.collection_items, 3)" :key="item.id"&ndash;&gt;-->
+<!--          <ItemCard v-for="item in new_items" :key="item.id"-->
+<!--                    :collection_name="item.subcategory.name"-->
+<!--                    :item_name="item.name"-->
+<!--                    :item_price="item.price"-->
+<!--                    :discount="item.discount"-->
+<!--                    :item_slug="item.name_slug"-->
+<!--                    :cat_slug="item.category"-->
+<!--                    :subcat_slug="item.subcategory.name_slug"-->
+<!--                    :image="item.images"/>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
     <!--    <section class="about">-->
     <!--      <div class="container">-->
     <!--        <div class="about-wrapper">-->
@@ -138,22 +139,32 @@
     <section class="social">
       <div class="container">
         <div class="social-top">
-          <h3 class="text text-300 text-center text-upper">подписывайтесь на наш инстаграм</h3>
-          <p class="text-center"><a href="#" class="text text-f-80">@docsuniform</a></p>
+          <h3 class="text text-300 text-center text-upper"><a href="https://www.instagram.com/docsuniform/" target="_blank">подписывайтесь на наш инстаграм</a></h3>
+          <p class="text-center"><a href="https://www.instagram.com/docsuniform/" target="_blank" class="text text-f-80">@docsuniform</a></p>
         </div>
         <div class="social-wrapper">
           <div class="social-item">
-            <img  src="/i1.jpg" >
-          </div>
-          <div class="social-item">
-            <img  src="/i2.jpg" >
-          </div>
-          <div class="social-item">
-            <img  src="/i3.jpg" >
+            <a href="https://www.instagram.com/docsuniform/" target="_blank">
+              <img  src="/i1.jpg" >
+            </a>
 
           </div>
           <div class="social-item">
-            <img  src="/i4.jpg" >
+            <a href="https://www.instagram.com/docsuniform/" target="_blank">
+              <img  src="/i2.jpg" >
+            </a>
+
+          </div>
+          <div class="social-item">
+            <a href="https://www.instagram.com/docsuniform/" target="_blank">
+              <img  src="/i3.jpg" >
+            </a>
+
+          </div>
+          <div class="social-item">
+            <a href="https://www.instagram.com/docsuniform/" target="_blank">
+               <img  src="/i4.jpg" >
+            </a>
           </div>
         </div>
       </div>
@@ -187,9 +198,9 @@ export default {
     return {
       rate1:4,
       feedbacks:[
-        {id:1,rate:4,img:'',from:'Иллина',nick:'ashata77',text:'Купили форму у вас в магазине дня 3 назад.. решили написать отзыв) Качество шикарное 👍 идеально подошел костюмчик! 👌 цену оправдывает)) Придём еще!)'},
+        {id:1,rate:5,img:'',from:'Иллина',nick:'ashata77',text:'Купили форму у вас в магазине дня 3 назад.. решили написать отзыв) Качество шикарное 👍 идеально подошел костюмчик! 👌 цену оправдывает)) Придём еще!)'},
         {id:2,rate:5,img:'',from:'Dahi Abdullayev',nick:'marmotte2016',text:'Здравствуйте! Вы были абсолютно правы! Костюм подошел просто идепально! Такая приятная для тела ткань! 😍😍😍 И сама модель обалденная! Про цвет я вообще молчу - мой любимый! Пожлауйста, не останавливайтесь на достигнутом! Только вперед! Успехов вам и только довольных клиентов!💰'},
-        {id:3,rate:5,img:'',from:'Darria',nick:'_protege_moi',text:'Спасибо большое, качество хорошее, размеры точные, но виз короткий, хотя бы 1-2 см добавить и было бы отлично. Но все равно намного лучше чем у других производителей'},
+        {id:3,rate:4,img:'',from:'Darria',nick:'_protege_moi',text:'Спасибо большое, качество хорошее, размеры точные, но виз короткий, хотя бы 1-2 см добавить и было бы отлично. Но все равно намного лучше чем у других производителей'},
       ],
       bannerOptions: {
         slidesPerView: 1,
