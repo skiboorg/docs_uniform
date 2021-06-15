@@ -56,26 +56,26 @@
       </div>
     </section>
 
-<!--    <section class="collection">-->
-<!--      <div class="container">-->
-<!--        <h2 class="section-header">-->
-<!--          Новинки-->
-<!--        </h2>-->
-<!--        <div class="collection-wrapper">-->
-<!--          &lt;!&ndash;           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"&ndash;&gt;-->
-<!--          &lt;!&ndash;         <ItemCard v-for="item in _.take(collection.collection_items, 3)" :key="item.id"&ndash;&gt;-->
-<!--          <ItemCard v-for="item in new_items" :key="item.id"-->
-<!--                    :collection_name="item.subcategory.name"-->
-<!--                    :item_name="item.name"-->
-<!--                    :item_price="item.price"-->
-<!--                    :discount="item.discount"-->
-<!--                    :item_slug="item.name_slug"-->
-<!--                    :cat_slug="item.category"-->
-<!--                    :subcat_slug="item.subcategory.name_slug"-->
-<!--                    :image="item.images"/>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </section>-->
+    <section class="collection">
+      <div class="container">
+        <h2 class="section-header">
+          Новинки
+        </h2>
+        <div class="collection-wrapper">
+          <!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
+          <!--         <ItemCard v-for="item in _.take(collection.collection_items, 3)" :key="item.id"-->
+          <ItemCard v-for="item in new_items" :key="item.id"
+                    :collection_name="item.subcategory.name"
+                    :item_name="item.name"
+                    :item_price="item.price"
+                    :discount="item.discount"
+                    :item_slug="item.name_slug"
+                    :cat_slug="item.category"
+                    :subcat_slug="item.subcategory.name_slug"
+                    :image="item.images"/>
+        </div>
+      </div>
+    </section>
     <!--    <section class="about">-->
     <!--      <div class="container">-->
     <!--        <div class="about-wrapper">-->
