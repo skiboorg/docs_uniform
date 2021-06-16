@@ -1,7 +1,7 @@
 <template>
   <div class="marquee js-marquee mb-50">
     <div class="marquee-wrapper js-marquee-wrapper" reverse>
-      <h1  style="line-height: 0"><p :class="{'color-green':is_index}"><span>&#10072;</span>{{text}}</p></h1>
+      <p :class="{'color-green':is_index}"><span>&#10072;</span>{{text}}</p>
 
     </div>
   </div>

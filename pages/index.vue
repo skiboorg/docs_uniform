@@ -95,7 +95,7 @@
     <!--    </section>-->
     <section class="about-new">
       <div class="container">
-        <h2 class="section-header">ИНТЕРНЕТ-МАГАЗИН ОДЕЖДЫ ДЛЯ СОВРЕМЕННЫХ ВРАЧЕЙ</h2>
+        <h1 class="section-header">ИНТЕРНЕТ-МАГАЗИН ОДЕЖДЫ ДЛЯ СОВРЕМЕННЫХ ВРАЧЕЙ</h1>
         <p>DOC’S — это опыт врачей и хороший вкус дизайнеров: вместе мы делаем стильную и комфортную медицинскую одежду. Мы придумываем лаконичные и удобные модели, которые выглядят эстетично и не мешают в процессе работы.</p>
         <div style="display: flex;justify-content: center">
           <nuxt-link style="padding: 25px 70px" class="btn" to="/about">узнать больше</nuxt-link>
