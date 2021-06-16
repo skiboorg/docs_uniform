@@ -181,6 +181,19 @@ export default {
     ItemCard,
     MarqueeLine
   },
+   head() {
+    return {
+      title: `Магазин медицинской одежды DOC's`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `
+Покупайте недорого стильные и модные мужские медицинские халаты в интернет-магазине DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ, низкие цены ☝️ Заходите!`
+        }
+      ]
+    }
+  },
   async fetch({store}){
     await store.dispatch('categories/fetchCategories')
     await store.dispatch('cart/fetchCart')
