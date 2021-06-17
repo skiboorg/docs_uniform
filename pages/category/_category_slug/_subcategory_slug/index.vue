@@ -10,7 +10,7 @@
       </p>
       </div>
          <div style="color: #E0E0E0">
-        <h1 style="text-transform: uppercase">{{this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}} {{cat_name}}</h1>
+       <h1>{{h1}}</h1>
       </div>
       </div>
     </div>
@@ -68,13 +68,12 @@ export default {
   },
   head() {
     return {
-      title: `${this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}— купить в интернет-магазине DOC’S`,
+      title: this.page_title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `
-Покупайте недорого стильные и модные мужские медицинские халаты в интернет-магазине DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ, низкие цены ☝️ Заходите!`
+          content: this.page_description
         }
       ]
     }
@@ -117,9 +116,15 @@ export default {
 
   },
   computed:{
-    cat_name(){
-      return this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).subcategories.find(x=>x.name_slug===this.$route.params.subcategory_slug).name
-    }
+    h1(){
+      return this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).subcategories.find(x=>x.name_slug===this.$route.params.subcategory_slug).h1
+    },
+    page_title(){
+      return this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).subcategories.find(x=>x.name_slug===this.$route.params.subcategory_slug).title
+    },
+    page_description(){
+      return this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).subcategories.find(x=>x.name_slug===this.$route.params.subcategory_slug).description
+    },
   }
 
 }
