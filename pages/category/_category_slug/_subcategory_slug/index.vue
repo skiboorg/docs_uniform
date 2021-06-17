@@ -10,7 +10,7 @@
       </p>
       </div>
          <div style="color: #E0E0E0">
-        <h1>{{ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string }}</h1>
+        <h1 style="text-transform: uppercase">{{this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}} {{cat_name}}</h1>
       </div>
       </div>
     </div>
@@ -116,6 +116,11 @@ export default {
     console.log(this.collections)
 
   },
+  computed:{
+    cat_name(){
+      return this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).subcategories.find(x=>x.name_slug===this.$route.params.subcategory_slug).name
+    }
+  }
 
 }
 </script>

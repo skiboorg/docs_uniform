@@ -1,5 +1,15 @@
 <template>
   <div class="">
+     <div class="container">
+      <div style="display: flex;align-items: center;justify-content: flex-end;flex-wrap: wrap">
+
+         <div style="color: #E0E0E0">
+        <h1 >Интернет-магазин медицинской одежды DOC’S</h1>
+      </div>
+      </div>
+
+
+    </div>
     <MarqueeLine :is_index="true" text="магазин медицинской одежды "/>
     <section class="categories">
       <div class="container">
@@ -95,7 +105,7 @@
     <!--    </section>-->
     <section class="about-new">
       <div class="container">
-        <h1 class="section-header">ИНТЕРНЕТ-МАГАЗИН ОДЕЖДЫ ДЛЯ СОВРЕМЕННЫХ ВРАЧЕЙ</h1>
+        <h3 class="section-header">ИНТЕРНЕТ-МАГАЗИН ОДЕЖДЫ ДЛЯ СОВРЕМЕННЫХ ВРАЧЕЙ</h3>
         <p>DOC’S — это опыт врачей и хороший вкус дизайнеров: вместе мы делаем стильную и комфортную медицинскую одежду. Мы придумываем лаконичные и удобные модели, которые выглядят эстетично и не мешают в процессе работы.</p>
         <div style="display: flex;justify-content: center">
           <nuxt-link style="padding: 25px 70px" class="btn" to="/about">узнать больше</nuxt-link>
