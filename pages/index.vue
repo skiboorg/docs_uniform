@@ -57,6 +57,7 @@
                     :collection_name="item.subcategory.name"
                     :item_name="item.name"
                     :item_price="item.price"
+
                     :discount="item.discount"
                     :item_slug="item.name_slug"
                     :cat_slug="item.category"
@@ -78,6 +79,7 @@
                     :collection_name="item.subcategory.name"
                     :item_name="item.name"
                     :item_price="item.price"
+                    :item_old_price="item.old_price"
                     :discount="item.discount"
                     :item_slug="item.name_slug"
                     :cat_slug="item.category"

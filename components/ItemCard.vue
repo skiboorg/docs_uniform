@@ -11,14 +11,24 @@
       </nuxt-link>
     </div>
     <p class="collection-item__name">{{item_name}}</p>
-    <p class="collection-item__price">{{item_price}} ₽</p>
+    <div v-if="!discount>0">
+      <p class="collection-item__price">{{item_price}} ₽</p>
+    </div>
+    <div v-else style="display: flex;">
+      <p style="color: red;margin-right: 10px" class="collection-item__price">{{item_price}} ₽</p>
+       <p style="color: grey;text-decoration: line-through" class="collection-item__price">{{item_old_price}} ₽</p>
+    </div>
+
+
+
+
 
   </div>
 </template>
 
 <script>
 export default {
-  props:['collection_name','image','item_name','item_price','discount','cat_slug','subcat_slug','item_slug'],
+  props:['collection_name','image','item_name','item_price','discount','cat_slug','subcat_slug','item_slug','item_old_price'],
   data() {
     return {}
   },

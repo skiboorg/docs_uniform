@@ -33,7 +33,8 @@
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
-                        :discount="item.diccount"
+                        :discount="item.discount"
+                         :item_old_price="item.old_price"
                         :item_slug="item.name_slug"
                         :cat_slug="$route.params.category_slug"
                         :subcat_slug="$route.params.subcategory_slug"
@@ -43,10 +44,12 @@
     </section>
     <section style="margin-bottom: 0">
      <div class="container collection-wrapper">
+
       <ItemCard v-if="item.collection.is_base_collection" v-for="item in items" :key="item.id"
                         :collection_name="item.subcategory.name"
                         :item_name="item.name"
                         :item_price="item.price"
+                         :item_old_price="item.old_price"
                         :discount="item.diccount"
                         :item_slug="item.name_slug"
                         :cat_slug="$route.params.category_slug"
