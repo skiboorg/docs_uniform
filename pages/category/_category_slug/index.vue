@@ -9,8 +9,9 @@
         <a class="link" href="#" @click.prevent="$router.back()">НАЗАД</a>
       </p>
       </div>
+
          <div style="color: #E0E0E0">
-        <h1>{{ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string }}</h1>
+        <h1>{{ h1 }}</h1>
       </div>
       </div>
 
@@ -59,13 +60,12 @@ export default {
   },
   head() {
     return {
-      title: `${this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}— купить в интернет-магазине DOC’S`,
+      title: this.page_title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `
-Покупайте недорого стильные и модные мужские медицинские халаты в интернет-магазине DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ, низкие цены ☝️ Заходите!`
+          content: this.page_description
         }
       ]
     }
@@ -89,6 +89,17 @@ export default {
 
 
   },
+  computed:{
+    h1(){
+      return this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).h1
+    },
+    page_title(){
+      return this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).title
+    },
+    page_description(){
+      return this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).description
+    },
+  }
 
 }
 </script>

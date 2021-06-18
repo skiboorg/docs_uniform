@@ -1,11 +1,18 @@
 <template>
   <div class="">
     <div class="container">
-      <p class="back-link"><svg width="27" height="15" viewBox="0 0 27 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div style="display: flex;align-items: center;justify-content: space-between;flex-wrap: wrap">
+         <div class="">
+        <p class="back-link"><svg width="27" height="15" viewBox="0 0 27 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M27 7.5H1M1 7.5L7.5 1M1 7.5L7.5 14" stroke="#519999"/>
       </svg>
         <a class="link" href="#" @click.prevent="$router.back()">НАЗАД</a>
       </p>
+      </div>
+         <div style="color: #E0E0E0">
+       <h1>Контакты</h1>
+      </div>
+      </div>
     </div>
     <MarqueeLine :text="'КОНТАКТЫ'"/>
     <section class="subcategories">
@@ -62,13 +69,12 @@ export default {
   },
   head() {
     return {
-      title: `Контакты интернет-магазин медицинской одежды DOC’S`,
+      title: `Контакты интернет-магазина медицинской одежды DOC’S`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `
-Контакты интернет-магазина медицинской одежды DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ ☝️ Заходите!`
+          content: `Контакты интернет-магазина медицинской одежды DOC’S ✅ Новые коллекции, быстрая доставка по России и СНГ ☝️ Заходите!`
         }
       ]
     }
