@@ -28,7 +28,7 @@
                  class="subcategories-item__img">
                <el-image  :src="subcategory.image" lazy></el-image>
             </div>
-            <p class="subcategories-item__name">{{subcategory.name}}</p>
+            <h2 class="subcategories-item__name">{{subcategory.name}}</h2>
           </div>
         </div>
       </div>
