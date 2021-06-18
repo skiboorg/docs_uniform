@@ -24,6 +24,7 @@
                         :item_name="item.name"
                         :item_price="item.price"
                         :discount="item.diccount"
+                         :item_old_price="item.old_price"
                         :item_slug="item.name_slug"
                         :cat_slug="$route.params.category_slug"
                         :subcat_slug="$route.params.subcategory_slug"
@@ -42,6 +43,18 @@ export default {
   async fetch({store}){
     await store.dispatch('categories/fetchCategories')
     await store.dispatch('cart/fetchCart')
+  },
+   head() {
+    return {
+      title: this.collection[0].name,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.collection[0].name
+        }
+      ]
+    }
   },
   components: {
     MarqueeLine,
