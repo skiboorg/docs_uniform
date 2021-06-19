@@ -6,10 +6,10 @@ const SITE_BASE_URL = 'http://localhost:3000'
 
 export default {
 
-  //server: {
-  //  port: 80, // default: 3000
-  //  host: '185.92.148.221' // default: localhost
-  //},
+  server: {
+    port: 3000, // default: 3000
+    host: 'localhost' // default: localhost
+  },
 
   env: {
     //img_url: 'http://185.92.148.221:8000',
@@ -78,10 +78,78 @@ export default {
     '@nuxtjs/sitemap'
     // 'nuxt-lazy-load'
   ],
-  robots: {
-    UserAgent: '*',
-    Disallow: '/'
-  },
+  robots: [
+    {
+      UserAgent: 'Googlebot',
+      Disallow: () => '/admin'
+
+    },
+    {
+      Disallow: () => '*/api'
+    },
+    {
+      Disallow: () => '/login'
+    },
+    {
+      Disallow: () => '/lk'
+    },
+    {
+      Disallow: () => '/api'
+    },
+    {
+      Disallow: () => '/cart'
+    },
+    {
+      Disallow: () => '*/image'
+    },
+     {
+      UserAgent: 'Yandex',
+      Disallow: () => '/admin'
+
+    },
+    {
+      Disallow: () => '*/api'
+    },
+    {
+      Disallow: () => '/login'
+    },
+    {
+      Disallow: () => '/lk'
+    },
+    {
+      Disallow: () => '/api'
+    },
+    {
+      Disallow: () => '/cart'
+    },
+    {
+      Disallow: () => '*/image'
+    },
+
+     {
+      UserAgent: '*',
+      Disallow: () => '/admin'
+
+    },
+    {
+      Disallow: () => '*/api'
+    },
+    {
+      Disallow: () => '/login'
+    },
+    {
+      Disallow: () => '/lk'
+    },
+    {
+      Disallow: () => '/api'
+    },
+    {
+      Disallow: () => '/cart'
+    },
+    {
+      Disallow: () => '*/image'
+    },
+  ],
   sitemap: {
     routes:
       async () => {
