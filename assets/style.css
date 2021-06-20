@@ -1171,7 +1171,7 @@ select:focus {
   opacity: 0.5;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .item-info__colors {
@@ -1526,7 +1526,7 @@ select:focus {
 .lk-order-item__info--name {
   font-size: 14px;
   font-weight: 400;
-  margin-bottom: 25px;
+
 }
 
 .lk-order-item__info--status {
@@ -1538,7 +1538,8 @@ select:focus {
 .lk-order-item__info--group {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -2488,7 +2489,9 @@ select:focus {
   .lk-order-item__info--group {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-row-gap: 20px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;

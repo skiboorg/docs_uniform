@@ -248,6 +248,7 @@ export default {
       //const response = await this.$axios.get(`/api/calculate_delivery`)
     },
     async createOrder () {
+      this.validateEmail()
       this.orderData.phone ?  this.$refs.phone.$el.classList.remove('fieldError'):this.$refs.phone.$el.classList.add('fieldError')
       this.orderData.email && this.is_email_valid ? this.$refs.email.$el.classList.remove('fieldError') :this.$refs.email.$el.classList.add('fieldError')
       this.orderData.fio ? this.$refs.fio.$el.classList.remove('fieldError'): this.$refs.fio.$el.classList.add('fieldError')

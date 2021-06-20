@@ -15,15 +15,29 @@
                                 <p class="fs12">{{order.order_code}}</p>
                             </div>
                             <div class="lk-order-item__info--group--item">
+                                <p class="item-info__subtitle">Статус оплаты</p>
+
+                                <p class="fs12">{{order.is_payed ? 'Оплачен' : 'Не оплачен'}}</p>
+                            </div>
+
+                        </div>
+                        <div class="lk-order-item__info--group">
+                            <div class="lk-order-item__info--group--item">
+                                <p class="item-info__subtitle">тип доставки</p>
+                                <p class="fs12">{{order.delivery.name}}</p>
+                            </div>
+
+                            <div class="lk-order-item__info--group--item">
                                 <p class="item-info__subtitle">Адрес доставки</p>
 
-                                <p class="fs12">{{order.city ? `г. ${order.city.name}` : ''}}{{order.street}} {{order.house}} {{order.flat}}</p>
+                                <p class="fs12">{{order.city ? `г. ${order.city.name}` : '-'}}{{order.street}} {{order.house}} {{order.flat}}</p>
                             </div>
                          <div class="">
+                            <p class="item-info__subtitle">Общая сумма</p>
                              <p class="lk-order-item__price">{{order.total_price}}₽</p>
                          </div>
                         </div>
-
+                      <hr/>
                         <div class="lk-order-item__info--group" v-for="item in order.items" :key="item.id">
 
                         <div class="lk-order-item__img">
@@ -33,8 +47,13 @@
                     <div class="lk-order-item__info" >
 <!--                        <p class="lk-order-item__info&#45;&#45;status">{% if order.is_complete %}Доставлен{% endif %}</p>-->
 <!--                        <p class="lk-order-item__info&#45;&#45;status">{% if order.is_payed %}Оплачен{% endif %}</p>-->
-
+                        <p class="cart-item__info__art">{{item.item_type.article}}</p>
                         <p class="lk-order-item__info--name">{{item.item_type.name}}</p>
+                      <span style="font-size: 12px;opacity: .5;">
+                  {{item.item_type.color.name}}
+                  {{item.item_type.size.name}}
+                  {{item.item_type.height.name}}
+                </span>
 
                     </div>
                     <p class="lk-order-item__num">{{item.quantity}} шт</p>
