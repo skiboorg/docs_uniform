@@ -1539,14 +1539,22 @@ select:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.lk-order-item__info--group.grid3 {
+  grid-template-columns: repeat(3,1fr);
+}
+
+.lk-order-item__info--group.grid4 {
+  grid-template-columns: repeat(4,1fr);
 }
 
 .lk-order-item__num {
@@ -2490,7 +2498,7 @@ select:focus {
     display: -webkit-box;
     display: -ms-flexbox;
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+
     grid-row-gap: 20px;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -2499,6 +2507,14 @@ select:focus {
     -ms-flex-pack: justify;
     justify-content: space-between;
   }
+
+  .lk-order-item__info--group.grid3 {
+  grid-template-columns: repeat(2,1fr);
+}
+
+.lk-order-item__info--group.grid4 {
+  grid-template-columns: repeat(2,1fr);
+}
 
   .lk-order-item__num {
     -webkit-box-ordinal-group: 5;

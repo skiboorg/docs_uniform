@@ -5,7 +5,7 @@
 
 
                     <div class="lk-order-item" v-for="order in orders" :key="order.id">
-                     <div class="lk-order-item__info--group">
+                     <div class="lk-order-item__info--group grid3">
                             <div class="lk-order-item__info--group--item">
                                 <p class="item-info__subtitle">Дата заказа</p>
                                 <p class="fs12">{{new Date(order.created_at).toLocaleString()}}</p>
@@ -21,7 +21,7 @@
                             </div>
 
                         </div>
-                        <div class="lk-order-item__info--group">
+                        <div class="lk-order-item__info--group grid3">
                             <div class="lk-order-item__info--group--item">
                                 <p class="item-info__subtitle">тип доставки</p>
                                 <p class="fs12">{{order.delivery.name}}</p>
@@ -38,7 +38,7 @@
                          </div>
                         </div>
                       <hr/>
-                        <div class="lk-order-item__info--group" v-for="item in order.items" :key="item.id">
+                        <div class="lk-order-item__info--group grid4" v-for="item in order.items" :key="item.id">
 
                         <div class="lk-order-item__img">
                         <img :src="base_url+item.item_type.image" alt="">
