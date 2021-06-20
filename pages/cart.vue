@@ -179,6 +179,18 @@ export default {
     const delivery_types = get_delivery.data
     return {delivery_types}
   },
+   head() {
+    return {
+      title: `Ваша корзина`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `Покупайте стильную, современную одежду для врачей, удобную медицинскую униформу в интернет-магазине DOC’S :white_check_mark: Новые коллекции, быстрая доставка по России и СНГ :point_up: Заходите!`
+        }
+      ]
+    }
+  },
   data() {
     return {
       loading:false,
@@ -387,7 +399,9 @@ export default {
       }
        if (!this.is_office_cdek){
         return userData && deliveryData
-      }
+      }else {
+         return userData && this.orderData.delivery_office
+       }
 
 
     },
