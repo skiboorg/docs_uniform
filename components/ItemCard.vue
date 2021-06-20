@@ -1,5 +1,6 @@
 <template>
   <div class="collection-item" >
+
     <p class="collection-item-name">{{collection_name}}</p>
     <div class="collection-item__img" >
       <nuxt-link :to="`/category/${cat_slug}/${subcat_slug}/${item_slug}`">

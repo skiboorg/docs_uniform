@@ -26,9 +26,10 @@
                         :discount="item.diccount"
                          :item_old_price="item.old_price"
                         :item_slug="item.name_slug"
-                        :cat_slug="$route.params.category_slug"
-                        :subcat_slug="$route.params.subcategory_slug"
-                        :image="item.images"/>
+                        :cat_slug="item.category"
+                        :subcat_slug="item.subcategory.name_slug"
+                        :image="item.images"
+              />
             </div>
         </div>
     </section>
