@@ -373,14 +373,14 @@ export default {
     },
     async 'orderData.delivery_office'(val){
       console.log(val)
-      if (val){
+      //if (val){
         //this.deliveryPrice = this.cities.find(x=>x.id===val).price
-
-
+        this.deliveryPrice = 0
+      this.loading = true
         await this.calculateDelivery()
-      }else{
-        this.city_code=null
-      }
+      //}else{
+      //  this.city_code=null
+      //}
     }
     // cart_weight(val){
     //   if (val > 3000){
