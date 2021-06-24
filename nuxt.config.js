@@ -30,7 +30,8 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'yandex-verification', content: '52811535c3597f68' },
-      { name: 'facebook-domain-verification', content: 'lcp31n2ylzh970zya2xcqck7au6wgj' }
+      { name: 'facebook-domain-verification', content: 'lcp31n2ylzh970zya2xcqck7au6wgj' },
+      { name: 'google-site-verification', content: 'n7bysP5Hprd2S8QF9s2dq6Wq1-IFWSRgfFgJtKD7_OU' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/fav.png' },
