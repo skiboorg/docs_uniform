@@ -2,15 +2,18 @@
   <div class="main-wrapper">
     <Header/>
     <Nuxt />
+
     <Footer/>
     <div v-if="!this.$auth.$storage.getCookie('cookie_agree')" ref="cookie_message" class="cookie-message"
     :class="{'hideCookie':hideCookie}"
     >
       <div class="container cookie-message__inner">
-         <p>Продолжая использовать наш сайт, вы даете согласие на обработку файлов cookie, которые обеспечивают
+         <p>Продолжая использовать наш сайт, вы даете согласие на обработку странных cookie, которые обеспечивают
         правильную работу сайта. Благодаря им мы улучшаем сайт, обслуживание и товары</p>
       <el-button class="btn" @click="cookie_agree" type="info">ПРИНЯТЬ КУКИ</el-button>
       </div>
+
+
 
     </div>
   </div>
@@ -23,7 +26,8 @@
     export default {
         data:function(){
             return{
-              hideCookie:false
+              hideCookie:false,
+
             }
         },
         components:{

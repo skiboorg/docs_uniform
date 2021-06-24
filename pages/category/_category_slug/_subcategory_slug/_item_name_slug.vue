@@ -247,6 +247,11 @@ export default {
     }
   },
   mounted() {
+    this.$fb.track('ViewContent',{
+      content_name:this.item.name,
+      content_type:'product',
+      content_ids: this.item.id,
+      });
     let acc = document.getElementsByClassName("accordion");
 
     for (let i = 0; i < acc.length; i++) {
@@ -262,13 +267,14 @@ export default {
     }
 
     for(let i of this.item.types){
+
       if (i.is_active){
         !this.colors.find(x=>x.id === i.color.id) ? this.colors.push(i.color) : null
-      !this.sizes.find(x=>x.id === i.size.id) ? this.sizes.push(i.size) : null
-      !this.heights.find(x=>x.id === i.height.id) ? this.heights.push(i.height) : null
-      !this.materials.find(x=>x.id === i.material.id) ? this.materials.push(i.material) : null
-      !this.mods.find(x=>x.id === i.modification.id) ? this.mods.push(i.modification) : null
-      }
+        !this.sizes.find(x=>x.id === i.size.id) ? this.sizes.push(i.size) : null
+        !this.heights.find(x=>x.id === i.height.id) ? this.heights.push(i.height) : null
+        !this.materials.find(x=>x.id === i.material.id) ? this.materials.push(i.material) : null
+        !this.mods.find(x=>x.id === i.modification.id) ? this.mods.push(i.modification) : null
+        }
 
     }
     this.sizes = _.orderBy(this.sizes,'order_num' )
@@ -400,6 +406,20 @@ console.log('11')
         await this.$store.dispatch('cart/fetchCart')
         this.notify('Товар добавлен','','success')
         this.buttonCaption = 'В корзине'
+
+        this.$fb.track('AddToCart',{
+        value: this.item.price,
+        currency: 'RUB',
+          content_name:this.item.name,
+        contents: [
+          {
+            id: this.item.id,
+            quantity: 1
+          }
+        ],
+          content_type:'product',
+        content_ids: this.item.id,
+      });
 
       }
     }

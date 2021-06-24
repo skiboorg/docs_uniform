@@ -167,6 +167,8 @@
             <el-input   prefix-icon="el-icon-key" show-password v-model="registerData.password2"  placeholder="Повторите пароль"></el-input>
           </el-form-item>
           <el-button type="primary" class="btn" @click="submitRegisterForm">Регистрация</el-button>
+           <p style="margin-top: 20px;text-align: center">При регистрации я автоматически соглашаюсь<br>
+             с <a style="text-decoration: underline" href="/policy.docx" target="_blank">политикой конфиденциальности</a></p>
           <p style="margin-top: 20px;color: red;text-align: center"></p>
           <p style="text-align: center; opacity: .5">Есть аккаунт? <a style="text-decoration: underline" href="#" @click.prevent="authMode='login'">Вход</a></p>
           <p style="text-align: center; opacity: .5">Забыли пароль? <a style="text-decoration: underline" href="№" @click.prevent="authMode='recover'">Восстановить</a></p>

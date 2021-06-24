@@ -29,7 +29,7 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'robots', content: 'noindex' },
+
 
 
     ],
@@ -75,9 +75,28 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/robots',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    ['nuxt-facebook-pixel-module', {
+      track: 'PageView',
+      pixelId: '624286744704947',
+      autoPageView: true,
+      disabled: false
+    }],
+    '@nuxtjs/gtm',
+    [
+      '@nuxtjs/yandex-metrika',
+      {
+        id: '52699993',
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+      }
+    ]
     // 'nuxt-lazy-load'
   ],
+  gtm: {
+    id: 'G-D9GRZ0NZQX'
+  },
   robots: [
     {
       UserAgent: 'Googlebot',

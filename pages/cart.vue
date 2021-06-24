@@ -272,7 +272,7 @@ export default {
          return
       }
 
-
+      this.$fb.track('InitiateCheckout');
       this.orderSend = true
       let session_id = this.$auth.$storage.getCookie('session_id')
       const response = await this.$axios.post(`/api/create_order`,
@@ -281,6 +281,8 @@ export default {
           order:this.orderData,
           delivery_price:this.deliveryPrice
         })
+     this.$fb.track('Purchase');
+
       console.log(response.data)
       await this.$store.dispatch('cart/fetchCart')
       if (response.data.pay_url){

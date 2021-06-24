@@ -1,5 +1,6 @@
 <template>
-  <div class="">
+  <div style="position: relative" class="">
+    <img @click="mailModal=true" class="subimg" src="/sub.png" alt="">
      <div class="container">
       <div style="display: flex;align-items: center;justify-content: flex-end;flex-wrap: wrap">
 
@@ -181,6 +182,19 @@
         </div>
       </div>
     </section>
+              <el-dialog  class="mail-modal" :visible.sync="mailModal">
+            <img src="/mailModal.jpg" alt="">
+            <div class="inner">
+              <p class="title">Cкидка <span>15%</span><br> за подписку</p>
+              <p class="mb-20">Отправляем только самое интересное <br> и полезное</p>
+        <el-form  :model="data" status-icon :rules="registerRules" ref="registerForm">
+                  <el-form-item prop="email">
+                      <el-input class="mb-15" prefix-icon="el-icon-message" v-model="data.email"  placeholder="Введите почту"></el-input>
+                  </el-form-item>
+                      <el-button type="primary"  class="btn" @click="addSubscribe">Получить скидку</el-button>
+        </el-form>
+            </div>
+</el-dialog>
   </div>
 </template>
 
@@ -220,6 +234,19 @@ export default {
   },
   data() {
     return {
+      mailModal:false,
+      data:{
+        email:null,
+      },
+      registerRules: {
+
+        email:[
+          { required: true, message: 'Это обязательное поле', trigger: ['blur', 'change'] },
+          { type: 'email', message: 'Введите корректный E-Mail адрес', trigger: ['blur', 'change'] }
+          ]
+
+
+      },
       rate1:4,
       feedbacks:[
         {id:1,rate:5,img:'',from:'Иллина',nick:'ashata77',text:'Купили форму у вас в магазине дня 3 назад.. решили написать отзыв) Качество шикарное 👍 идеально подошел костюмчик! 👌 цену оправдывает)) Придём еще!)'},
@@ -258,6 +285,25 @@ export default {
         // }
       },
     }
+  },
+  methods:{
+     addSubscribe(){
+       this.$refs.registerForm.validate( async(valid) => {
+        if (valid) {
+           await this.$axios.post(`/api/add_subscribe`,{email:this.data.email})
+       this.$notify({
+        title:'Вы подписаны на рассылку',
+        type: 'success'
+      });
+      this.data.email=null
+      this.mailModal = false
+        } else {
+
+          return false;
+        }
+      });
+
+    }
   }
 }
 </script>
@@ -267,6 +313,36 @@ export default {
     width: 300px
     height: 300px
     object-fit: cover
+.mail-modal
+  & .el-dialog
+    width: 400px !important
+
+  & .inner
+    padding: 25px
+  & .title
+    font-size: 35px
+    font-weight: 700
+    line-height: 38px
+    margin-bottom: 10px
+    span
+      color: red
+  & .btn
+    width: 100%
+    max-width: 100%
+
+  & .el-dialog__header
+    display: none
+  & .el-dialog__body
+    padding: 0
+    img
+      width: 100%
+      height: auto
+
+@media (max-width: 600px)
+  .mail-modal
+    & .el-dialog
+      width: 100% !important
+
 </style>
 
 

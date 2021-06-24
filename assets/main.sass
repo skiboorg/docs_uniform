@@ -38,7 +38,7 @@ $main_color: #519999
     & .header
       top: 33px
   &-line
-    padding: 6px 0
+    padding: 9px 0
     background: $main_color
     position: absolute
     left: 0
@@ -360,12 +360,20 @@ $main_color: #519999
     right: 0
     top: 0px
 
+.subimg
+  position: fixed
+  right: 0
+  top: 300px
+  cursor: pointer
+  z-index: 100
+
 @media (max-width: 768px)
+  .subimg
+    top: 250px
   .header-icons
     &::after
 
       content: none
-
 
 .about-new
   background: #f9f9f9
