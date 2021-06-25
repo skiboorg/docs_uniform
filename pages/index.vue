@@ -185,7 +185,7 @@
               <el-dialog  class="mail-modal" :visible.sync="mailModal">
             <img src="/mailModal.jpg" alt="">
             <div class="inner">
-              <p class="title">Cкидка <span>15%</span><br> за подписку</p>
+              <p class="title">Cкидка <span>10%</span><br> за подписку</p>
               <p class="mb-20">Отправляем только самое интересное <br> и полезное</p>
         <el-form  :model="data" status-icon :rules="registerRules" ref="registerForm">
                   <el-form-item prop="email">
