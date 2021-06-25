@@ -99,74 +99,57 @@ export default {
   },
   robots: [
     {
-      UserAgent: 'Googlebot',
-      Disallow: () => '/admin'
-
-    },
-    {
-      Disallow: () => '*/api'
-    },
-    {
-      Disallow: () => '/login'
-    },
-    {
-      Disallow: () => '/lk'
-    },
-    {
-      Disallow: () => '/api'
-    },
-    {
-      Disallow: () => '/cart'
-    },
-    {
-      Disallow: () => '*/image'
-    },
-     {
-      UserAgent: 'Yandex',
-      Disallow: () => '/admin'
-
-    },
-    {
-      Disallow: () => '*/api'
-    },
-    {
-      Disallow: () => '/login'
-    },
-    {
-      Disallow: () => '/lk'
-    },
-    {
-      Disallow: () => '/api'
-    },
-    {
-      Disallow: () => '/cart'
-    },
-    {
-      Disallow: () => '*/image'
-    },
-
-     {
       UserAgent: '*',
-      Disallow: () => '/admin'
+      Disallow: () => '/*?'
+    },
+    {Disallow: () => '/undefined/'  },
+    {Disallow: () => '/cart'    },
+    {Disallow: () => '/#'    },
+    {Disallow: () => '/lk/'    },
+    {Disallow: () => '/register/'    },
+    {Disallow: () => '/*login*' },
+    {Disallow: () => '/password/' },
+    {Disallow: () => '/admin' },
+    {Disallow: () => '*/api' },
+    {Allow: () => '/*/*.js' },
+    { Allow: () => '/*/*.css' },
 
-    },
     {
-      Disallow: () => '*/api'
+      UserAgent: 'GoogleBot',
+      Disallow: () => '/*?'
     },
+    {Disallow: () => '/undefined/'  },
+    {Disallow: () => '/cart'    },
+    {Disallow: () => '/#'    },
+    {Disallow: () => '/lk/'    },
+    {Disallow: () => '/register/'    },
+    {Disallow: () => '/*login*' },
+    {Disallow: () => '/password/' },
+    {Disallow: () => '/admin' },
+    {Disallow: () => '*/api' },
+    {Allow: () => '/*/*.js' },
+    { Allow: () => '/*/*.css' },
+
     {
-      Disallow: () => '/login'
+      UserAgent: 'Yandex',
+      Disallow: () => '/*?'
     },
+    {Disallow: () => '/undefined/'  },
+    {Disallow: () => '/cart'    },
+    {Disallow: () => '/#'    },
+    {Disallow: () => '/lk/'    },
+    {Disallow: () => '/register/'    },
+    {Disallow: () => '/*login*' },
+    {Disallow: () => '/password/' },
+    {Disallow: () => '/admin' },
+    {Disallow: () => '*/api' },
+
+    { Allow: () => '/*/*.js' },
+    { Allow: () => '/*/*.css' },
+    { 'Clean-Param': () => 'utm_source&utm_medium&utm_campaign' },
+
     {
-      Disallow: () => '/lk'
-    },
-    {
-      Disallow: () => '/api'
-    },
-    {
-      Disallow: () => '/cart'
-    },
-    {
-      Disallow: () => '*/image'
+      Sitemap: () => 'https://docsuniform.ru/sitemap.xml'
     },
   ],
   sitemap: {

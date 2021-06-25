@@ -20,7 +20,7 @@
                v-for="(category,index) in this.$store.getters['categories/getCategories']"
                :key="category.id">
             <!--            :class="category.is_for_man ? 'man' : 'woman'"-->
-            <p class="categories-item__text" >{{category.name}}</p>
+            <h2 class="categories-item__text" >{{category.name}}</h2>
           </div>
         </div>
       </div>

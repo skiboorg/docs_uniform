@@ -272,7 +272,7 @@ export default {
          return
       }
 
-      this.$fb.track('InitiateCheckout');
+      this.$fb.track('Initiate Checkout');
       this.orderSend = true
       let session_id = this.$auth.$storage.getCookie('session_id')
       const response = await this.$axios.post(`/api/create_order`,
