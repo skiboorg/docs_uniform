@@ -206,9 +206,9 @@ export default {
       is_office_cdek:false,
       cities:[],
       orderData:{
-        phone:this.$auth.loggedIn ? this.$auth.user.phone : null,
-        email:this.$auth.loggedIn ? this.$auth.user.email : null,
-        fio:this.$auth.loggedIn ? this.$auth.user.fio : null,
+        phone:this.$auth.loggedIn ? this.$auth.user.phone : this.$auth.$storage.getCookie('phone'),
+        email:this.$auth.loggedIn ? this.$auth.user.email : this.$auth.$storage.getCookie('email'),
+        fio:this.$auth.loggedIn ? this.$auth.user.fio : this.$auth.$storage.getCookie('fio'),
         street:null,
         house:null,
         flat:null,
@@ -271,6 +271,10 @@ export default {
         });
          return
       }
+
+      this.$auth.$storage.setCookie('phone',this.orderData.phone)
+      this.$auth.$storage.setCookie('fio',this.orderData.fio)
+      this.$auth.$storage.setCookie('email',this.orderData.email)
 
       this.$fb.track('Initiate Checkout');
       this.orderSend = true
