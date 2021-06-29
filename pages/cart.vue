@@ -289,7 +289,7 @@ export default {
       this.$auth.$storage.setCookie('fio',this.orderData.fio)
       this.$auth.$storage.setCookie('email',this.orderData.email)
 
-      this.$fb.track('Initiate Checkout');
+
       this.orderSend = true
       let session_id = this.$auth.$storage.getCookie('session_id')
       const response = await this.$axios.post(`/api/create_order`,
@@ -298,7 +298,10 @@ export default {
           order:this.orderData,
           delivery_price:this.deliveryPrice
         })
-     this.$fb.track('Purchase');
+     this.$fb.track('Purchase',{
+        value: this.deliveryPrice + this.cart.total_price + this.pack_price,
+        currency: 'RUB'
+     });
 
       console.log(response.data)
       await this.$store.dispatch('cart/fetchCart')

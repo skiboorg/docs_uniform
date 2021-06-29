@@ -95,7 +95,7 @@ export default {
     // 'nuxt-lazy-load'
   ],
   gtm: {
-    id: 'G-D9GRZ0NZQX'
+    id: 'GTM-NXMCR8D'
   },
   robots: [
     {
