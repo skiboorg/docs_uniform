@@ -37,7 +37,7 @@
           <div class="cart-grid-step"><p>1/4 данные</p></div>
           <div class="cart-grid-form">
 
-            <el-input class="mb-10 " ref="phone"  type="text" name="phone"  placeholder="Телефон *" v-model="orderData.phone"></el-input>
+            <el-input class="mb-10 " ref="phone" v-mask="'+7(###)###-##-##'" @input="validatePhone" type="text" name="phone"  placeholder="Телефон *" v-model="orderData.phone"></el-input>
             <el-input class="mb-10" ref="email" @input="validateEmail"  type="text" name="email" placeholder="Электронная почта *" v-model="orderData.email"></el-input>
             <el-input type="text" ref="fio" name="fio" placeholder="ФИО *" v-model="orderData.fio"></el-input>
 
@@ -203,6 +203,7 @@ export default {
       city_code:null,
       is_self_delivery:true,
       is_email_valid:false,
+      is_phone_valid:false,
       is_office_cdek:false,
       cities:[],
       orderData:{
@@ -255,19 +256,31 @@ export default {
           this.is_email_valid = false
         }
       },
+    validatePhone() {
+      console.log(this.orderData.phone)
+        const re = /^(\+7|)?\([489][0-9]{2}\)[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+        if(re.test(String(this.orderData.phone))){
+           console.log('gg')
+         this.is_phone_valid = true
+        }else{
+          console.log('nn')
+          this.is_phone_valid = false
+        }
+      },
     async cityChange () {
       console.log('change')
       //const response = await this.$axios.get(`/api/calculate_delivery`)
     },
     async createOrder () {
       this.validateEmail()
-      this.orderData.phone ?  this.$refs.phone.$el.classList.remove('fieldError'):this.$refs.phone.$el.classList.add('fieldError')
+      this.validatePhone()
+       this.is_phone_valid ?  this.$refs.phone.$el.classList.remove('fieldError'):this.$refs.phone.$el.classList.add('fieldError')
       this.orderData.email && this.is_email_valid ? this.$refs.email.$el.classList.remove('fieldError') :this.$refs.email.$el.classList.add('fieldError')
       this.orderData.fio ? this.$refs.fio.$el.classList.remove('fieldError'): this.$refs.fio.$el.classList.add('fieldError')
 
       if(!this.is_data_ok){
          this.$notify.error({
-                   message: 'Поля, отмеченные * обязательны для заполнения'
+                   title: 'Поля, отмеченные * обязательны для заполнения'
         });
          return
       }
@@ -308,7 +321,7 @@ export default {
         this.notify('Промокод активирован','','success')
         await this.$store.dispatch('cart/fetchCart')
       }else {
-        this.notify('Промокод не найден','','error')
+        this.notify('Промокод не найден или был использован ранее','','error')
       }
       this.promoSent= false
     },
@@ -398,7 +411,7 @@ export default {
   },
   computed:{
     is_data_ok(){
-      let userData = this.orderData.fio && this.orderData.email && this.orderData.phone && this.is_email_valid
+      let userData = this.orderData.fio && this.orderData.email && this.orderData.phone && this.is_email_valid && this.is_phone_valid
       let deliveryData = this.orderData.house && this.orderData.street && this.orderData.flat && this.orderData.delivery_city
       if (this.is_self_delivery){
         return userData
