@@ -37,7 +37,7 @@
           <div class="cart-grid-step"><p>1/4 данные</p></div>
           <div class="cart-grid-form">
 
-            <el-input class="mb-10 " ref="phone" v-mask="'+7(###)###-##-##'" @input="validatePhone" type="text" name="phone"  placeholder="Телефон *" v-model="orderData.phone"></el-input>
+            <el-input class="mb-10 " ref="phone" v-mask="'+7##########'" @input="validatePhone" type="text" name="phone"  placeholder="Телефон *" v-model="orderData.phone"></el-input>
             <el-input class="mb-10" ref="email" @input="validateEmail"  type="text" name="email" placeholder="Электронная почта *" v-model="orderData.email"></el-input>
             <el-input type="text" ref="fio" name="fio" placeholder="ФИО *" v-model="orderData.fio"></el-input>
 
@@ -258,7 +258,7 @@ export default {
       },
     validatePhone() {
       console.log(this.orderData.phone)
-        const re = /^(\+7|)?\([489][0-9]{2}\)[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+        const re = /^(\+7|)?[\s\-]?[489][0-9]{2}[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
         if(re.test(String(this.orderData.phone))){
            console.log('gg')
          this.is_phone_valid = true
