@@ -380,7 +380,9 @@ console.log('11')
       for (let i of this.item.images.filter(x => x.color === this.colors[this.selectedColor].id)) {
         this.thumbList.push(i.image_thumb)
         this.previewList.push(i.image)
+
       }
+      console.log(this.colors[this.selectedColor])
 
       // this.materials = []
       // this.mods = []

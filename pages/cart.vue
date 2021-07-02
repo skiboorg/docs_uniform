@@ -90,10 +90,10 @@
                   Наш менеджер с вами свяжется и поможет оформить доставку!</p>
               </div>
               <div v-else>
-                 <p class="cart-total__text text-grey">
-                   Выберите на карте <a href="https://www.cdek.ru/ru/office">подходящий вам офис</a>,
-                   а затем выберите его адрес на сайте!
-                 </p>
+                <p class="cart-total__text text-grey">
+                  Выберите на карте <a href="https://www.cdek.ru/ru/office">подходящий вам офис</a>,
+                  а затем выберите его адрес на сайте!
+                </p>
               </div>
 
 
@@ -147,8 +147,8 @@
             <span @click="applyPromo" class="color-green" :class="{'btnDisabled':promoSent}">АКТИВИРОВАТЬ</span>
           </p>
           <p v-else class="cart-total__promo ">Промокод активирован</p>
-<!--:disabled="!is_data_ok"-->
-            <el-checkbox class="mb-10" v-model="orderData.need_register">Автоматически меня зарегистрировать</el-checkbox>
+          <!--:disabled="!is_data_ok"-->
+          <el-checkbox v-if="!$auth.loggedIn" class="mb-10" v-model="orderData.need_register">Автоматически меня зарегистрировать</el-checkbox>
           <el-button  :loading="loading || orderSend" type="submit" class="btn" @click="createOrder">оформить заказ</el-button>
           <p class="cart-total__text mb-10">Нажимая на кнопку «оплатить заказ», я принимаю условия
             <a href="/offer.docx" target="_blank">публичной оферты</a>
@@ -179,7 +179,7 @@ export default {
     const delivery_types = get_delivery.data
     return {delivery_types}
   },
-   head() {
+  head() {
     return {
       title: `Ваша корзина`,
       meta: [
@@ -224,7 +224,7 @@ export default {
       },
       payments:[
         {id:1,name:'Картой онлайн, Apple Pay, Google Pay',value:'online'},
-       // {id:2,name:'Курьером',value:'cash'},
+        // {id:2,name:'Курьером',value:'cash'},
 
       ],
       pack_types:[
@@ -249,24 +249,24 @@ export default {
       });
     },
     validateEmail() {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(re.test(String(this.orderData.email))){
-         this.is_email_valid = true
-        }else{
-          this.is_email_valid = false
-        }
-      },
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(re.test(String(this.orderData.email))){
+        this.is_email_valid = true
+      }else{
+        this.is_email_valid = false
+      }
+    },
     validatePhone() {
       console.log(this.orderData.phone)
-        const re = /^(\+7|)?[\s\-]?[489][0-9]{2}[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
-        if(re.test(String(this.orderData.phone))){
-           console.log('gg')
-         this.is_phone_valid = true
-        }else{
-          console.log('nn')
-          this.is_phone_valid = false
-        }
-      },
+      const re = /^(\+7|)?[\s\-]?[489][0-9]{2}[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+      if(re.test(String(this.orderData.phone))){
+        console.log('gg')
+        this.is_phone_valid = true
+      }else{
+        console.log('nn')
+        this.is_phone_valid = false
+      }
+    },
     async cityChange () {
       console.log('change')
       //const response = await this.$axios.get(`/api/calculate_delivery`)
@@ -274,15 +274,15 @@ export default {
     async createOrder () {
       this.validateEmail()
       this.validatePhone()
-       this.is_phone_valid ?  this.$refs.phone.$el.classList.remove('fieldError'):this.$refs.phone.$el.classList.add('fieldError')
+      this.is_phone_valid ?  this.$refs.phone.$el.classList.remove('fieldError'):this.$refs.phone.$el.classList.add('fieldError')
       this.orderData.email && this.is_email_valid ? this.$refs.email.$el.classList.remove('fieldError') :this.$refs.email.$el.classList.add('fieldError')
       this.orderData.fio ? this.$refs.fio.$el.classList.remove('fieldError'): this.$refs.fio.$el.classList.add('fieldError')
 
       if(!this.is_data_ok){
-         this.$notify.error({
-                   title: 'Поля, отмеченные * обязательны для заполнения'
+        this.$notify.error({
+          title: 'Поля, отмеченные * обязательны для заполнения'
         });
-         return
+        return
       }
 
       this.$auth.$storage.setCookie('phone',this.orderData.phone)
@@ -298,16 +298,24 @@ export default {
           order:this.orderData,
           delivery_price:this.deliveryPrice
         })
-     this.$fb.track('Purchase',{
-        value: this.deliveryPrice + this.cart.total_price + this.pack_price,
-        currency: 'RUB'
-     });
+      if (response.data.email_error){
+          this.$notify.error({
+          title: 'Указанный e-mail уже используется'
+        });
+        this.orderSend = false
+      }else{
+        this.$fb.track('Purchase',{
+          value: this.deliveryPrice + this.cart.total_price + this.pack_price,
+          currency: 'RUB'
+        });
 
-      console.log(response.data)
-      await this.$store.dispatch('cart/fetchCart')
-      if (response.data.pay_url){
-        window.location.href = response.data.pay_url
+        console.log(response.data)
+        await this.$store.dispatch('cart/fetchCart')
+        if (response.data.pay_url){
+          window.location.href = response.data.pay_url
+        }
       }
+
 
 
     },
@@ -396,10 +404,10 @@ export default {
     async 'orderData.delivery_office'(val){
       console.log(val)
       //if (val){
-        //this.deliveryPrice = this.cities.find(x=>x.id===val).price
-        this.deliveryPrice = 0
+      //this.deliveryPrice = this.cities.find(x=>x.id===val).price
+      this.deliveryPrice = 0
       this.loading = true
-        await this.calculateDelivery()
+      await this.calculateDelivery()
       //}else{
       //  this.city_code=null
       //}
@@ -419,11 +427,11 @@ export default {
       if (this.is_self_delivery){
         return userData
       }
-       if (!this.is_office_cdek){
+      if (!this.is_office_cdek){
         return userData && deliveryData
       }else {
-         return userData && this.orderData.delivery_office
-       }
+        return userData && this.orderData.delivery_office
+      }
 
 
     },
