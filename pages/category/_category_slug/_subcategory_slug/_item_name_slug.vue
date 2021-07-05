@@ -293,10 +293,10 @@ export default {
 
 
     this.selectColor(0)
-    for (let i of this.item.images.filter(x=>x.color===this.colors[0].id)){
-      this.thumbList.push(i.image_thumb)
-      this.previewList.push(i.image)
-    }
+    // for (let i of this.item.images.filter(x=>x.color===this.colors[0].id)){
+    //   this.thumbList.push(i.image_thumb)
+    //   this.previewList.push(i.image)
+    // }
   },
   watch:{
     selectedColor(val){
