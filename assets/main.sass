@@ -262,6 +262,10 @@ $main_color: #519999
   & .el-dialog__body
     padding: 0
 @media (max-width: 600px)
+  .authModal
+    & .el-dialog
+      width: unset
+      max-width: 380px
   .sizesDialog
     & .el-dialog
       width: 95%
@@ -411,3 +415,9 @@ $main_color: #519999
           font-size: 14px
           font-weight: 300
     &__bottom
+
+
+.el-button--primary.is-disabled
+  background-color: #519999
+  border-color: #519999
+  opacity: .8

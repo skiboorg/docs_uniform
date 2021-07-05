@@ -191,7 +191,8 @@
                   <el-form-item prop="email">
                       <el-input class="mb-15" prefix-icon="el-icon-message" v-model="data.email"  placeholder="Введите почту"></el-input>
                   </el-form-item>
-                      <el-button type="primary"  class="btn" @click="addSubscribe">Получить скидку</el-button>
+          <el-checkbox class="mb-10" v-model="agree">Я принимаю условия рассылки</el-checkbox>
+                      <el-button type="primary" :disabled="!agree" class="btn" @click="addSubscribe">Получить скидку</el-button>
         </el-form>
             </div>
 </el-dialog>
@@ -234,6 +235,7 @@ export default {
   },
   data() {
     return {
+      agree:false,
       mailModal:false,
       data:{
         email:null,
@@ -292,7 +294,8 @@ export default {
         if (valid) {
            await this.$axios.post(`/api/add_subscribe`,{email:this.data.email})
        this.$notify({
-        title:'Вы подписаны на рассылку',
+        title:'ВЫ ПОДПИСАНЫ НА НОВОСТНУЮ РАССЫЛКУ!',
+         message:'Спасибо за подписку на рассылку.',
         type: 'success'
       });
       this.data.email=null

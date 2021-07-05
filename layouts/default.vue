@@ -40,6 +40,12 @@
             this.hideCookie = true
           }
         },
+      mounted() {
+          if (this.$auth.$storage.getCookie('_token.local')){
+            this.$auth.logout()
+            this.$auth.$storage.removeCookie('_token.local')
+          }
+      }
 
 
     }

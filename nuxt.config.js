@@ -170,6 +170,11 @@ export default {
     transpile: [/^element-ui/],
   },
   auth: {
+    cookie: {
+    options: {
+      maxAge:3600*3,
+    }
+  },
     redirect: {
       login: '/',
       logout: '/',

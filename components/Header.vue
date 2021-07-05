@@ -112,6 +112,8 @@
               <nuxt-link class="mobile-links__link" to="/delivery">Доставка и оплата</nuxt-link>
               <nuxt-link class="mobile-links__link" to="/about">О нас</nuxt-link>
               <nuxt-link class="mobile-links__link" to="/contact">Контакты</nuxt-link>
+              <nuxt-link v-if="$auth.loggedIn" class="mobile-links__link" to="/lk">Личный кабинет</nuxt-link>
+              <a v-if="!$auth.loggedIn" href="#" @click.prevent="authModal=true" class="mobile-links__link">Вход/Регистрация</a>
 
               <a class="mobile-links__phone" href="tel:+7 (495) 205-93-94">+7 (495) 205-93-94</a>
               <div class="mobile-links__social">

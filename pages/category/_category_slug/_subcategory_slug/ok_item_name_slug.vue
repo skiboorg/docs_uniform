@@ -17,8 +17,8 @@
 
             <el-image style="cursor: pointer"  v-for="(image,index) in thumbList" :key="index"
                       :src="image"
-                      @click="openImage(index)"
-            >
+                       @click="openImage(index)"
+                      >
 
               <div slot="placeholder" class="image-slot">
                 Загрузка<span class="dot">...</span>
@@ -49,7 +49,7 @@
 
               <div v-if="sizes.length>1" class="item-info__param">
                 <p  class="item-info__subtitle">размер</p>
-                <!--                @change="selectedHeight=null"-->
+<!--                @change="selectedHeight=null"-->
                 <el-select  v-model="selectedSize" placeholder="Select" >
                   <el-option
                     v-for="size in sizes"
@@ -98,7 +98,7 @@
 
             </div>
 
-            <p id="myBtn" class="item-info__table" @click="sizesDialogVisible=!sizesDialogVisible">Таблица размеров</p>
+           <p id="myBtn" class="item-info__table" @click="sizesDialogVisible=!sizesDialogVisible">Таблица размеров</p>
 
             <div @click="addToCart" class="btn" :class="{'btnDisabled':btnDisabled}" >
               <p>{{buttonCaption}}</p>
@@ -114,9 +114,9 @@
               </div>
               <div class="item-info__feature">
                 <div class="item-info__feature--img">
-                  <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M35.7223 50H14.2658C11.0389 50 8.41406 47.3713 8.41406 44.1407L5.41406 31.7382L8.41406 19.3358H3.15513L0 5.89907L1.48201 5.24438C1.83334 5.08892 10.1566 1.43046 16.3929 0.322761L18.2106 0L18.6325 1.79982C19.3294 4.77456 22.005 6.93343 24.9942 6.93343C28.0448 6.93343 30.6609 4.86242 31.3556 1.8976L31.8 0.00152786L33.6948 0.440788C40.5246 2.0248 48.1296 5.09083 48.4496 5.22032L49.9999 5.84827L46.8329 19.3358H41.574L44.574 31.7382L41.574 44.1407C41.574 47.3713 38.9487 50 35.7223 50ZM6.24541 15.4295H12.315L9.31496 31.7877L12.315 44.1407C12.315 45.2174 13.1901 46.0936 14.2658 46.0936H35.7223C36.7976 46.0936 37.6727 45.2174 37.6727 44.1407L40.6727 31.7877L37.6727 15.4295H43.7423L45.431 8.23746C43.1701 7.37918 38.7794 5.78792 34.5168 4.66838C33.8424 6.1695 32.8151 7.50752 31.5208 8.54647C29.6787 10.0254 27.3609 10.8398 24.9938 10.8398C22.6276 10.8398 20.3041 10.0037 18.4517 8.48536C17.1463 7.41547 16.1129 6.04231 15.4407 4.50948C11.454 5.44911 6.85576 7.23977 4.54558 8.18971L6.24541 15.4295Z" fill="#519999"/>
-                  </svg>
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M35.7223 50H14.2658C11.0389 50 8.41406 47.3713 8.41406 44.1407L5.41406 31.7382L8.41406 19.3358H3.15513L0 5.89907L1.48201 5.24438C1.83334 5.08892 10.1566 1.43046 16.3929 0.322761L18.2106 0L18.6325 1.79982C19.3294 4.77456 22.005 6.93343 24.9942 6.93343C28.0448 6.93343 30.6609 4.86242 31.3556 1.8976L31.8 0.00152786L33.6948 0.440788C40.5246 2.0248 48.1296 5.09083 48.4496 5.22032L49.9999 5.84827L46.8329 19.3358H41.574L44.574 31.7382L41.574 44.1407C41.574 47.3713 38.9487 50 35.7223 50ZM6.24541 15.4295H12.315L9.31496 31.7877L12.315 44.1407C12.315 45.2174 13.1901 46.0936 14.2658 46.0936H35.7223C36.7976 46.0936 37.6727 45.2174 37.6727 44.1407L40.6727 31.7877L37.6727 15.4295H43.7423L45.431 8.23746C43.1701 7.37918 38.7794 5.78792 34.5168 4.66838C33.8424 6.1695 32.8151 7.50752 31.5208 8.54647C29.6787 10.0254 27.3609 10.8398 24.9938 10.8398C22.6276 10.8398 20.3041 10.0037 18.4517 8.48536C17.1463 7.41547 16.1129 6.04231 15.4407 4.50948C11.454 5.44911 6.85576 7.23977 4.54558 8.18971L6.24541 15.4295Z" fill="#519999"/>
+</svg>
                 </div>
                 <p>Тянется</p>
               </div>
@@ -155,33 +155,33 @@
       </div>
 
     </section>
-    <section>
+     <section>
 
 
-      <div v-if="recommended_items.length > 0" class="container ">
-        <h3 class="section-header mb-40">Рекомендуемые товары</h3>
-        <div class="collection-wrapper">
-          <ItemCard v-for="item in recommended_items" :key="item.id"
-                    :collection_name="item.subcategory.name"
-                    :item_name="item.name"
-                    :item_price="item.price"
-                    :item_old_price="item.old_price"
-                    :discount="item.diccount"
-                    :item_slug="item.name_slug"
-                    :cat_slug="$route.params.category_slug"
-                    :subcat_slug="$route.params.subcategory_slug"
-                    :image="item.images"/>
-        </div>
+     <div v-if="recommended_items.length > 0" class="container ">
+       <h3 class="section-header mb-40">Рекомендуемые товары</h3>
+       <div class="collection-wrapper">
+         <ItemCard v-for="item in recommended_items" :key="item.id"
+                        :collection_name="item.subcategory.name"
+                        :item_name="item.name"
+                        :item_price="item.price"
+                       :item_old_price="item.old_price"
+                        :discount="item.diccount"
+                        :item_slug="item.name_slug"
+                        :cat_slug="$route.params.category_slug"
+                        :subcat_slug="$route.params.subcategory_slug"
+                        :image="item.images"/>
+       </div>
 
 
-      </div>
-    </section>
-    <el-dialog class="sizesDialog" :visible.sync="sizesDialogVisible">
-      <el-image :src="sizes_img"></el-image>
-    </el-dialog>
-    <el-dialog class="sizesDialog" :visible.sync="imageModal">
-      <el-image :src="cur_image"></el-image>
-    </el-dialog>
+    </div>
+   </section>
+      <el-dialog class="sizesDialog" :visible.sync="sizesDialogVisible">
+  <el-image :src="sizes_img"></el-image>
+</el-dialog>
+          <el-dialog class="sizesDialog" :visible.sync="imageModal">
+  <el-image :src="cur_image"></el-image>
+</el-dialog>
   </div>
 
 </template>
@@ -196,16 +196,14 @@ export default {
     await store.dispatch('cart/fetchCart')
   },
   async asyncData({$axios,params,error}){
-    console.log(params.item_name_slug)
     try{
-
       const responce_data = await $axios.get(`/api/get_item?base_item_slug=${params.item_name_slug}`)
-      const recommended_data = await $axios.get(`/api/get_recomended_items?base_item_slug=${params.item_name_slug}`)
-      const item = responce_data.data
-      const recommended_items = recommended_data.data
+    const recommended_data = await $axios.get(`/api/get_recomended_items?base_item_slug=${params.item_name_slug}`)
+    const item = responce_data.data
+    const recommended_items = recommended_data.data
       console.log(item)
 
-      return {item,recommended_items}
+    return {item,recommended_items}
     }catch (e){
       return error({ statusCode: 404 })
     }
@@ -253,7 +251,7 @@ export default {
       content_name:this.item.name,
       content_type:'product',
       content_ids: this.item.id,
-    });
+      });
     let acc = document.getElementsByClassName("accordion");
 
     for (let i = 0; i < acc.length; i++) {
@@ -272,28 +270,30 @@ export default {
 
       if (i.is_active){
         !this.colors.find(x=>x.id === i.color.id) ? this.colors.push(i.color) : null
-        // !this.sizes.find(x=>x.id === i.size.id) ? this.sizes.push(i.size) : null
-        // !this.heights.find(x=>x.id === i.height.id) ? this.heights.push(i.height) : null
-        // !this.materials.find(x=>x.id === i.material.id) ? this.materials.push(i.material) : null
-        // !this.mods.find(x=>x.id === i.modification.id) ? this.mods.push(i.modification) : null
-      }
+        !this.sizes.find(x=>x.id === i.size.id) ? this.sizes.push(i.size) : null
+        !this.heights.find(x=>x.id === i.height.id) ? this.heights.push(i.height) : null
+        !this.materials.find(x=>x.id === i.material.id) ? this.materials.push(i.material) : null
+        !this.mods.find(x=>x.id === i.modification.id) ? this.mods.push(i.modification) : null
+        }
 
     }
-//     this.sizes = _.orderBy(this.sizes,'order_num' )
-//
-//     this.selectedHeight = this.heights[0].id
-//     this.selectedMaterial = this.materials[0].id
-//     this.selectedMod = this.mods[0].id
-// console.log('11')
-//     if (this.is_male){
-//       this.sizes.length >= 2 ? this.selectedSize = this.sizes[1].id : this.selectedSize = this.sizes[0].id
-//     }else{
-//       this.sizes.length > 3 ? this.selectedSize = this.sizes[3].id : this.selectedSize = this.sizes[0].id
-//     }
+    this.sizes = _.orderBy(this.sizes,'order_num' )
+
+    this.selectedHeight = this.heights[0].id
+    this.selectedMaterial = this.materials[0].id
+    this.selectedMod = this.mods[0].id
+console.log('11')
+    if (this.is_male){
+      this.sizes.length >= 2 ? this.selectedSize = this.sizes[1].id : this.selectedSize = this.sizes[0].id
+    }else{
+      this.sizes.length > 3 ? this.selectedSize = this.sizes[3].id : this.selectedSize = this.sizes[0].id
+    }
 
 
-    this.selectColor(0)
+
+    this.checkItem()
     for (let i of this.item.images.filter(x=>x.color===this.colors[0].id)){
+
       this.thumbList.push(i.image_thumb)
       this.previewList.push(i.image)
     }
@@ -339,27 +339,23 @@ export default {
       });
     },
     checkItem() {
-      let filtered_types = this.item.types.filter(x=>x.color.id===this.colors[this.selectedColor].id)
-      for (let i of filtered_types) {
+      for (let i of this.item.types) {
         if (i.color.id === this.colors[this.selectedColor].id &&
           i.size.id === this.selectedSize &&
           i.height.id === this.selectedHeight &&
           i.material.id === this.selectedMaterial &&
           i.modification.id === this.selectedMod) {
           if (i.quantity > 0) {
-
             this.buttonCaption = 'В корзину'
             this.btnDisabled = false
             return i
           } else {
-
             this.buttonCaption = 'К сожалению, закончилось :('
-            //this.selectNextMod()
+            this.selectNextMaterial()
           }
         } else {
-
           this.buttonCaption = 'К сожалению, закончилось <:('
-          //this.selectNextMod()
+        //this.selectNextMaterial()
         }
       }
       this.btnDisabled = true
@@ -373,46 +369,28 @@ export default {
       if (!currMatIndex+1 > this.materials.length-1){
         this.selectedMaterial = this.materials[currMatIndex+1].id
       }
-    },
-    selectNextMod(){
-      if (this.mods.length>1){
-        let currModIndex = this.mods.findIndex(x=>x.id===this.selectedMod)
-        if (!currModIndex+1 > this.mods.length-1){
-          this.selectedMod = this.mods[currModIndex+1].id
-        }
-      }
+
+
     },
     selectColor(index) {
+
       this.previewList = []
       this.thumbList = []
       this.selectedColor = index
       for (let i of this.item.images.filter(x => x.color === this.colors[this.selectedColor].id)) {
         this.thumbList.push(i.image_thumb)
         this.previewList.push(i.image)
-      }
-      let filtered_types = this.item.types.filter(x=>x.color.id===this.colors[this.selectedColor].id)
-      this.sizes = []
-      this.heights = []
-      this.materials = []
-      this.mods = []
-      for(let i of filtered_types){
-        !this.sizes.find(x=>x.id === i.size.id) ? this.sizes.push(i.size) : null
-        !this.heights.find(x=>x.id === i.height.id) ? this.heights.push(i.height) : null
-        !this.materials.find(x=>x.id === i.material.id) ? this.materials.push(i.material) : null
-        !this.mods.find(x=>x.id === i.modification.id) ? this.mods.push(i.modification) : null
-      }
-      this.selectedSize = this.sizes[0].id
-      this.selectedHeight = this.heights[0].id
-      this.selectedMaterial = this.materials[0].id
-      this.selectedMod = this.mods[0].id
 
-      if (this.is_male){
-        this.sizes.length >= 2 ? this.selectedSize = this.sizes[1].id : this.selectedSize = this.sizes[0].id
-      }else{
-        this.sizes.length > 3 ? this.selectedSize = this.sizes[3].id : this.selectedSize = this.sizes[0].id
       }
-      this.checkItem()
+      console.log(this.colors[this.selectedColor])
 
+      // this.materials = []
+      // this.mods = []
+      // for(let i of this.item.types.filter(x => x.color.id === this.colors[this.selectedColor].id)){
+      //   this.materials.push(i.material)
+      //   this.mods.push(i.modification)
+      // }
+      // console.log(this.materials)
 
     },
     async addToCart() {
@@ -432,18 +410,18 @@ export default {
         this.buttonCaption = 'В корзине'
 
         this.$fb.track('AddToCart',{
-          value: this.item.price,
-          currency: 'RUB',
+        value: this.item.price,
+        currency: 'RUB',
           content_name:this.item.name,
-          contents: [
-            {
-              id: this.item.id,
-              quantity: 1
-            }
-          ],
+        contents: [
+          {
+            id: this.item.id,
+            quantity: 1
+          }
+        ],
           content_type:'product',
-          content_ids: this.item.id,
-        });
+        content_ids: this.item.id,
+      });
 
       }
     }
