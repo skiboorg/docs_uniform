@@ -154,9 +154,10 @@
           <el-form-item prop="email">
             <el-input  prefix-icon="el-icon-message" v-model="registerData.email"  placeholder="Введите почту"></el-input>
           </el-form-item>
-           <el-form-item prop="phone">
-            <el-input  prefix-icon="el-icon-phone" v-model="registerData.phone"  placeholder="Введите телефон"></el-input>
-          </el-form-item>
+           <el-form-item id="phone" prop="phone">
+            <el-input  prefix-icon="el-icon-phone" v-mask="'+7##########'" @input="validatePhone" v-model="registerData.phone"  placeholder="Введите телефон"></el-input>
+            <span id="phone-error" class="phone-error">Введите корректный номер телефона</span>
+           </el-form-item>
            <el-form-item prop="fio">
             <el-input  prefix-icon="el-icon-user" v-model="registerData.fio"  placeholder="Введите ФИО"></el-input>
           </el-form-item>
@@ -166,7 +167,7 @@
            <el-form-item prop="password2" class="mb-40">
             <el-input   prefix-icon="el-icon-key" show-password v-model="registerData.password2"  placeholder="Повторите пароль"></el-input>
           </el-form-item>
-          <el-button type="primary" class="btn" @click="submitRegisterForm">Регистрация</el-button>
+          <el-button type="primary" class="btn" :disabled="!is_phone_valid" @click="submitRegisterForm">Регистрация</el-button>
            <p style="margin-top: 20px;text-align: center">При регистрации я автоматически соглашаюсь<br>
              с <a style="text-decoration: underline" href="/policy.docx" target="_blank">политикой конфиденциальности</a></p>
           <p style="margin-top: 20px;color: red;text-align: center"></p>
@@ -220,6 +221,7 @@ export default {
         password2:null,
       },
       authModal:false,
+      is_phone_valid:false,
       authMode:'login',
       mobileMenuActive:false,
       curLang:'RU',
@@ -287,6 +289,23 @@ export default {
 
   },
   methods: {
+    validatePhone() {
+
+      const re = /^(\+7|)?[\s\-]?[489][0-9]{2}[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+      if(re.test(String(this.registerData.phone))){
+        console.log('gg')
+        this.is_phone_valid = true
+        document.getElementById('phone').classList.remove('is-error')
+        document.getElementById('phone-error').classList.add('is-hidden')
+
+      }else{
+        console.log('nn')
+        this.is_phone_valid = false
+        document.getElementById('phone').classList.add('is-error')
+
+
+      }
+    },
     authModalClosed(){
       this.authMode = 'login'
     },
@@ -310,7 +329,7 @@ export default {
         await this.$store.dispatch('cart/fetchCart')
         this.authModal=false
       } catch (error) {
-        this.notify('Ошибка','Проверьте введеные данные','error')
+        this.notify('Ошибка','Аккаунт с вашим email уже существует! Зайдите в него или восстановите пароль.','error')
       }
     },
 
@@ -323,8 +342,9 @@ export default {
           phone:this.registerData.phone,
         })
         console.log(await response)
-        this.notify('Успешно','Аккаунт создан','success')
-        this.authModal='loginTab'
+        this.notify('Вы успешно зарегистрировались!','Теперь вы можете войти на сайт под вашим профилем','success')
+        this.authMode='login'
+        this.authModal=false
       }catch (e) {
         this.notify('Ошибка','Проверьте введеные данные','error')
       }
@@ -333,12 +353,25 @@ export default {
 
       this.$refs.recoverForm.validate((valid) => {
         if (valid) {
-           console.log('recover')
+           this.restorePass()
         } else {
 
           return false;
         }
       });
+    },
+    async restorePass(){
+      let response = await this.$axios.post('/api/user/recover_password', {
+          email:this.recoverData.email
+        })
+      console.log(response.data)
+      if (!response.data.result){
+        this.notify('Ошибка','Аккаунт не найден','error')
+      }else{
+        this.authMode='login'
+        this.authModal=false
+        this.notify('Ваш пароль успешно сброшен!','Мы выслали вам на указанную почту новый пароль для вашего профиля. Вы сможете его поменять в настройках в личном кабинете.','success')
+      }
     },
     submitLoginForm() {
       this.$refs.loginForm.validate((valid) => {
@@ -384,5 +417,16 @@ export default {
 
 }
 </script>
-
+<style lang="sass">
+.is-hidden
+  display: none
+.phone-error
+  color: #F56C6C
+  font-size: 12px
+  line-height: 1
+  padding-top: 4px
+  position: absolute
+  top: 100%
+  left: 0
+</style>
 

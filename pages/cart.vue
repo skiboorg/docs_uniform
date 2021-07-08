@@ -300,7 +300,8 @@ export default {
         })
       if (response.data.email_error){
           this.$notify.error({
-          title: 'Указанный e-mail уже используется'
+          title: 'Аккаунт с таких email уже зарегистрирован!',
+            message: 'Вы можете зайти в свой профиль в меню сайта или оформить заказ без автоматической регистрации - мы поймем что это вы!'
         });
         this.orderSend = false
       }else{
