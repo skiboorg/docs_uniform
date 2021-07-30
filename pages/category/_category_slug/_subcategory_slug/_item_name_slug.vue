@@ -396,7 +396,9 @@ export default {
       this.previewList = []
       this.thumbList = []
       this.selectedColor = index
-      for (let i of this.item.images.filter(x => x.color === this.colors[this.selectedColor].id)) {
+      console.log('dd')
+      for (let i of this.item.images.filter(x => x.color.id === this.colors[this.selectedColor].id)) {
+        console.log(i)
         this.thumbList.push(i.image_thumb)
         this.previewList.push(i.image)
       }
