@@ -21,32 +21,17 @@
     <MarqueeLine :text="`${ this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).string}`"/>
     <section class="subcategories">
       <div class="container">
-        <div class="categories-links">
-          <p class="categories-links-link active">ВСЕ ТОВАРЫ</p>
-          <router-link
-            class="categories-links-link"
-            v-for="subcategory in this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).subcategories"
-            :to="`/category/${$route.params.category_slug}/${subcategory.name_slug}`"
+        <div class="subcategories-wrapper">
+          <div class="subcategories-item"
+               v-for="subcategory in this.$store.getters['categories/getCategories'].find(x => x.name_slug === this.$route.params.category_slug).subcategories"
                :key="subcategory.id">
-            {{subcategory.name}}
-          </router-link>
-        </div>
-
-          <div style="flex-wrap: wrap" class="collection-wrapper">
-
-              <ItemCard  v-for="item in  items" :key="item.id"
-                        :collection_name="item.subcategory.name"
-                        :item_name="item.name"
-                        :item_price="item.price"
-                        :discount="item.diccount"
-                         :item_old_price="item.old_price"
-                        :item_slug="item.name_slug"
-                        :cat_slug="$route.params.category_slug"
-                        :subcat_slug="item.subcategory.name_slug"
-                        :image="item.images"
-
-              />
+            <div @click="$router.push(`/category/${$route.params.category_slug}/${subcategory.name_slug}`)"
+                 class="subcategories-item__img">
+               <el-image  :src="subcategory.image" lazy></el-image>
             </div>
+            <h2 class="subcategories-item__name">{{subcategory.name}}</h2>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -123,25 +108,5 @@ export default {
 
 }
 </script>
-<style lang="sass" >
-.categories-links
-  display: flex
-  align-items: center
-  justify-content: flex-start
-  flex-wrap: wrap
-  margin-bottom: 50px
-  &-link
-    margin-right: 20px
-    text-transform: uppercase
-    transition: all .2s linear
-    font-weight: bold
-    color: #e0e0e0
-    &:last-child
-      margin-right: 0
-    &:hover
-      color: #519999
-    &.active
-      color: #519999
 
-</style>
 

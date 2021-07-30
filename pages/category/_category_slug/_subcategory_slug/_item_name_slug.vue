@@ -42,8 +42,18 @@
             <p class="item-info__description">{{ item.short_description }}</p>
             <p class="item-info__subtitle">цвет</p>
             <div class="item-info__colors">
-                        <span @click="selectColor(index)" :class="{'selected':selectedColor===index}"
-                              v-for="(color,index) in colors" :style="'background:  ' + color.bg_color  " class="item-info__color "></span>
+              <div class="" v-for="(color,index) in colors" :key="color.id">
+                <span v-if="color.bg_color" @click="selectColor(index)" :class="{'selected':selectedColor===index}"
+                               :style="'background:  ' + color.bg_color  " class="item-info__color"></span>
+                <span v-if="color.image" @click="selectColor(index)"
+                      class="item-info__color image"
+                      :class="{'selected':selectedColor===index}"
+                      :style="'background:  url(' + color.image +')'  "></span>
+              </div>
+
+
+<!--                        <span @click="selectColor(index)" :class="{'selected':selectedColor===index}"-->
+<!--                              v-for="(color,index) in colors" :style="'background:  ' + color.bg_color  " class="item-info__color "></span>-->
             </div>
             <div class="item-info__params">
 

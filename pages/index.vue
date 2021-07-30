@@ -71,7 +71,7 @@
     <section class="collection">
       <div class="container">
         <h2 class="section-header">
-          Новинки
+          SALE
         </h2>
         <div class="collection-wrapper">
           <!--           <ItemCard v-for="item in _.takeRight(collection.collection_items, 3)" :key="item.id"-->
